@@ -1,0 +1,32 @@
+{
+  "name": "jarm.com",
+  "version": "3.0.0",
+  "description": "A Micro-CMS designed to dynamic web applications. support multiple sub-domains. Fast, simple and lightweight.",
+  "main": "files/cdn/lib",
+  "dependencies": {
+    "bower": "^1.8.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"\";"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/positronth/jarm.com.git"
+  },
+  "keywords": [
+    "jarm",
+    "jarm.com",
+    "php",
+    "framework",
+    "fast",
+    "simple",
+    "lightweight"
+  ],
+  "author": "Positron",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/positronth/jarm.com/issues"
+  },
+  "homepage": "https://github.com/positronth/jarm.com#readme"
+}

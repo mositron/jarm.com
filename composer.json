@@ -1,0 +1,37 @@
+{
+    "name": "positronth/jarm.com",
+    "version": "3.0.0",
+    "type": "project",
+    "description": "A Micro-CMS designed to dynamic web applications. support multiple sub-domains. Fast, simple and lightweight.",
+    "keywords": ["jarm", "jarm.com"],
+    "homepage": "https://jarm.com",
+    "license": "MIT",
+    "authors": [
+      {
+        "name": "Positron",
+        "homepage": "https://jarm.com",
+        "role": "Developer"
+      }
+    ],
+    "config": {
+      "component-dir": "files/cdn/lib",
+      "vendor-dir": "php/Vendor"
+    },
+    "require": {
+      "php": "^7.1",
+      "ext-mongodb": "^1.2",
+      "phpunit/phpunit": "^6.0",
+      "facebook/graph-sdk": "^5.4",
+      "google/apiclient": "^2.0",
+      "cbschuld/browser.php": "dev-master",
+      "amnuts/opcache-gui": "^2.2",
+      "robloach/component-installer": "*",
+      "components/jquery": "^3.1",
+      "components/bootstrap": "^3.3",
+      "components/font-awesome": "^4.7",
+      "tinymce/tinymce": "^4.5",
+      "drmonty/chosen": "^1.6"
+    },
+    "autoload": {
+    }
+}

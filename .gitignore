@@ -1,0 +1,5 @@
+/Conf/*.php
+/Vendor/*.php
+/Vendor/*/*
+/cdn/lib/*
+composer.lock

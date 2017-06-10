@@ -1,0 +1,11 @@
+language: php
+php:
+  - '7.1'
+
+sudo: required
+
+before_script:
+  - pecl install mongodb
+  - echo "extension = mongodb.so" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
+  - composer install
+script: php/vendor/phpunit/phpunit/phpunit --coverage-clover=php/start.php
