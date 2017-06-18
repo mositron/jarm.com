@@ -298,7 +298,17 @@
     echo '</div>';
 */
 ?>
-
+<div style="padding:10px 0px;margin-top:10px;border-top:1px solid #ccc;">
+<a href="https://www.facebook.com/simdaijai" target="_blank" ref="nofollow">
+<img src="https://cdn.jarm.com/img/misc/simdaijai.jpg" class="img-responsive" style="margin-bottom:10px;">
+ซิมถูก โทรฟรี เน็ตไม่อั้น ไม่ลดสปีด เฉลี่ยวันละ 3 บ. นิดๆ ถูกกว่านี้ไม่มีแล้ว จำนวนจำกัด !!!<br>
++ ราคา 399 บ. / ใช้งานได้ 4 เดือน<br>
++ ราคา 799 บ. / ใช้งานได้ 8 เดือน<br>
++ ราคา 1,199 บ. / ใช้งานได้ 12 เดือน<br>
++ ราคา 1,999 บ. / ใช้งานได้ 20 เดือน<br>
++++ความเร็วเน็ต 1 Mbps | เฉลี่ยเดือนละ 100 บ. เท่านั้น!!<br><br>
+<strong>รายละเอียดเพิ่มเติม คลิกเลย</strong></a>
+</div>
   <div style="padding:10px 0px;text-align:center"><div class="fb-save" data-uri="<?php echo URI?>" data-size="large" style="width:190px !important;display:inline-block;"></div></div>
   </div>
   <?php if(!defined('HIDE_ADS')):?>
@@ -314,7 +324,7 @@
       var js, fjs = d.getElementsByTagName(s)[0];
       if (d.getElementById(id)) return;
       js = d.createElement(s); js.id = id;
-      js.src = "//connect.facebook.net/th_TH/sdk/xfbml.ad.js#xfbml=1&version=v2.5&appId=<?php echo self::$conf['social']['facebook']['appid']?>";
+      js.src = "//connect.facebook.net/th_TH/sdk/xfbml.ad.js#xfbml=1&version=v2.9&appId=<?php echo self::$conf['social']['facebook']['appid']?>";
       fjs.parentNode.insertBefore(js, fjs);
     }(document, 'script', 'facebook-jssdk'));
   }
@@ -381,5 +391,5 @@
 </aside>
 <div class="col-md-12">
   <h3 class="bar-heading" style="margin-top:5px">แสดงความคิดเห็นด้วย Facebook</h3>
-  <div class="fb-comments" data-href="<?php echo URI?>" data-num-posts="30" data-width="100%" data-version="v2.3"></div>
+  <div class="fb-comments" data-href="<?php echo URI?>" data-num-posts="30" data-width="100%" data-version="v2.9"></div>
 </div>

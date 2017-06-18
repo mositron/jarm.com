@@ -1,15 +1,16 @@
 <!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><title>Jarm.com</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Kanit:300" />
   <link rel="stylesheet" type="text/css" href="https://cdn.jarm.com/css/jarm-all.css" />
   <script type="text/javascript" src="https://cdn.jarm.com/js/jarm-all.js"></script>
   <style>
-  body{background:transparent;color:#333;font-family:tahoma;font-size:64px;padding:0px;margin:20px 0px;overflow:hidden;text-align:center;}
+  body{background:transparent;color:#333;font-size:44px;padding:0px;margin:20px 0px;overflow:hidden;text-align:center;}
   .box{border-radius:16px;background:#fff;color:#333;margin:20px 0px 0px;}
   .box>div{padding:0px 10px 10px;text-align:center;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;line-height:56px;}
-  .box>div span{display:inline-block;margin:0px 10px;font-size:40px}
-.bar-heading{height:60px;line-height:60px;font-size:56px;}
-  h2.bar-heading{font-size:60px; color:#fff;text-align:center; height:60px;line-height:60px;}
+  .box>div span{display:inline-block;margin:0px 10px;font-size:34px}
+.bar-heading{height:60px;line-height:60px;font-size:44px;}
+  h2.bar-heading{font-size:44px; color:#fff;text-align:center; height:60px;line-height:60px;}
   marquee{padding:0px;margin:0px 0px 0px;height:60px;line-height:60px;}
   .col-xs-4 .box{margin-right:10px;}
   </style>

@@ -32,7 +32,7 @@ class Service extends Container
     {
       echo $_GET['hub_challenge'];
     }
-    //https://graph.facebook.com/v2.6/me/messages?access_token
+    //https://graph.facebook.com/v2.9/me/messages?access_token
     if($_POST['object']=='page')
     {
       $reply='';
@@ -44,7 +44,7 @@ class Service extends Container
       }
       if($reply!='')
       {
-        $url='https://graph.facebook.com/v2.6/me/messages?access_token='.$page_token;
+        $url='https://graph.facebook.com/v2.9/me/messages?access_token='.$page_token;
         $json=Load::Http()->get($url,
         ['recipient'=>['id'=>$sender],'message'=>['text'=>$reply]]);
       }

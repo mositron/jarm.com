@@ -22,6 +22,7 @@
 <meta property="og:locale" content="th_TH" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Kanit:300" />
 <link rel="stylesheet" type="text/css" href="<?php echo FILES_CDN?>css/jarm-all.css" />
 <link rel="apple-touch-icon" sizes="57x57" href="<?php echo FILES_CDN?>img/favicon/apple-icon-57x57.png">
 <link rel="apple-touch-icon" sizes="60x60" href="<?php echo FILES_CDN?>img/favicon/apple-icon-60x60.png">
@@ -192,7 +193,7 @@ fbq('track', '<?php echo $this->data['pixel']??'PageView'?>');
       <div class="col-xs-6 col-sm-3 col-md-2"><a href="<?php echo self::uri(['ent'])?>" title="ข่าวบันเทิง ดารา บันเทิง ข่าวดารา ซุบซิบดารา ติดกระแสดารา ภาพหลุดดารา">ข่าวบันเทิง</a></div>
       <div class="col-xs-6 col-sm-3 col-md-2"><a href="<?php echo self::uri(['korea'])?>" title="เกาหลี ดาราเกาหลี นักร้องเกาหลี ซีรีย์เกาหลี ข่าวเกาหลี">ข่าวเกาหลี</a></div>
       <div class="col-xs-6 col-sm-3 col-md-2"><a href="<?php echo self::uri(['live'])?>" title="Facebook Live - ถ่ายทอดสด">ถ่ายทอดสด</a></div>
-      <div class="col-xs-6 col-sm-3 col-md-2"><a href="<?php echo self::uri(['trend'])?>" title="กระแสวันนี้ แนวโน้มวันนี้">กระแสวันนี้</a></div>
+      <div class="col-xs-6 col-sm-3 col-md-2"><a href="<?php echo self::uri(['english'])?>" title="ฝึกคำศัพท์ ท่องศัพท์ ภาษาอังกฤษ 300 คำ">คำศัพท์ภาษาอังกฤษ</a></div>
       <div class="col-xs-6 col-sm-3 col-md-2"><a href="<?php echo self::uri(['tv'])?>" title="ทีวีย้อนหลัง ละครย้อนหลัง">ทีวีย้อนหลัง</a></div>
       <div class="col-xs-6 col-sm-3 col-md-2"><a href="<?php echo self::uri(['gold'])?>" title="ราคาทอง ราคาทองคำวันนี้">ราคาทองวันนี้</a></div>
       <div class="col-xs-6 col-sm-3 col-md-2"><a href="<?php echo self::uri(['chat'])?>" title="แชท คุยสด แชทหาเพื่อน">แชท คุยสด</a></div>
@@ -259,7 +260,7 @@ fbq('track', '<?php echo $this->data['pixel']??'PageView'?>');
       <div class="col-xs-6 col-sm-4 col-md-2 col-lg-2">
         <div><a href="<?php echo self::uri(['beauty'])?>" title="ผู้หญิง แฟนชั่น" target="_blank">ผู้หญิง</a></div>
         <div><a href="<?php echo self::uri(['lotto'])?>" title="หวย ตรวจหวย เลขเด็ด" target="_blank">ตรวจหวย</a></div>
-        <div><a href="<?php echo self::uri(['lotto','/set'])?>" title="หวยหุ้น หวยหุ้นวันนี้" target="_blank">หวยหุ้น</a></div>
+        <div><a href="<?php echo self::uri(['english'])?>" title="ฝึกคำศัพท์ ภาษาอังกฤษ 300 คำ" target="_blank">คำศัพท์ภาษาอังกฤษ</a></div>
       </div>
       <div class="col-xs-6 col-sm-4 col-md-2 col-lg-2">
         <div><a href="<?php echo self::uri(['horo'])?>" title="ดูดวง ดูดวงรายวัน ดูดวงความรัก ทำนายฝัน" target="_blank">ดูดวง</a></div>
@@ -305,7 +306,7 @@ fbq('track', '<?php echo $this->data['pixel']??'PageView'?>');
   var js, fjs = d.getElementsByTagName(s)[0];
   if (d.getElementById(id)) return;
   js = d.createElement(s); js.id = id;
-  js.src = "//connect.facebook.net/th_TH/sdk.js#xfbml=1&version=v2.5&appId=<?php echo self::$conf['social']['facebook']['appid']?>";
+  js.src = "//connect.facebook.net/th_TH/sdk.js#xfbml=1&version=v2.9&appId=<?php echo self::$conf['social']['facebook']['appid']?>";
   fjs.parentNode.insertBefore(js, fjs);
 }(document, 'script', 'facebook-jssdk'));
 (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){

@@ -1,0 +1,25 @@
+<?php
+return array(
+1=>array('mxp'=>100),
+2=>array('mxp'=>500),
+3=>array('mxp'=>1200),
+4=>array('mxp'=>2500),
+5=>array('mxp'=>6000),
+6=>array('mxp'=>15000),
+7=>array('mxp'=>25000),
+8=>array('mxp'=>40000),
+9=>array('mxp'=>70000),
+10=>array('mxp'=>100000),
+11=>array('mxp'=>135000),
+12=>array('mxp'=>175000),
+13=>array('mxp'=>220000),
+14=>array('mxp'=>270000),
+15=>array('mxp'=>325000),
+16=>array('mxp'=>385000),
+17=>array('mxp'=>450000),
+18=>array('mxp'=>520000),
+19=>array('mxp'=>595000),
+20=>array('mxp'=>675000),
+21=>array('mxp'=>760000),
+);
+?>

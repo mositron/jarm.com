@@ -1,0 +1,174 @@
+<?php
+
+if($inv=$this->db->findone('lionica_item',array('_id'=>intval($arg['item']),'u'=>_::$my['_id'],'dd'=>array('$exists'=>false),'mk'=>array('$exists'=>false))))
+{
+	$items=$this->config('item');
+	if(isset($items[$inv['item']]))
+	{
+		$info=array();
+		list($item,$popup)=$this->item($inv);;
+		if($item['type']==1)
+		{
+			$msg='';
+			$effect='';
+			if($hp=intval($item['hp']))
+			{
+				$this->char['hp']+=$hp;
+				if($this->char['hp']>$this->char['mhp'])
+				{
+					$this->char['hp']=$this->char['mhp'];
+				}
+				$msg.=' เพิ่ม '.$hp.' HP';
+				$effect='hp';
+			}
+			if($mp=intval($item['mp']))
+			{
+				$this->char['mp']+=$mp;
+				if($this->char['mp']>$this->char['mmp'])
+				{
+					$this->char['mp']=$this->char['mmp'];
+				}
+				$msg.=' เพิ่ม '.$mp.' MP';
+				$effect='mp';
+			}
+			$info[]=array('type'=>'use','name'=>$item['name'],'text'=>$msg,'effect'=>$effect);
+			$this->db->update('lionica_char',array('_id'=>$this->char['_id']),array('$set'=>array('hp'=>$this->char['hp'],'mp'=>$this->char['mp'])));
+			if($inv['c']>1)
+			{
+				$this->db->update('lionica_item',array('_id'=>$inv['_id']),array('$inc'=>array('c'=>-1)));
+			}
+			else
+			{
+				$this->db->remove('lionica_item',array('_id'=>$inv['_id']));
+			}
+		}
+		elseif($item['type']==10)
+		{
+			$msg='';
+			$effect='';
+			if($this->char['pet'])
+			{
+				$food=$this->char['pet']['status']['ele']+325;
+				if($food!=$inv['item'])
+				{
+					$this->ajax->alert('ชนิดของอาหารไม่ถูกต้อง');
+				}
+				else
+				{
+					$this->char['pet']['status']['hp']+=100;
+					if($this->char['pet']['status']['hp']>$this->char['pet']['status']['mhp'])
+					{
+						$this->char['pet']['status']['hp']=$this->char['pet']['status']['mhp'];
+					}
+					$info[]=array('type'=>'use','name'=>$item['name'],'text'=>'ให้อาหารสัตว์เลี้ยง','effect'=>'');
+					$this->db->update('lionica_char',array('_id'=>$this->char['_id']),array('$set'=>array('pet.status.hp'=>$this->char['pet']['status']['hp'],'pet.status.du'=>new MongoDate())));
+					if($inv['c']>1)
+					{
+						$this->db->update('lionica_item',array('_id'=>$inv['_id']),array('$inc'=>array('c'=>-1)));
+					}
+					else
+					{
+						$this->db->remove('lionica_item',array('_id'=>$inv['_id']));
+					}
+				}
+			}
+			else
+			{
+				$this->ajax->alert('ยังไม่มีสัตว์เลี้ยง');
+			}
+		}
+		elseif($item['type']>1)
+		{
+			if(!is_array($this->char['eq']))
+			{
+				$this->char['eq']=array();
+			}
+			if($item['job'])
+			{
+				if(is_array($item['job']))
+				{
+					if(!in_array($this->char['job'],$item['job']))
+					{
+						$this->ajax->alert('ไม่สามารถใช้งานไอเท็มนี้ได้ เนื่องจากอาชีพไม่ถูกต้อง');
+						return;
+					}
+				}
+				elseif($this->char['job']!=$item['job'])
+				{
+					$this->ajax->alert('ไม่สามารถใช้งานไอเท็มนี้ได้ เนื่องจากอาชีพไม่ถูกต้อง');
+					return;
+				}
+			}
+			if($this->char['lv']<$item['lv'])
+			{
+				$this->ajax->alert('ไม่สามารถใช้งานไอเท็มนี้ได้ เนื่องจากเลเวลไม่เพียงพอ');
+				return;
+			}
+			
+			$cur=$this->char['eq']['i'.$item['type']];
+			if($arg['type']=='use')
+			{
+				if($cur&&$cur['inv']!=$inv['_id'])
+				{
+					$info[]=array('type'=>'uneq','name'=>($cur['nh']?'+'.$cur['nh'].' ':'').$items[$cur['item']]['name'],'eq'=>$item['type'],'inv'=>$inv['_id']);
+					unset($this->char['eq']['i'.$item['type']]);
+					$this->db->update('lionica_char',array('_id'=>$this->char['_id']),array('$unset'=>array('eq.i'.$item['type']=>1)));
+					$this->db->update('lionica_item',array('_id'=>$cur['inv']),array('$unset'=>array('eq'=>1)));
+					if($item['type']==9)
+					{
+						if($this->char['pet']&&$this->char['pet']['inv']==$cur['inv'])
+						{
+							$this->db->update('lionica_item',array('_id'=>$cur['inv']),array('$set'=>array('status'=>$this->char['pet']['status'])));
+						}
+					}
+				}
+				
+				$info[]=array('type'=>'eq','name'=>$item['name'],'eq'=>$item['type'],'css'=>$item['css'],'inv'=>$inv['_id']);
+				$this->char['eq']['i'.$item['type']]=array('inv'=>$inv['_id'],'item'=>$inv['item'],'nh'=>intval($inv['nh']),'ele'=>intval($inv['ele']));
+				$this->db->update('lionica_char',array('_id'=>$this->char['_id']),array('$set'=>array('eq.i'.$item['type']=>$this->char['eq']['i'.$item['type']])));
+				$this->db->update('lionica_item',array('_id'=>$inv['_id']),array('$set'=>array('eq'=>$this->char['_id'])));
+				if($item['type']==9)
+				{
+					if(!$inv['status'])
+					{
+						$sta=array('str','agi','vit','dex','int');
+						shuffle($sta);
+						shuffle($sta);
+						$inc=array(1,2,3,4,5,6,7,8,9,1,2,3,4,5,6,7,1,2,3,4,5,1,2,3,1);
+						shuffle($inc);
+						shuffle($inc);
+						$inv['status']=array('hp'=>100,'mhp'=>100,'lv'=>1,'xp'=>0,'mxp'=>100,'ele'=>$inv['item']-313,'evo'=>0,'type'=>$sta[0],'inc'=>$inc[0]);	
+						$this->db->update('lionica_item',array('_id'=>$inv['_id']),array('$set'=>array('status'=>$inv['status'])));
+					}
+					$this->char['pet']=array('no'=>$inv['item']-313,'inv'=>$inv['_id'],'status'=>$inv['status']);
+					$this->char['pet']['status']['du']=new MongoDate();
+					$this->db->update('lionica_char',array('_id'=>$this->char['_id']),array('$set'=>array('pet'=>$this->char['pet'])));
+				}
+			}
+			elseif($arg['type']=='unuse')
+			{
+				if($inv['eq'])
+				{
+					$info[]=array('type'=>'uneq','name'=>$item['name'],'eq'=>$item['type'],'inv'=>$inv['_id']);
+					unset($this->char['eq']['i'.$item['type']]);
+					$this->db->update('lionica_char',array('_id'=>$this->char['_id']),array('$unset'=>array('eq.i'.$item['type']=>1)));
+					$this->db->update('lionica_item',array('_id'=>$inv['_id']),array('$unset'=>array('eq'=>1)));
+					if($item['type']==9)
+					{
+						if($this->char['pet'])
+						{
+							$this->db->update('lionica_item',array('_id'=>$this->char['pet']['inv']),array('$set'=>array('status'=>$this->char['pet']['status'])));
+						}
+						unset($this->char['pet']);
+						$this->db->update('lionica_char',array('_id'=>$this->char['_id']),array('$unset'=>array('pet'=>1)));
+					}
+				}	
+			}
+			$this->update_stats();
+		}
+		$this->update_inventory();
+		$this->ajax->script('_.lionica.logs('.json_encode($info).')');
+	}
+}
+
+?>

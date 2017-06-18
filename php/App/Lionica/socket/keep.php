@@ -1,0 +1,49 @@
+<?php
+
+$count=$this->db->count('lionica_item',array('u'=>_::$my['_id'],'dd'=>array('$exists'=>false),'mk'=>array('$exists'=>false),'$or'=>array(array('eq'=>array('$exists'=>false)),array('eq'=>$this->char['_id']))));
+if($count>=$this->config['inventory_max'])
+{
+	$this->ajax->alert('กระเป๋าเต็มแล้ว ไม่สามารถเก็บเพิ่มได้');	
+}
+elseif($drop=$this->db->findone('lionica_drop',array('_id'=>intval($arg['drop']),'u'=>_::$my['_id'],'p'=>$this->char['_id'])))
+{				
+	if(!$drop['dk'])
+	{
+		if($drop['da']->sec > time()-10800)
+		{		
+			$items=$this->config('item');
+			if($drop['item']==-1)
+			{
+				if($silver=intval($drop['silver']))
+				{
+					$this->char['silver']+=$silver;
+					$this->db->update('lionica_char',array('_id'=>$this->char['_id']),array('$inc'=>array('silver'=>$silver)));
+				}
+			}
+			elseif(isset($items[$drop['item']]))
+			{
+				$op=array('slot'=>0,'ele'=>0);
+				if($items[$drop['item']]['can_ele']&&$drop['slot'])
+				{
+					$op['slot']=1;	
+				}
+				$this->db->update('lionica_drop',array('_id'=>$drop['_id']),array('$set'=>array('dk'=>new MongoDate())));
+				$this->item_insert(_::$my['_id'],$drop['item'],1,false,$op);
+				$this->update_inventory();
+			}
+		}
+		else
+		{
+			$this->ajax->alert('ไอเท็มชิ้นนี้สุญหายไปแล้ว');	
+		}
+	}
+	else
+	{
+		$this->ajax->alert('คุณเก็บไอเท็มชิ้นนี้ไปแล้ว');	
+	}
+}
+else
+{
+	$this->ajax->alert('ไอเท็มชิ้นนี้สุญหายไปแล้ว');	
+}
+?>

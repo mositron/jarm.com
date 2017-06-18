@@ -334,7 +334,7 @@ class Facebook_Dev
       var js, fjs = d.getElementsByTagName(s)[0];
       if (d.getElementById(id)) return;
       js = d.createElement(s); js.id = id;
-      js.src = "//connect.facebook.net/th_TH/sdk.js#xfbml=1&version=v2.5&appId=678076615655643";
+      js.src = "//connect.facebook.net/th_TH/sdk.js#xfbml=1&version=v2.9&appId=678076615655643";
       fjs.parentNode.insertBefore(js, fjs);
     }(document, \'script\', \'facebook-jssdk\'));</script>
       </iframe></figure>';

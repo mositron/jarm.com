@@ -63,4 +63,4 @@
 <script type="text/javascript">MTBADVS.InStream.Default.run({"immediately":true})</script>
 
 <h3 class="bar-heading" style="margin-top:5px">แสดงความคิดเห็นด้วย Facebook</h3>
-<div class="fb-comments" data-href="<?php echo URI?>" data-num-posts="30" data-width="100%" data-version="v2.3"></div>
+<div class="fb-comments" data-href="<?php echo URI?>" data-num-posts="30" data-width="100%" data-version="v2.9"></div>

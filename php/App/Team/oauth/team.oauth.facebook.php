@@ -18,7 +18,7 @@ require ROOT.'handlers/facebook/Facebook-v4-5/autoload.php';
 $fb = new Facebook\Facebook([
   'app_id' => Load::$conf['social']['facebook']['appid'],
   'app_secret' => Load::$conf['social']['facebook']['secret'],
-  'default_graph_version' => 'v2.5',
+  'default_graph_version' => 'v2.9',
   'persistent_data_handler'=>'session'
 ]);
 

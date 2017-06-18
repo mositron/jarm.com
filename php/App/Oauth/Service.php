@@ -35,7 +35,7 @@ class Service extends Container
       $fb = new \Facebook\Facebook([
         'app_id' => Load::$conf['social']['facebook']['appid'],
         'app_secret' => Load::$conf['social']['facebook']['secret'],
-        'default_graph_version' => 'v2.5',
+        'default_graph_version' => 'v2.9',
         'persistent_data_handler'=>new \Jarm\App\Facebook_Helper()
       ]);
 
