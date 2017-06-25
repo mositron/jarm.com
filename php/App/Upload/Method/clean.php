@@ -5,12 +5,13 @@ if($_POST['file'])
 {
   $f=false;
   $log=[];
-  if(mb_strlen($_POST['file'],'utf-8')==5)
+  $path=explode('/', $_POST['file']);
+  if(count($path)>1) // secure check
   {
-    $path=UPLOAD_PATH.'sticker/'.$_POST['file'];
+    $path=UPLOAD_PATH.$_POST['file'];
     if(is_dir($path))
     {
-      //Load::Folder()->clean(UPLOAD_FOLDER.'sticker/'.$_POST['file']);
+      Load::Folder()->clean(UPLOAD_FOLDER.$_POST['file']);
       $status=['status'=>'OK','data'=>[]];
     }
     else

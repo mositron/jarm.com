@@ -30,12 +30,15 @@ class Service extends Container
       switch($_POST['method'])
       {
         case 'copy':
-        case 'delete':
+        case 'list':
         case 'fromstring':
         case 'getsize':
         case 'rotate':
         case 'upload':
         case 'thumb':
+        case 'watermark':
+        case 'delete':
+        case 'clean':
 
         case 'profile-crop':
         case 'profile-gif':
@@ -45,39 +48,16 @@ class Service extends Container
         case 'image-post':
         case 'image-clear':
 
-        case 'forum-post':
-
         case 'news-post':
         case 'news-list':
         case 'news-facebook':
         case 'news-delete':
-
-        case 'drama-post':
-        case 'drama-list':
-
-        case 'game-post':
-
-        case 'movie-post':
-        case 'movie-wallpaper':
-
-        case 'football-team':
-        case 'football-banner':
-
-        case 'euro-team':
-
-        case 'gift-upload':
 
         case 'glitter-post':
 
         case 'guess-post':
         case 'guess-answer':
 
-        case 'sticker-post':
-        case 'sticker-pic':
-        case 'sticker-del':
-        case 'sticker-clean':
-
-        case 'watermark':
         case 'ads-upload':
         case 'banner-upload':
 
@@ -87,7 +67,7 @@ class Service extends Container
         case 'story-delete':
 
           $_POST['data']=json_decode($_POST['data'],true);
-          require_once(__DIR__.'/method/'.$_POST['method'].'.php');
+          require_once(__DIR__.'/Method/'.$_POST['method'].'.php');
           break;
       }
     }

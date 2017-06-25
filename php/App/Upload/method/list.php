@@ -3,24 +3,23 @@ use Jarm\Core\Load;
 
 if($_POST['file'])
 {
-  $tmp=UPLOAD_PATH.'news/'.$_POST['file'].'/';
-  $icon=[];
+  $tmp=UPLOAD_PATH.'story/'.$_POST['file'].'/';
+  $file=[];
   if(is_dir($tmp))
   {
     if($dh=opendir($tmp))
     {
       while(($dir=readdir($dh))!==false)
       {
-        if(preg_match("/([a-zA-Z0-9_\-]+)(\.jpg)$/iU",$dir,$path)&&!in_array($dir,['s.jpg','t.jpg','m.jpg']))
+        if(!in_array($dir,['.','..']))
         {
-          array_push($icon,$path[1].'.jpg');
+          array_push($file,['name'=>$dir,'type'=>is_dir($tmp.$dir)?'dir':'file']);
         }
       }
       closedir($dh);
     }
   }
-  rsort($icon);
-  $status=['status'=>'OK','data'=>$icon];
+  $status=['status'=>'OK','data'=>$file];
 }
 else
 {
