@@ -1,5 +1,5 @@
 <?php
-namespace Jarm\App\Story;
+namespace Jarm\App\Story\Method;
 use Jarm\Core\Load;
 
 class Home
@@ -8,6 +8,10 @@ class Home
   public function __construct($story)
   {
     $this->story = $story;
+  }
+
+  public function get()
+  {
     return 'x';
   }
 }

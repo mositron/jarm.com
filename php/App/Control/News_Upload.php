@@ -4,7 +4,10 @@ use Jarm\Core\Load;
 
 class News_Upload
 {
-  public function __construct($parent,$id)
+  public function __construct()
+  {
+  }
+  public function get($parent,$id)
   {
     Load::Session()->logged();
     $db=Load::DB();

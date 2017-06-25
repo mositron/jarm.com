@@ -199,7 +199,7 @@ function uploadFile(inp, editor) {
 <option value="<?php echo $k?>"<?php echo $c==$k?' selected':''?>><?php echo $v['t']?></option>
 <?php endforeach ?>
 </select></div>
-<div class="col-sm-6"><input type="text" class="form-control" name="tags" id="tags" placeholder="ป้ายกำกับ (คั่นด้วย , และไม่เกิน 5 คำ)"></div>
+<div class="col-sm-6"><input type="text" class="form-control" name="tags" id="tags" value="<?php echo implode(', ',$this->post['tags'])?>" placeholder="ป้ายกำกับ (คั่นด้วย , และไม่เกิน 5 คำ)"></div>
 </div>
 <div class="form-actions">
 <span id="status" class="pull-right" style="margin-top:7px;"><?php echo $this->post['pl']?'<a href="/'.$this->post['bl'].'/'.$this->post['_id'].'/'.$this->post['l'].'">เผยแพร่แล้ว</a>':'ฉบับร่าง'?></span>

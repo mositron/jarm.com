@@ -16,7 +16,7 @@
 <meta property="og:title" content="<?php echo $this->data['title']?>" />
 <meta property="og:image" content="<?php echo $this->data['image']?>" />
 <meta property="og:url" content="<?php echo URI?>" />
-<link rel="canonical" href="<?php echo URI?>" />
+<link rel="canonical" href="<?php echo self::$core->data['canonical']?:URI?>" />
 <meta property="og:site_name" content="<?php echo $this->data['sitename']?>" />
 <meta property="og:description" content="<?php echo $this->data['description']?>" />
 <meta property="og:locale" content="th_TH" />

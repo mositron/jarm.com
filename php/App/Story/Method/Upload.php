@@ -1,5 +1,5 @@
 <?php
-namespace Jarm\App\Story;
+namespace Jarm\App\Story\Method;
 use Jarm\Core\Load;
 
 class Upload
@@ -9,6 +9,10 @@ class Upload
   {
     Load::Session()->logged();
     $this->story = $story;
+  }
+
+  public function get()
+  {
     $db=Load::DB();
     if($this->blog=$db->findone('story_blog',['dd'=>['$exists'=>false],'l'=>Load::$path[1]]))
     {

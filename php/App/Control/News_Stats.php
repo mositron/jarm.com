@@ -4,7 +4,10 @@ use Jarm\Core\Load;
 
 class News_Stats
 {
-  public function __construct($parent,$id)
+  public function __construct()
+  {
+  }
+  public function get($parent,$id)
   {
     $db=Load::DB();
     list($id,$sc)=explode('-',Load::$path[2],2);

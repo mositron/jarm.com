@@ -4,7 +4,10 @@ use Jarm\Core\Load;
 
 class News_Home
 {
-  public function __construct($parent,$id)
+  public function __construct()
+  {
+  }
+  public function get($parent,$id)
   {
     Load::Session()->logged();
     define('EXPIRE_NEWS',3650);

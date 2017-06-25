@@ -1,5 +1,5 @@
 <?php
-namespace Jarm\App\Story;
+namespace Jarm\App\Story\Method;
 use Jarm\Core\Load;
 
 class Profile
@@ -8,6 +8,10 @@ class Profile
   public function __construct($story)
   {
     $this->story = $story;
+  }
+
+  public function get()
+  {
     $db=Load::DB();
     if(Load::$path[0])
     {
@@ -21,10 +25,11 @@ class Profile
         {
           return ['move'=>'/'.$this->blog['l'].'?no-post'];
         }
-        if(Load::$path[2]!=$this->post['l'])
+        if(!empty(Load::$path[2]) && (Load::$path[2]!=$this->post['l']))
         {
           return ['move'=>'/'.$this->blog['l'].'/'.$this->post['_id'].'/'.$this->post['l']];
         }
+        Load::$core->data['canonical']='https://story.jarm.com/'.$this->post['bl'].'/'.$this->post['_id'];
         $poster=Load::User()->get($this->post['u']);
         Load::$core->data['title']=$this->post['t'].' - '.$this->blog['t'].' - '.$poster['name'];
         Load::$core->data['description']=$this->post['t'].' - '.$this->blog['t'].' | Jarm.com';

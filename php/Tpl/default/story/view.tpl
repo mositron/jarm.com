@@ -42,6 +42,6 @@
   </div>
   <div>
     <h3 class="bar-heading" style="margin-top:5px">แสดงความคิดเห็น</h3>
-    <div class="fb-comments" data-href="<?php echo URI?>" data-num-posts="30" data-width="100%" data-version="v2.9"></div>
+    <div class="fb-comments" data-href="<?php echo self::$core->data['canonical']?:URI?>" data-num-posts="30" data-width="100%" data-version="v2.9"></div>
   </div>
 </div>

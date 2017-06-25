@@ -1,5 +1,5 @@
 <?php
-namespace Jarm\App\Story;
+namespace Jarm\App\Story\Method;
 use Jarm\Core\Load;
 
 class Post
@@ -11,6 +11,10 @@ class Post
   {
     Load::Session()->logged();
     $this->story = $story;
+  }
+
+  public function get()
+  {
     $db=Load::DB();
     if(!Load::$path[1])
     {
@@ -98,7 +102,7 @@ class Post
     $ajax=Load::Ajax();
     $dc=$this->clean($d);
     $img=(array)($this->getimg($dc));
-    $set=['t'=>$t,'d'=>$dc,'l'=>Load::Format()->folder(mb_substr($t,0,50,'utf-8')),'img'=>$img];
+    $set=['t'=>$t,'d'=>$dc,'l'=>Load::Format()->link(mb_substr($t,0,50,'utf-8')),'img'=>$img];
     $set['bl']=$this->blog['l'];
     if($arg['cate']&&isset($this->story->cate[$arg['cate']]))
     {

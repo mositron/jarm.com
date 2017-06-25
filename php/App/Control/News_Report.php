@@ -4,7 +4,10 @@ use Jarm\Core\Load;
 
 class News_Report
 {
-  public function __construct($parent,$id)
+  public function __construct()
+  {
+  }
+  public function get($parent,$id)
   {
     if(!Load::$my['am'])
     {

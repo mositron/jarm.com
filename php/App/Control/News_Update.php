@@ -4,7 +4,10 @@ use Jarm\Core\Load;
 
 class News_Update
 {
-  public function __construct($parent,$id)
+  public function __construct()
+  {
+  }
+  public function get($parent,$id)
   {
     Load::Session()->logged();
     if(in_array(Load::$my['_id'],[1,6,247228]))

@@ -1,5 +1,5 @@
 <?php
-namespace Jarm\App\Story;
+namespace Jarm\App\Story\Method;
 use Jarm\Core\Load;
 
 class Blog
@@ -9,6 +9,10 @@ class Blog
   {
     Load::Session()->logged();
     $this->story = $story;
+  }
+
+  public function get()
+  {
     if(Load::$path[1])
     {
       if(Load::$path[2]=='edit')

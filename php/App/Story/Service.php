@@ -45,19 +45,16 @@ class Service extends Container
 
   public function _byblog()
   {
+    $func='home';
     if(in_array(Load::$path[0],['blog','post','upload']))
     {
-      $v = '\Jarm\App\Story\Method\\'.ucfirst(Load::$path[0]);
-      return new $v($this);
+      $func=Load::$path[0];
     }
     elseif(Load::$path[0])
     {
-      return new \Jarm\App\Story\Method\Profile($this);
+      $func='profile';
     }
-    else
-    {
-      return new \Jarm\App\Story\Method\Home($this);
-    }
+    return (new \ReflectionClass('Jarm\\App\\Story\\Method\\'.ucfirst($func)))->newInstanceArgs([$this])->get();
   }
 
   public function check_perm($key,$am=1)
