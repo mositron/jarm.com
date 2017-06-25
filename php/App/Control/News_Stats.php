@@ -28,7 +28,7 @@ class News_Stats
       $parent->news['sv']='s3';
     }
     Load::$core->data['title']='Admin - สถิติ: '.$parent->news['t'];
-    Load::$core->data['content']=Load::$core
+    return Load::$core
       ->assign('news',$parent->news)
       ->assign('logs',$db->find('logs',['ty'=>'addview','news'=>$parent->news['_id']],[],['sort'=>['_id'=>-1],'limit'=>100]))
       ->fetch('control/news.stats');

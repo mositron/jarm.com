@@ -29,8 +29,9 @@ class Service extends \Jarm\App\News\Service
       5=>'ภาคใต้(ฝั่งตะวันออก)',
       6=>'ภาคใต้(ฝั่งตะวันตก)'
     ];
-    Load::$core->assign('cate',$this->cate);
-    Load::$core->assign('zone',$this->zone);
+    Load::$core
+      ->assign('cate',$this->cate)
+      ->assign('zone',$this->zone);
   }
 
   public function _home()
@@ -42,8 +43,9 @@ class Service extends \Jarm\App\News\Service
     {
       $weather[$v['zone']][]=$v;
     }
-    Load::$core->assign('weather',$weather);
-    Load::$core->data['content']=Load::$core->fetch('weather/home');
+    return Load::$core
+      ->assign('weather',$weather)
+      ->fetch('weather/home');
   }
 
   public function get_place()
@@ -55,9 +57,9 @@ class Service extends \Jarm\App\News\Service
     }
     Load::$core->data['title']='พยากรณ์อากาศ'.$weather['name'].' สภาพอากาศ'.$weather['name'].' - '.Load::$core->data['title'];
     Load::$core->data['description']='พยากรณ์อากาศ'.$weather['name'].' สภาพอากาศ'.$weather['name'].' - '.Load::$core->data['description'];
-
-    Load::$core->assign('weather',$weather);
-    Load::$core->data['content']=Load::$core->fetch('weather/place');
+    return Load::$core
+      ->assign('weather',$weather)
+      ->fetch('weather/place');
   }
 }
 ?>

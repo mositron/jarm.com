@@ -14,7 +14,7 @@ class Player extends Service
       Load::$core->data['image'] = $episode['cover'];
       $db->update('tv_episode',['_id'=>$episode['_id']],['$inc'=>['do'=>1]]);
       $list=$db->findone('tv_list',['content_season_id'=>$episode['content_season_id']]);
-      Load::$core->data['content']=Load::$core
+      return Load::$core
         ->assign('list',$list)
         ->assign('title',$title)
         ->assign('episode',$episode)
@@ -22,7 +22,7 @@ class Player extends Service
     }
     else
     {
-      Load::move('/');
+      return ['move'=>'/'];
     }
   }
 }

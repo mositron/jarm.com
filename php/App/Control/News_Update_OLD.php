@@ -293,10 +293,11 @@ class News_Update
     $parent->news['rc']=($parent->news['rc']??0);
     $parent->news['exl']=($parent->news['exl']??0);
     $parent->news['tags']=($parent->news['tags']??[]);
-    Load::$core->data['content']=Load::$core->assign('news',$parent->news)
-                    ->assign('error',$error)
-                    ->assign('user',Load::User()->get($parent->news['u']))
-                    ->fetch('control/news.update');
+    return Load::$core
+      ->assign('news',$parent->news)
+      ->assign('error',$error)
+      ->assign('user',Load::User()->get($parent->news['u']))
+      ->fetch('control/news.update');
   }
 
   public function checkout_nofollow($arg)

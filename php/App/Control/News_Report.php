@@ -48,7 +48,7 @@ class News_Report
       $u[$n['u']]['news'][]=$n;
     }
 //    print_r($news);
-    Load::$core->data['content']=Load::$core
+    return Load::$core
       ->assign('writer',$u)
       ->assign('news',$news)
       ->assign('dfrom',$dfrom)

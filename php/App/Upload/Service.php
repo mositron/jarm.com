@@ -83,6 +83,9 @@ class Service extends Container
 
         case 'fbimage':
 
+        case 'story-list':
+        case 'story-delete':
+
           $_POST['data']=json_decode($_POST['data'],true);
           require_once(__DIR__.'/method/'.$_POST['method'].'.php');
           break;

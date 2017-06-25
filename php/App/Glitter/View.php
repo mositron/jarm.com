@@ -36,12 +36,11 @@ class View extends Service
       $relate=array_slice(array_values($relate),0,52);
     }
 
-    $poster=Load::User()->get($glitter['u']);
-    Load::$core->data['content']=Load::$core
+    return Load::$core
       ->assign('relate',$relate)
       ->assign('glitter',$glitter)
       ->assign('c',$c)
-      ->assign('user',$poster)
+      ->assign('user',Load::User()->get($glitter['u']))
       ->fetch('glitter/view');
   }
 

@@ -18,9 +18,9 @@ class User extends Service
       if($this->profile=$user->get(Load::$path[1]))
       {
         Load::Ajax()->register(['addpoint','setban','resetavatar','setblock','hackbywut','setverify','sethideall']);
-        $this->user_upload($this->profile);
-        $this->user_profile($this->profile);
         Load::cache();
+        $this->user_upload($this->profile);
+        return $this->user_profile($this->profile);
       }
       else
       {

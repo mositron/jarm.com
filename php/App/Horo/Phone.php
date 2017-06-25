@@ -25,10 +25,10 @@ class Phone extends Service
       shuffle($a);
       shuffle($a);
       $a=array_slice($a,0,30);
-      Load::$core->assign('mhit',$db->find('horo_phone',['_id'=>['$in'=>$a,'$ne'=>53]],['_id'=>1,'d'=>1]));
-
-      Load::$core->assign('phone',$phone);
-      Load::$core->data['content']=Load::$core->fetch('phone.view');
+      return Load::$core
+        ->assign('mhit',$db->find('horo_phone',['_id'=>['$in'=>$a,'$ne'=>53]],['_id'=>1,'d'=>1]))
+        ->assign('phone',$phone)
+        ->fetch('phone.view');
     }
     elseif(Load::$path[1])
     {
@@ -38,17 +38,9 @@ class Phone extends Service
     {
       Load::$core->data['title'] = 'ดูดวงเบอร์มือถือ - '.Load::$core->data['title'];
       Load::$core->data['description'] = ' ดูดวงเบอร์มือถือ - '.Load::$core->data['description'];
-
-      $cache=Load::$core;
-      if(!Load::$core->data['content']=$cache->get('horo/phone',0))
-      {
-        $db=Load::DB();
-
-        Load::$core->assign('phone',$db->find('horo_phone',[],['_id'=>1,'d'=>1]));
-        Load::$core->data['content']=Load::$core->fetch('phone.home');
-
-        $cache->set('horo/phone',Load::$core->data['content']);
-      }
+      return Load::$core
+        ->assign('phone',Load::DB()->find('horo_phone',[],['_id'=>1,'d'=>1]))
+        ->fetch('phone.home');
     }
   }
 }

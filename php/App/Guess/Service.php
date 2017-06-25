@@ -61,7 +61,7 @@ class Service extends Container
         $app=$db->find('guess',['pl'=>1,'c'=>intval($c[1]),'dd'=>['$exists'=>false]],['t'=>1,'d'=>1,'l'=>1,'fd'=>1,'u'=>1,'p'=>1,'do'=>1,'f'=>1],['sort'=>['_id'=>-1],'skip'=>$skip,'limit'=>100]);
       }
 
-      Load::$core->data['content']=Load::$core
+      return Load::$core
         ->assign('c',$c[1])
         ->assign('pager',$pg)
         ->assign('user',Load::User())

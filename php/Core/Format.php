@@ -5,8 +5,8 @@ class Format
 {
   public function __construct()
   {
-
   }
+
   public function encid(int $iInteger): string
   {
     $aMap=[
@@ -18,7 +18,7 @@ class Format
       'G','H','I','J','K','L','M','N',
       'O','P','Q','R','S','T','U','V',
       'W','X','Y','Z'
-  ];
+    ];
     $sString='';
     while($iInteger>0)
     {

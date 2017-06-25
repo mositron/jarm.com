@@ -69,7 +69,7 @@ class Live extends Service
         echo '<h1>ไม่มีสิทธิ์ใช้งานส่วนนี้ - <small>('.(Load::$my?'ไม่ใช่ผู้ดูแล':'ยังไม่ได้เข้าระบบ').')</small></h1>';
         exit;
       }
-      Load::$core->data['content']=Load::$core->fetch('control/live.home');
+      return Load::$core->fetch('control/live.home');
     }
   }
 
@@ -77,13 +77,11 @@ class Live extends Service
   {
     $url=urldecode(parse_url($_SERVER['REQUEST_URI'],PHP_URL_PATH));
     Load::$path=array_values(array_filter(explode('/',substr($url,strlen('/')))));
-
     list($type,$e)=explode('-',Load::$path[1],2);
     $like=explode('-',$e);
     $page=Load::$path[2];
     $post=Load::$path[3];
     $access=Load::$path[4];
-
   }
 }
 ?>

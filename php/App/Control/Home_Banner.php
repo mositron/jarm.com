@@ -98,7 +98,7 @@ class Home_Banner extends Service
             Load::move('/home-banner/'.$banner['_id'].'?completed');
           }
         }
-        Load::$core->data['content']=Load::$core
+        return Load::$core
           ->assign('banner',$banner)
           ->assign('error',$error)
           ->assign('access',$access)
@@ -164,7 +164,7 @@ class Home_Banner extends Service
       $a[] = [$i,''];
       $k[] = '';
 
-      Load::$core->data['content']=Load::$core
+      return Load::$core
         ->assign('app',$var)
         ->assign('stats',$stats)
         ->assign('a',$a)
@@ -192,7 +192,7 @@ class Home_Banner extends Service
       {
         $banner=$db->find('banner',$arg,[],['sort'=>['da'=>-1]]);
       }
-      Load::$core->data['content']=Load::$core
+      return Load::$core
         ->assign('count',$count)
         ->assign('banner',$banner)
         ->assign('access',$access)
@@ -207,8 +207,8 @@ class Home_Banner extends Service
     if($banner=$db->findone('banner',['_id'=>intval($i),'dd'=>['$exists'=>false]]))
     {
       $db->update('banner',['_id'=>intval($i)],['$set'=>['dd'=>Load::Time()->now()]]);
-      Load::Ajax()->alert('ลบเรียบร้อยแล้ว.');
-      Load::Ajax()->script('$(".bn'.$i.'").remove();');
+      Load::Ajax()->alert('ลบเรียบร้อยแล้ว.')
+                  ->script('$(".bn'.$i.'").remove();');
       //Load::Ajax()->redirect('/home-banner');
     }
     else

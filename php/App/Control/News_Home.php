@@ -60,7 +60,7 @@ class News_Home
       }
       $trends[$d['date']][]=$d;
     }
-    Load::$core->data['content']=Load::$core
+    return Load::$core
       ->assign('trends',$trends)
       ->assign('count',$count)
       ->assign('news',$news)

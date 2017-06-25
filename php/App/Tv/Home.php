@@ -19,7 +19,7 @@ class Home extends Service
         $cate[$c[$i]['id']]=$c[$i];
       }
     }
-    Load::$core->data['content']=Load::$core
+    return Load::$core
       ->assign('cate',$cate)
       ->fetch('tv/home');
   }

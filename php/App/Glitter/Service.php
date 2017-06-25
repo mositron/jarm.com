@@ -128,7 +128,7 @@ class Service extends Container
       list($pg,$skip)=Load::Pager()->navigation(64,$count,[$url,'page-'],$page);
       $last=$db->find('glitter',$_,['_id'=>1,'t'=>1,'l'=>1,'sv'=>1,'fd'=>1,'c'=>1,'cs'=>1,'p'=>1,'ds'=>1,'ty'=>1,'pr'=>1],['sort'=>['_id'=>-1],'skip'=>$skip,'limit'=>64]);
     }
-    Load::$core->data['content']=Load::$core
+    return Load::$core
       ->assign('c',$c)
       ->assign('t',$t)
       ->assign('last',$last)

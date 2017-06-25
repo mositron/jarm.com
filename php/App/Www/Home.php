@@ -46,7 +46,7 @@ class Home extends Service
     {
         $h2[$i]['pr']=$fetch_ads($h2[$i]);
     }
-    Load::$core->data['content']=Load::$core
+    return Load::$core
       ->assign('news',$news)
       ->assign('weather',$weather)
       ->assign('hbanner',['img'=>$h1,'bottom'=>$h2])

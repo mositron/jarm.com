@@ -167,8 +167,7 @@ class Service extends Container
     }
 
     Load::Ajax()->register(['forget'],$this);
-
-    Load::$core->data['content']=Load::$core
+    return Load::$core
       ->assign('q',$_SERVER['QUERY_STRING']?'?'.$_SERVER['QUERY_STRING']:'')
       ->fetch('oauth/login');
   }

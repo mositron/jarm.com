@@ -55,7 +55,7 @@ class Service extends Container
       <td><a href="https://www.facebook.com/'.($u[$i]['p2']?:$u[$i]['p']).'" target="_blank">'.$ty.'</a></td></tr>';
     }
     $tmp.='</tbody></table>';
-    Load::$core->data['content']=$tmp;
+    return $tmp;
   }
 }
 ?>

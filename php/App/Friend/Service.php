@@ -149,7 +149,7 @@ class Service extends Container
       list($pg,$skip)=Load::Pager()->navigation(100,$count,[$url,'/page-'],$page);
       $msn=$db->find('msn',$_,[],['sort'=>['au'=>1,'da'=>-1],'skip'=>$skip,'limit'=>100],false);
     }
-    Load::$core->data['content']=Load::$core
+    return Load::$core
         ->assign('z',$z)
         ->assign('p',$p)
         ->assign('t',$t)

@@ -8,7 +8,7 @@
 .
 
 ## ตัวอย่าง
-[jarmza.com](http://jarmza.com)
+[jarm.com](https://jarm.com)
 
 ![Screenshot](https://github.com/positronth/jarm.com/raw/master/Screenshot.png)  
 
@@ -120,15 +120,17 @@ server {
 ## ความต้องการของระบบ  
 - [PHP](https://php.net) v. 7.1+ ขึ้นไป
 - PECL/MongoDB (php-pecl-mongodb)
-- PECL/Memcached (php-pecl-memcache)
 - เซ็ทค่า date.timezone ในไฟล์ php.ini
 - [Composer](https://getcomposer.org/) สำหรับอัพเดท libs ต่างๆ  
 
 
-ในกรณีที่ใช้ docker สามารถดาวน์โหลด [Docker Image](https://hub.docker.com/r/positron/php/)  ได้ที่ repo  [positron/php](https://hub.docker.com/r/positron/php/)  
+## Docker  
+ในกรณีที่ใช้ docker สามารถดาวน์โหลดได้ที่ [Docker Image](https://hub.docker.com/r/positron)
+- [positron/php](https://hub.docker.com/r/positron/php/)  
+- [positron/nginx](https://hub.docker.com/r/positron/nginx/)  
+- [positron/mongo](https://hub.docker.com/r/positron/mongo/)  
 
 .
 
-## เตือนความจำ  
-
-ยิ่งเปิดเผย ยิ่งเห็นจุดบอด
+Positron  
+Sarawut Chongrakchit [Facebook](https://www.facebook.com/positron.th)

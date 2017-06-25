@@ -105,7 +105,7 @@ class Home extends Service
       $msn=$db->find('msn',['dd'=>['$exists'=>false],'ty'=>'gay'],[],['sort'=>['au'=>1,'da'=>-1],'skip'=>0,'limit'=>100],false);
     }
 
-    Load::$core->data['content']=Load::$core
+    return Load::$core
       ->assign('pager',$pg)
       ->assign('pc',$pc)
       ->assign('error',$error)

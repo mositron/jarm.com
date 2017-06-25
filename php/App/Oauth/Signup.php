@@ -11,106 +11,17 @@ class Signup extends Service
     Load::$core->data['title'] = 'สมัครสมาชิก';
     Load::$core->data['description'] = Load::$core->data['title'].' - สังคมออนไลน์ของคนไทย';
     Load::$core->data['keywords'] = 'สมัครสมาชิก, signup, สังคมออนไลน์';
-
-
     $ip=$_SERVER['REMOTE_ADDR'];
-
     $province = require(__CONF.'province.php');
-
-    Load::$core
-      ->assign('q',$_SERVER['QUERY_STRING']?'?'.$_SERVER['QUERY_STRING']:'')
-      ->assign('province',$province);
-
-    $db=Load::DB();
-/*
-    if(in_array('facebook',(array)Load::$path))
+    if($_POST)
     {
-      require_once(HANDLERS.'facebook/facebook.php');
-      $facebook=new facebook(['appId'=>Load::$conf['social']['facebook']['appid'],'secret'=>Load::$conf['social']['facebook']['secret']]);
-
-      if(!($uid=$facebook->getUser()) || !isset($_GET['code']))
-      {
-        Load::move($facebook->getLoginUrl(['scope'=>'offline_access,email,publish_stream,user_birthday,user_location,manage_pages,photo_upload']));
-      }
-      if ($uid)
-      {
-        $accessToken = $facebook->getAccessToken();
-        $me = $facebook->api('/me');
-        $me['email']=strtolower($me['email']);
-        $value=[];
-        $user=Load::User();
-        if(!$me['verified'] || strpos($me['email'],'facebook')>-1)
-        {
-          $value['error'] = 'ไม่สามารถสมัครสมาชิกด้วย Email หรือ FB Account นี้ได้';
-        }
-        elseif($u=$db->findOne('user',['em'=>$me['email']],$user->fields))
-        {
-          Load::Session()->set($u,false);
-          //Load::move(URI.($_SERVER['QUERY_STRING']?'?'.$_SERVER['QUERY_STRING']:''));
-          if($_GET['appid'] && isset(Load::$conf['apps'][$_GET['appid']]))
-          {
-            $r=Load::$conf['apps'][$_GET['appid']];
-            $data=['_id'=>Load::$my['_id']];
-            $data['algorithm'] = 'HMAC-SHA256';
-            $d = strtr(base64_encode(json_encode($data)), '+/', '-_');
-            $s = strtr(base64_encode(hash_hmac('sha256', $d, $r['secret'], true)), '+/', '-_');
-            //echo $r['uri'].'?redirect_uri='.urlencode($_GET['redirect_uri']).'&code='.$s.'.'.$d;
-            //exit;
-            Load::move($r['uri'].'login/?redirect_uri='.urlencode($_GET['redirect_uri']).'&code='.$s.'.'.$d);
-          }
-          elseif($_GET['redirect_uri'])
-          {
-            Load::move($_GET['redirect_uri']);
-          }
-          else
-          {
-            Load::move(['my']);
-          }
-        }
-        elseif($_POST['fbid']==$me['id'])
-        {
-          $value = $_POST;
-          $value['email'] = strtolower($me['email']);
-          $value['fbid'] = $me['id'];
-          $value['status']=1;
-          signup_facebook($value,$facebook,$accessToken);
-        }
-        else
-        {
-          $value['firstname'] = $me['first_name'];
-          $value['lastname'] = $me['last_name'];
-          $value['email'] = strtolower($me['email']);
-          $value['fbid'] = $me['id'];
-          $value['gender'] = substr($me['gender'],0,1);
-          $birthday = explode('/',$me['birthday']);
-          $value['bday'] = $birthday[1];
-          $value['bmonth'] = $birthday[0];
-          $value['byear'] = $birthday[2];
-
-          $location=explode(',',$me['location']['name']);
-          $loc = strtolower(trim($location[0]));
-          foreach($province as $k=>$v)
-          {
-            if($loc==strtolower($v['name_en']))
-            {
-              $value['province']=$k;
-              break;
-            }
-          }
-        }
-        $tpl->assign('value',$value);
-      }
-      $tpl->assign('content',$tpl->fetch('signup.facebook'));
+      $this->signup_email($_POST);
     }
-    else
-    {*/
-      if($_POST)
-      {
-        $this->signup_email($_POST);
-      }
-      Load::$core->assign('content',Load::$core->fetch('oauth/signup.email'));
-    //}
-    Load::$core->data['content'] = Load::$core->fetch('oauth/signup');
+    return Load::$core
+      ->assign('q',$_SERVER['QUERY_STRING']?'?'.$_SERVER['QUERY_STRING']:'')
+      ->assign('province',$province)
+      ->assign('content',Load::$core->fetch('oauth/signup.email'))
+      ->fetch('oauth/signup');
   }
   function signup_facebook($arg,$fb,$fbtoken)
   {

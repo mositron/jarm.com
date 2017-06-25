@@ -16,7 +16,7 @@ class Service extends Container
 
   public function get_home()
   {
-    Load::$core->data['content']=Load::$core
+    return Load::$core
       ->assign('msg',Load::DB()->findone('msg',['_id'=>'gold']))
       ->fetch('gold/home');
   }

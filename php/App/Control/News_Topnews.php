@@ -36,7 +36,7 @@ class News_Topnews
     $user=Load::User();
     $news=(new \Jarm\App\News\Service(['ignore'=>1]))->find(['da'=>['$gte'=>Load::Time()->from($dfrom),'$lte'=>Load::Time()->from($dto)]],['wt'=>1,'google'=>1],['sort'=>['do'=>-1]]);
 
-    Load::$core->data['content']=Load::$core
+    return Load::$core
       ->assign('user',$user)
       ->assign('news',$news)
       ->assign('dfrom',$dfrom)

@@ -22,14 +22,16 @@ class Service extends Container
       <li><a href="/banner" title=""'.($path=='banner'?' class="active"':'').'>แบนเนอร์ทั้งหมด</a></li>
       <li><a href="/job" title=""'.($path=='job'?' class="active"':'').'>รับสมัครงาน</a></li>
       <li><a href="/live" title=""'.($path=='live'?' class="active"':'').'>เครื่องมือ Live</a></li>
-      </ul>'
+      </ul>',
+      'hide_adsense'=>true,
+      'sc-bottom'=>false,
     ]);
   }
 
   public function _job()
   {
     Load::Ajax()->register('setjob',$this);
-    Load::$core->data['content']=Load::$core
+    return Load::$core
       ->assign('msg',Load::DB()->findone('msg',['_id'=>'job']))
       ->fetch('control/job');
   }
@@ -52,22 +54,19 @@ class Service extends Container
 
   public function clearcache($domain)
   {
-    $db=Load::DB();
-    $ajax=Load::Ajax();
     Load::$core->clean('',true,$domain);
-    $db->insert('logs',['ty'=>'cache','u'=>Load::$my['_id'],'dm'=>$domain]);
-    $ajax->alert('ล้างแคชทั้งหมดเรียบร้อยแล้ว');
-    $ajax->script('setTimeout(function(){window.location.href="'.URL.'"},2000);');
+    Load::DB()->insert('logs',['ty'=>'cache','u'=>Load::$my['_id'],'dm'=>$domain]);
+    Load::Ajax()
+      ->alert('ล้างแคชทั้งหมดเรียบร้อยแล้ว')
+      ->script('setTimeout(function(){window.location.href="'.URL.'"},2000);');
   }
 
   public function setjob($frm)
   {
-    $db=Load::DB();
     $ajax=Load::Ajax();
-    $user=Load::User();
     if($this->check_perm('job',1))
     {
-      $db->update('msg',['_id'=>'job'],['$set'=>['msg'=>trim($frm['detail'])]]);
+      Load::DB()->update('msg',['_id'=>'job'],['$set'=>['msg'=>trim($frm['detail'])]]);
       $ajax->alert('บันทึกข้อมูลเรียบร้อยแล้ว');
     }
     $ajax->script('setTimeout(function(){window.location.href="'.URL.'"},2000);');

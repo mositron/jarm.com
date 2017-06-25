@@ -8,7 +8,7 @@ class Chat extends Service
   {
     Load::$core->data['title']='แชทเลสเบี้ยน์ ห้องแชทชาวเลสเบี้ยน ทอม ดี้ เลสคิง เลสควีน เลสรุก เลสรับ พูดคุยของชาวเลสเบี้ยน สนทนาตามประสาชาวเลสเบี้ยน์';
     Load::$core->data['description']=Load::$core->data['title'].', '.Load::$core->data['description'];
-    Load::$core->data['content']=Load::$core->fetch('lesbian/chat');
+    return Load::$core->fetch('lesbian/chat');
   }
 }
 

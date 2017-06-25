@@ -85,8 +85,9 @@ $(document).ready(function(){
         console.log("progress!<br>Data: " + JSON.stringify(progress));
         $('._jupload > span').html(Math.round(progress) + "%")
       },
-      success: function(data){
-        console.log("Success!<br>Data: " + JSON.stringify(data));
+      success: function(d){
+        console.log("Success!<br>Data: " + d);
+        var data=JSON.parse(d);
         if(data.status=='OK')
         {
           if(data.update=='avatar')
@@ -98,6 +99,9 @@ $(document).ready(function(){
           }
           $('.img-uid-my').attr('src',data.pic);
           $('._jupload').html('<span>เปลี่ยนรูปภาพเรียบร้อยแล้ว...</span>');
+        }
+        else {
+          console.log(data.status);
         }
       },
       error: function(error){

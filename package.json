@@ -1,6 +1,6 @@
 {
   "name": "jarm.com",
-  "version": "3.0.0",
+  "version": "3.0.4",
   "description": "A Micro-CMS designed to dynamic web applications. support multiple sub-domains. Fast, simple and lightweight.",
   "main": "files/cdn/lib",
   "dependencies": {

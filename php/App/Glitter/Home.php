@@ -9,7 +9,7 @@ class Home extends Service
     $db=Load::DB();
     $last=$db->find('glitter',['dd'=>['$exists'=>false]],['_id'=>1,'t'=>1,'sv'=>1,'fd'=>1,'ty'=>1],['sort'=>['_id'=>-1],'limit'=>52]);
     $rec=$db->find('glitter',['dd'=>['$exists'=>false]],['_id'=>1,'t'=>1,'sv'=>1,'fd'=>1,'ty'=>1],['sort'=>['rc'=>-1,'_id'=>-1],'limit'=>12]);
-    Load::$core->data['content']=Load::$core
+    return Load::$core
       ->assign('last',$last)
       ->assign('rec',$rec)
       ->fetch('glitter/home');

@@ -24,8 +24,7 @@ class Recent extends Service
       list($pg,$skip)=Load::Pager()->navigation(100,$count,['/recent/','page-'],$page);
       $sticker=$db->find('sticker',$_,['_id'=>1,'t'=>1,'fd'=>1],['sort'=>['_id'=>-1],'skip'=>$skip,'limit'=>100]);
     }
-
-    Load::$core->data['content']=Load::$core
+    return Load::$core
       ->assign('pager',$pg)
       ->assign('sticker',$sticker)
       ->fetch('sticker/recent');

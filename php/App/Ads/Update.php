@@ -21,7 +21,7 @@ class Update extends Service
       $this->banner['sc']=substr(md5(rand(1,999999)),8,16);
       $db->update('ads',['_id'=>$this->banner['_id']],['$set'=>['sc'=>$this->banner['sc']]]);
     }
-    $this->{'update_'.$this->banner['ty']}($this->banner,$access);
+    return $this->{'update_'.$this->banner['ty']}($this->banner,$access);
   }
 
   private function update_ads($banner,$access)
@@ -113,7 +113,7 @@ class Update extends Service
         Load::$core->assign('adsR',$db->findone('ads',['_id'=>$banner['ads']['r']],['_id'=>1,'t'=>1]));
       }
     }
-    Load::$core->data['content']=Load::$core
+    return Load::$core
       ->assign('banner',$banner)
       ->assign('error',$error)
       ->assign('access',$access)
@@ -156,7 +156,6 @@ class Update extends Service
         $error['title']='กรุณากรอกชื่อแบนเนอร์';
       }
 
-
       if(!count($error))
       {
         $upset=['$set'=>$arg];
@@ -168,10 +167,11 @@ class Update extends Service
         Load::move('/update/'.$banner['_id'].'?completed');
       }
     }
-    Load::$core->data['content']=Load::$core->assign('banner',$banner)
-                    ->assign('error',$error)
-                    ->assign('access',$access)
-                    ->fetch('ads/update.advertorial');
+    return Load::$core
+              ->assign('banner',$banner)
+              ->assign('error',$error)
+              ->assign('access',$access)
+              ->fetch('ads/update.advertorial');
   }
 
   private function update_relate($banner,$access)
@@ -183,10 +183,7 @@ class Update extends Service
       $arg=[];
       $arg['t']=trim(mb_substr(strip_tags($_POST['title']),0,100,'utf-8'));
       $arg['content']=intval(trim($_POST['content']));
-
-
       $unset=[];
-
       $arg['dt1']=Load::Time()->from(trim($_POST['date1']).' 00:00:00');
       $arg['dt2']=Load::Time()->from(trim($_POST['date2']).' 23:59:59');
       foreach($this->relate_position as $k=>$v)
@@ -218,7 +215,7 @@ class Update extends Service
         Load::move('/update/'.$banner['_id'].'?completed');
       }
     }
-    Load::$core->data['content']=Load::$core
+    return Load::$core
       ->assign('banner',$banner)
       ->assign('error',$error)
       ->assign('access',$access)

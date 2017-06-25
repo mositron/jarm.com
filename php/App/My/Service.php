@@ -27,7 +27,7 @@ class Service extends Container
     Load::Session()->logged();
     $db=Load::DB();
     $news=(new \Jarm\App\News\Service(['ignore'=>1]))->find(['dd'=>['$exists'=>false],'pl'=>1],[],['limit'=>20,'sort'=>['ds'=>-1]]);
-    Load::$core->data['content']=Load::$core
+    return Load::$core
       ->assign('user',Load::User())
       ->assign('news',$news)
       ->assign('friend',$db->find('user',['st'=>['$gte'=>0]],['_id'=>1,'if.am'=>1,'am'=>1,'du'=>1,'em'=>1,'da'=>1],['sort'=>['_id'=>-1],'limit'=>10]))
@@ -51,10 +51,10 @@ class Service extends Container
     {
       if($this->profile=$user->get($path))
       {
+        Load::cache();
         Load::Ajax()->register(['addpoint','setban','resetavatar','setblock','hackbywut','setverify','sethideall','savecrop']);
         $this->user_upload($this->profile);
-        $this->user_profile($this->profile);
-        Load::cache();
+        return $this->user_profile($this->profile);
       }
       else
       {
@@ -211,7 +211,7 @@ class Service extends Container
     $prov=require(__CONF.'province.php');
     $pf[0]['pr']=($prof['if']['pr']?'จังหวัด ':'').$prov[$prof['if']['pr']]['name_th'];
     $pf[1]['pr']='<span>'.$pf[0]['pr'].'</span>';
-    Load::$core->data['content']=Load::$core
+    return Load::$core
       ->assign('user',Load::User())
       ->assign('profile',$prof)
       ->assign('pf',$pf)

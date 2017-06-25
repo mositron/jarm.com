@@ -23,10 +23,11 @@ class Service extends \Jarm\App\News\Service
     Load::cache();
     $db=Load::DB();
     $music=$db->find('music',[],['_id'=>1,'t'=>1,'s'=>1,'fd'=>1,'sn'=>1,'ar'=>1,'al'=>1,'yt'=>1,'da'=>1],['sort'=>['_id'=>-1],'limit'=>20]);
-    Load::$core->assign('music',$music);
     $news=(new \Jarm\App\News\Service(['ignore'=>1]))->find(['pl'=>1,'c'=>$arg['cate']],[],['limit'=>16]);
-    Load::$core->assign('news',$news);
-    Load::$core->data['content']=Load::$core->fetch('music/home');
+    return Load::$core
+      ->assign('music',$music)
+      ->assign('news',$news)
+      ->fetch('music/home');
   }
 
   public function _list()
@@ -68,7 +69,7 @@ class Service extends \Jarm\App\News\Service
       list($pg,$skip)=Load::Pager()->navigation(110,$count,[$url,'page-'],$page);
       $music=$db->find('music',$_,['_id'=>1,'t'=>1,'s'=>1,'fd'=>1,'sn'=>1,'ar'=>1,'al'=>1,'yt'=>1,'da'=>1],['sort'=>$sort,'skip'=>$skip,'limit'=>110]);
     }
-    Load::$core->data['content']=Load::$core
+    return Load::$core
       ->assign('c',$c)
       ->assign('music',$music)
       ->assign('pager',$pg)

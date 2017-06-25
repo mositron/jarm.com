@@ -13,23 +13,24 @@ class Manage extends Service
     }
     if(is_numeric(Load::$path[1])||Load::$path[1]=='new')
     {
-      $this->manage_view();
+      return $this->manage_view();
     }
     elseif(in_array(Load::$path[1],['stats']))
     {
-      $this->{'manage_'.Load::$path[1]}();
+      return $this->{'manage_'.Load::$path[1]}();
     }
     else
     {
-      $this->manage_home();
+      return $this->manage_home();
     }
   }
 
   public function manage_home()
   {
     Load::Ajax()->register(['newapp','delapp','frominet']);
-    Load::$core->assign('getapp',$this->getapp());
-    Load::$core->data['content']=Load::$core->fetch('guess/manage.home');
+    return Load::$core
+      ->assign('getapp',$this->getapp())
+      ->fetch('guess/manage.home');
   }
 
   public function manage_stats()
@@ -69,7 +70,7 @@ class Manage extends Service
     $i=$c+1;
     $a[] = [$i,''];
     $k[] = '';
-    Load::$core->data['content']=Load::$core
+    return Load::$core
       ->assign('app',$var)
       ->assign('stats',$stats)
       ->assign('a',$a)
@@ -278,8 +279,7 @@ class Manage extends Service
         $app=array_merge($app,$arg);
       }
     }
-
-    Load::$core->data['content']=Load::$core
+    return Load::$core
       ->assign('app',$app)
       ->assign('error',$error)
       ->fetch('manage.view');
@@ -291,9 +291,7 @@ class Manage extends Service
     $allorder = ['_id'=>'#','p'=>'รูปภาพ','t'=>'คำถาม','s'=>'สถานะ'];
     $allby=['desc'=>'หลังไปหน้า','asc'=>'หน้าไปหลัง'];
     $all=['order','by','search','page'];
-
     extract(Load::Split()->get('/manage/',0,$all,$allorder,$allby));
-
     $arg = ['u'=>Load::$my['_id'],'dd'=>['$exists'=>false]];
     if(Load::$my['_id']==1)
     {

@@ -17,8 +17,9 @@ class Search extends Service
     Load::$core->data['title'] = 'ตรวจหวย ตรวจสลากกินแบ่งรัฐบาล งวดที่ '.$tm;
     Load::$core->data['description'] = 'ตรวจหวย ตรวจสลากกินแบ่งรัฐบาล งวดที่ '.$tm.' เลขเด็ด หวยเด็ด อัพเดทรวดเร็ว';
     Load::$core->data['keywords'] = 'ตรวจหวย, หวย, ตรวจสลากกินแบ่งรัฐบาล, '.$tm.', '.str_replace(' ',', ',$tm).', ตรวจสลากกินแบ่ง, เลขเด็ด, หวยเด็ด';
-    Load::$core->assign('lotto',$lotto);
-    Load::$core->data['content']=Load::$core->fetch('lotto/search');
+    return Load::$core
+      ->assign('lotto',$lotto)
+      ->fetch('lotto/search');
   }
 }
 ?>

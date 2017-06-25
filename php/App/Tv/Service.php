@@ -30,14 +30,14 @@ class Service extends Container
     {
       Load::$core->data['title'] = $cate['name_th'].' - ดู'.$cate['name_th'].'ย้อนหลัง ดูทีวีย้อนหลัง';
       $list=$db->find('tv_list',['cate_id'=>$cate['id']],[],['sort'=>['modified_date'=>-1],'limit'=>40]);
-      Load::$core->data['content']=Load::$core
+      return Load::$core
         ->assign('cate',$cate)
         ->assign('list',$list)
         ->fetch('tv/cate');
     }
     else
     {
-      Load::move('/');
+      return ['move'=>'/'];
     }
   }
 }

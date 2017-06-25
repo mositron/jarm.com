@@ -20,8 +20,9 @@ class V extends Service
       }
       Load::$core->data['title'] = 'รูปภาพ '.$image['n'].' - '.Load::$path[0].' - '.Load::$core->data['title'];
       Load::$core->data['description'] = 'รูปภาพ '.$image['n'].' - '.Load::$path[0].' - '.Load::$core->data['description'];
-      Load::$core->assign('image',$image);
-      Load::$core->data['content']=Load::$core->fetch('image/view');
+      return Load::$core
+        ->assign('image',$image)
+        ->fetch('image/view');
     }
     else
     {

@@ -1,5 +1,4 @@
 /Conf/*.php
 /Vendor/*.php
 /Vendor/*/*
-files/cdn/*
 composer.lock

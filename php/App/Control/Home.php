@@ -66,7 +66,7 @@ class Home extends Service
     $member['ban']=$db->count('user',['st'=>['$lt'=>0]]);
     $member['hold']=$db->count('user',['st'=>['$gt'=>1]]);
 
-    Load::$core->data['content']=Load::$core
+    return Load::$core
       ->assign('user',Load::User())
       ->assign('ads',$ads)
       ->assign('diff',$diff)
@@ -80,20 +80,20 @@ class Home extends Service
 
   public function delfriend($id)
   {
-    $ajax=Load::Ajax();
     Load::DB()->update('msn',['_id'=>intval($id)],['$set'=>['dd'=>Load::Time()->now()]]);
     //$ajax->alert('ลบเรียบร้อยแล้ว');
-    $ajax->script('$("#friend'.$id.'").remove();');
-    $ajax->script('$("#friendcount").html($(".table-friend tr").length)');
+    Load::Ajax()
+      ->script('$("#friend'.$id.'").remove();')
+      ->script('$("#friendcount").html($(".table-friend tr").length)');
   }
 
   public function delfriends()
   {
-    $ajax=Load::Ajax();
     Load::DB()->update('msn',['dd'=>['$exists'=>false],'da'=>['$gte'=>Load::Time()->now(-3600*24*30)],'sd'=>['$exists'=>true]],['$set'=>['dd'=>Load::Time()->now()]],['multiple'=>true]);
-    $ajax->alert('ลบเรียบร้อยแล้ว');
-    $ajax->script('$(".table-friend").remove();');
-    $ajax->script('$("#friendcount").html(0)');
+    Load::Ajax()
+      ->alert('ลบเรียบร้อยแล้ว')
+      ->script('$(".table-friend").remove();')
+      ->script('$("#friendcount").html(0)');
   }
 }
 ?>

@@ -22,7 +22,7 @@ class Home extends Service
     $topic=$db->find('forum',['c'=>['$in'=>[5,191,192]],'dd'=>['$exists'=>false]],['_id'=>1,'t'=>1,'ds'=>1,'ic'=>1,'u'=>1,'do'=>1,'cm.c'=>1,'cm.d'=>['$slice'=>-1],'da'=>1],['sort'=>['ds'=>-1],'limit'=>10],false);
 
 
-    Load::$core->data['content']=Load::$core
+    return Load::$core
       ->assign('lotto_last',$lotto_last)
       ->assign('lotto',$lotto)
       ->assign('news',$news)

@@ -29,9 +29,9 @@ class Service extends Container
     }
     else
     {
-      Load::move('/about/privacy',true);
+      return ['move'=>'/about/privacy'];
     }
-    Load::$core->data['content']=Load::$core->fetch('www/about');
+    return Load::$core->fetch('www/about');
   }
 
   public function _ads(): void
@@ -66,12 +66,12 @@ class Service extends Container
   {
     #ปิดใช้งานชั่วคราว
     Load::move('/');
-    #Load::$core->data['content']=Load::$core->assign('job',Load::DB()->findone('msg',['_id'=>'job']))->fetch('www/job');
+    #return Load::$core->assign('job',Load::DB()->findone('msg',['_id'=>'job']))->fetch('www/job');
   }
 
   public function _unsubscribe()
   {
-    Load::$core->data['content']=Load::$core->fetch('www/unsubscribe');
+    return Load::$core->fetch('www/unsubscribe');
   }
 
   public function _user()
@@ -85,8 +85,8 @@ class Service extends Container
       'title'=>'กรุณายืนยันการสมัครสมาชิก | Jarm.com',
       'description'=>'กรุณายืนยันการสมัครสมาชิก | Jarm.com',
       'keywords'=>'กรุณายืนยันการสมัครสมาชิก',
-      'content'=>Load::$core->fetch('www/verify'),
     ]);
+    return Load::$core->fetch('www/verify');
   }
 
   public function sendconfirm()

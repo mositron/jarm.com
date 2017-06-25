@@ -38,7 +38,7 @@ class Service extends Container
 
   public function get_home()
   {
-    Load::$core->data['content']=Load::$core
+    return Load::$core
       ->assign('news',(new \Jarm\App\News\Service(['ignore'=>1]))->find(['pl'=>1,'c'=>24],[],['limit'=>16]))
       ->fetch('radio/home');
   }
@@ -67,7 +67,7 @@ class Service extends Container
     Load::$core->data['description'] = $this->radio[$r]['t'].' ฟังเพลงออนไลน์'.$this->radio[$r]['t'].' ฟังเพลง'.$this->radio[$r]['t'].' ฟังวิทยุออนไลน์'.$this->radio[$r]['t'].' ฟังวิทยุออนไลน์ทุกคลื่นทั่วไทย ฟังเพลงรัก ฟังเพลงอกหัก ฟังเพลงใหม่ ทั้งไทยและสากลได้ที่นี่';
     Load::$core->data['keywords'] = $this->radio[$r]['t'].', ฟังเพลง, วิทยุออนไลน์, ฟังวิทยุออนไลน์, ฟังเพลงออนไลน์, วิทยุออนไลน์, วิทยุ';
     Load::$core->data['type']='article';
-    Load::$core->data['content']=Load::$core
+    return Load::$core
       ->assign('id',$r)
       ->fetch('radio/view');
   }

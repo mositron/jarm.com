@@ -52,7 +52,7 @@ class Home extends Service
         }
       }
 
-      return ['content'=>Load::$core
+      return Load::$core
         ->assign('banner',$banner)
         ->assign('inner',$inner)
         ->assign('site',$site)
@@ -60,11 +60,11 @@ class Home extends Service
         ->assign('order',$order)
         ->assign('by',$by)
         ->assign('allorder',$allorder)
-        ->fetch('ads/home')];
+        ->fetch('ads/home');
     }
     else
     {
-      return ['content'=>Load::$core->fetch('ads/permission')];
+      return Load::$core->fetch('ads/permission');
     }
   }
 }

@@ -1,5 +1,0 @@
-<?php
-team::session()->logged();
-
-
-?>

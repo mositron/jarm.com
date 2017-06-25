@@ -89,7 +89,7 @@ class Lyric extends Service
 
     $relate=$db->find('music',['_id'=>['$ne'=>$music['_id']],'ar'=>$music['ar'],'al'=>$music['al'],'dd'=>['$exists'=>false]],['_id'=>1,'sn'=>1],['sort'=>['_id'=>-1],'limit'=>20]);
 
-    Load::$core->data['content']=Load::$core
+    return Load::$core
       ->assign('type',['rs'=>'RS','gm'=>'GMM','yp'=>''])
       ->assign('c',$music['c'])
       ->assign('music',$music)

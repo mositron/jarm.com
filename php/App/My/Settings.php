@@ -113,7 +113,7 @@ class Settings extends Service
     Load::$core->data['title']='ตั้งค่า - Jarm สังคมออนไลน์';
     Load::$core->data['description']='ตั้งค่า - สังคมออนไลน์ของคนไทย';
     Load::$core->data['keywords']='ตั้งค่า, สังคมออนไลน์';
-    Load::$core->data['content']=Load::$core
+    return Load::$core
       ->assign('my',Load::$my)
       ->assign('settings',$getsettings($path))
       ->fetch('my/settings');
@@ -258,8 +258,8 @@ class Settings extends Service
                                               'if.pr'=>intval($arg['prov']),
                                               'if.rl'=>$arg['relate'],
                                               ]]);
-        $ajax->script('setTimeout(function(){window.location.href="/settings";},2000)');
-        $ajax->alert('แก้ไขข้อมูลส่วนตัวเรียบร้อยแล้ว');
+        $ajax->script('setTimeout(function(){window.location.href="/settings";},2000)')
+              ->alert('แก้ไขข้อมูลส่วนตัวเรียบร้อยแล้ว');
       }
     }
     elseif($arg['setting']=='password')

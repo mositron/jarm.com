@@ -69,7 +69,7 @@ class Friend extends Service
     {
       if($k!=4)$pc[$k]=$db->find('msn_province',['z'=>intval($k)],['t'=>1,'c'=>1],['sort'=>['c'=>-1],'limit'=>5],false);
     }
-    Load::$core->data['content']=Load::$core
+    return Load::$core
       ->assign('z',$z)
       ->assign('p',$p)
       ->assign('pc',$pc)

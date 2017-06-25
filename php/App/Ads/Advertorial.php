@@ -51,16 +51,16 @@ class Advertorial extends Service
         }
       }
 
-      return ['content'=>Load::$core
+      return Load::$core
         ->assign('banner',$banner)
         ->assign('inner',$inner)
         ->assign('site',$site)
         ->assign('status',$status)
-        ->fetch('ads/advertorial')];
+        ->fetch('ads/advertorial');
     }
     else
     {
-      return ['content'=>Load::$core->fetch('ads/permission')];
+      return Load::$core->fetch('ads/permission');
     }
   }
 }

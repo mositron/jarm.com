@@ -23,7 +23,7 @@ class Game extends Service
     Load::$core->data['title'] = $app['t'].' - เกมทายใจ เกมส์วัดดวง เกมเฟสบุ๊ค faceook';
     Load::$core->data['description'] = $app['d'].' - สร้าง Application บน Facebook ง่ายๆ ฟรี!';
     Load::$core->data['image']='https://s4.jarm.com/guess/'.$app['fd'].'/m.jpg';
-    Load::$core->data['content']=Load::$core
+    return Load::$core
       ->assign('app',$app)
       ->assign('user',Load::User()->get($app['u']))
       ->fetch('guess/game');

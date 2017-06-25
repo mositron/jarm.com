@@ -13,7 +13,7 @@ class Home extends Service
     $data['appn']=$db->find('guess',['pl'=>1,'dd'=>['$exists'=>false]],['t'=>1,'d'=>1,'l'=>1,'fd'=>1,'p'=>1,'do'=>1,'u'=>1,'f'=>1],['sort'=>['_id'=>-1],'limit'=>21]);
     shuffle($data['app']);
     $data['app'] = array_slice($data['app'],0,6);
-    Load::$core->data['content']=Load::$core
+    return Load::$core
       ->assign('user',Load::User())
       ->assign('app',$data['app'])
       ->assign('appn',$data['appn'])

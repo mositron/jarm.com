@@ -83,9 +83,9 @@ class Upload extends Service
     {
       $error.='ปิดให้บริการสำหรับเว็บภายนอกชั่วคราว<br>';
     }
-
-    Load::$core->assign('error',$error);
-    Load::$core->data['content']=Load::$core->fetch('image/upload');
+    return Load::$core
+      ->assign('error',$error)
+      ->fetch('image/upload');
   }
 }
 ?>

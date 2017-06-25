@@ -28,17 +28,14 @@ class Service extends \Jarm\App\News\Service
     $db=Load::DB();
     extract(Load::Split()->get('/list/',0,['page']));
     $_=['dd'=>['$exists'=>false],'pl'=>1];
-
     Load::$core->data['title']='ตรวจหวยย้อนหลัง'.($page>1?' หน้า '.$page:'').' - '.Load::$core->data['title'];
     Load::$core->data['description']=Load::$core->data['title'].', '.Load::$core->data['description'];
-
     if($count=$db->count('lotto',$_))
     {
       list($pg,$skip)=Load::Pager()->navigation(48,$count,['/list','/page-'],$page);
       $lotto=$db->find('lotto',$_,['_id'=>1,'tm'=>1,'a1'=>1,'f3'=>1,'l3'=>1,'l2'=>1,'l'=>1],['sort'=>['tm'=>-1],'skip'=>$skip,'limit'=>48]);
     }
-
-    Load::$core->data['content']=Load::$core
+    return Load::$core
       ->assign('lotto',$lotto)
       ->assign('pager',$pg)
       ->fetch('lotto/list');

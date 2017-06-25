@@ -4,7 +4,6 @@ class Upload
 {
   public function __construct()
   {
-
   }
   public function getkey(string $url,$par): ?string
   {
@@ -17,7 +16,6 @@ class Upload
     }
     return null;
   }
-
   public function post(string $serv,string $method,string $file,$data='',bool $decode=true)
   {
     $serv = Load::getServ($serv);

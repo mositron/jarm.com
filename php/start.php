@@ -6,8 +6,8 @@
 |     https://jarm.com
 |     positron@jarm.comm
 |
-|     $Revision: 3.0.0 $
-|     $Date: 2017/02/22 20:58:00 $
+|     $Revision: 3.0.4 $
+|     $Date: 2017/06/25 19:58:00 $
 |     $Author: Positron $
 +-----------------------------------------------------------------------------+
 */
@@ -91,6 +91,7 @@ Jarm\Core\Load::Init([
       'content'=>'',
       'img_cache'=>true,
       'div_row'=>true,
+      'sc-bottom'=>true,
   ])
   ->route([
     /**
@@ -124,6 +125,7 @@ Jarm\Core\Load::Init([
     'pr'=>['app'=>'news','arg'=>['cate'=>28,'hot'=>31]],
     'radio'=>['func'=>'view'],
     'sticker'=>['func'=>'cate'],
+    'story'=>['func'=>'byblog'],
     'tech'=>['app'=>'news','arg'=>['cate'=>3,'hot'=>31]],
     'weather'=>['app'=>'news','arg'=>['cate'=>21]],
   ])

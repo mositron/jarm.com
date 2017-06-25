@@ -10,7 +10,7 @@ class Lotto extends Service
     $path=(Load::$path[1]??'home');
     if(Load::$my['am'])
     {
-      $this->{'lotto_'.(is_numeric(Load::$path[1])?'update':'home')}();
+      return $this->{'lotto_'.(is_numeric(Load::$path[1])?'update':'home')}();
     }
     else
     {
@@ -29,7 +29,7 @@ class Lotto extends Service
       list($pg,$skip)=Load::Pager()->navigation(20,$count,['/lotto/','page-'],$page);
       $lotto=$db->find('lotto',$arg,['_id'=>1,'tm'=>1,'l'=>1,'a1'=>1,'l3'=>1,'l2'=>1,'pl'=>1],['skip'=>$skip,'limit'=>20,'sort'=>['tm'=>-1]]);
     }
-    Load::$core->data['content']=Load::$core
+    return Load::$core
       ->assign('count',$count)
       ->assign('lotto',$lotto)
       ->assign('pager',$pg)
@@ -95,7 +95,7 @@ class Lotto extends Service
       exit;
     }
 
-    Load::$core->data['content']=Load::$core
+    return Load::$core
       ->assign('date',['d'=>$d[0],'m'=>$d[1],'y'=>$d[2]])
       ->assign('lotto',$lotto)
       ->assign('error',$error)
@@ -109,7 +109,6 @@ class Lotto extends Service
     {
       $db->update('lotto',['_id'=>intval($i)],['$set'=>['dd'=>Load::Time()->now()]]);
       Load::$core->delete('lotto/home');
-
     }
     Load::Ajax()->redirect(URL);
   }

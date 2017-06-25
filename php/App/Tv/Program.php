@@ -13,14 +13,14 @@ class Program extends Service
       Load::$core->data['image'] = $list['cover'];
       $db->update('tv_list',['_id'=>$list['_id']],['$inc'=>['do'=>1]]);
       $episode=$db->find('tv_episode',['content_season_id'=>$list['content_season_id']],[],['sort'=>['date'=>-1],'limit'=>100]);
-      Load::$core->data['content']=Load::$core
+      return Load::$core
         ->assign('list',$list)
         ->assign('episode',$episode)
         ->fetch('tv/program');
     }
     else
     {
-      Load::move('/');
+      return ['move'=>'/'];
     }
   }
 }

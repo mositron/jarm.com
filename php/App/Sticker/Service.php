@@ -14,7 +14,6 @@ class Service extends Container
     {
       Load::move('https://jarm.com/');
     }
-
     Load::$core->data=array_merge(Load::$core->data,[
       'title'=>'สติ๊กเกอร์ Line ฟรี โหลดสติกเกอร์ฟรี สามารถใช้งานได้ใน Line, Wechat, WhatsApp และอื่นๆ',
       'description'=>'โหลดแอพสำหรับใช้งานสติกเกอร์ฟรี ใช้ได้บนไลน์ วอทแอพ วีแชท Line WeChat WhatsApp',
@@ -36,10 +35,10 @@ class Service extends Container
     $this->ref=[
       'fb'=>['t'=>'Facebook'],
     ];
-
-    Load::$core->assign('types',$this->types);
-    Load::$core->assign('cate',$this->cate);
-    Load::$core->assign('ref',$this->ref);
+    Load::$core
+      ->assign('types',$this->types)
+      ->assign('cate',$this->cate)
+      ->assign('ref',$this->ref);
   }
 
   public function get_cate()
@@ -66,8 +65,7 @@ class Service extends Container
       list($pg,$skip)=Load::Pager()->navigation(100,$count,[$url,'page-'],$page);
       $app=$db->find('sticker',['pl'=>1,'c'=>intval($c[1]),'dd'=>['$exists'=>false]],['t'=>1,'d'=>1,'l'=>1,'fd'=>1,'u'=>1,'p'=>1,'do'=>1,'f'=>1],['sort'=>['_id'=>-1],'skip'=>$skip,'limit'=>100]);
     }
-
-    Load::$core->data['content']=Load::$core
+    return Load::$core
       ->assign('c',$c[1])
       ->assign('pager',$pg)
       ->assign('user',Load::User())

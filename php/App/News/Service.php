@@ -38,13 +38,13 @@ class Service extends Container
   public function _home(array $arg=[])
   {
     Load::cache();
-    Load::$sub=='news'?$this->home_index($arg):$this->home_cate($arg);
+    return (Load::$sub=='news'?$this->home_index($arg):$this->home_cate($arg));
   }
 
   private function home_index(array $arg=[])
   {
     Load::Ajax()->register(['loadmore'],$this);
-    Load::$core->data['content']=Load::$core
+    return Load::$core
       ->assign('hot',$this->find(['pl'=>1,'ds'=>['$lte'=>Load::Time()->now(-3600*3),'$gte'=>Load::Time()->now(-3600*27)]],[],['sort'=>['do'=>-1],'skip'=>20,'limit'=>20]))
       ->assign('news',$this->find(['pl'=>1,'c'=>['$nin'=>[11,12]]],[],['limit'=>104]))
       ->fetch('news/home');
@@ -61,7 +61,7 @@ class Service extends Container
     Load::$core->data['title']=Load::$conf['news'][$arg['cate']]['t'].' | '.Load::$core->data['title'];
     Load::$core->data['description']=Load::$conf['news'][$arg['cate']]['t'].' | '.Load::$core->data['description'];
     Load::$core->data['keywords']=Load::$conf['news'][$arg['cate']]['t'].', '.Load::$core->data['keywords'];
-    Load::$core->data['content']=Load::$core
+    return Load::$core
       ->assign('hot',$this->find($cond,[],['sort'=>['do'=>-1],'limit'=>20]))
       ->assign('news',$this->find(['pl'=>1,'c'=>$arg['cate']],[],['limit'=>104]))
       ->fetch('news/home_cate');
@@ -241,7 +241,7 @@ class Service extends Container
       $relate=$this->find($arg,[],['limit'=>10]);
     }
 
-    Load::$core->data['content']=Load::$core
+    return Load::$core
       ->assign('user',$user)
       ->assign('news',$news)
       ->assign('ncate',Load::$conf['news'][$news['c']])
@@ -300,7 +300,7 @@ class Service extends Container
       list($pg,$skip)=Load::Pager()->navigation(80,$count,['/cate/'.$cid,'/page-'],$page);
       $news=$this->find($_,[],['skip'=>$skip,'limit'=>80]);
     }
-    Load::$core->data['content']=Load::$core
+    return Load::$core
       ->assign('news',$news)
       ->assign('nav',$nav)
       ->assign('pager',$pg)

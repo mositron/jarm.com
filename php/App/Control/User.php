@@ -27,7 +27,7 @@ class User extends Service
       }
     }
     $admin=array_merge($active,$ban);
-    Load::$core->data['content']=Load::$core
+    return Load::$core
       ->assign('user',Load::User())
       ->assign('admin',$admin)
       ->fetch('control/user');

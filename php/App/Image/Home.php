@@ -6,8 +6,9 @@ class Home extends Service
 {
   public function get_home()
   {
-    Load::$core->assign('image',Load::DB()->find('image',['dd'=>['$exists'=>false]],['_id'=>1,'ty'=>1,'fd'=>1,'f'=>1,'sv'=>1],['sort'=>['_id'=>-1],'limit'=>100]));
-    Load::$core->data['content']=Load::$core->fetch('image/home');
+    return Load::$core
+      ->assign('image',Load::DB()->find('image',['dd'=>['$exists'=>false]],['_id'=>1,'ty'=>1,'fd'=>1,'f'=>1,'sv'=>1],['sort'=>['_id'=>-1],'limit'=>100]))
+      ->fetch('image/home');
   }
 
   public function post_home()

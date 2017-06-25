@@ -16,7 +16,7 @@ class Service extends Container
 
   public function _home()
   {
-    Load::$core->data['content']=Load::$core->fetch('search/home');
+    return Load::$core->fetch('search/home');
   }
 }
 ?>

@@ -22,7 +22,7 @@
 <meta property="og:locale" content="th_TH" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Kanit:300" />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Kanit:300&amp;subset=latin-ext,thai,vietnamese">
 <link rel="stylesheet" type="text/css" href="<?php echo FILES_CDN?>css/jarm-all.css" />
 <link rel="apple-touch-icon" sizes="57x57" href="<?php echo FILES_CDN?>img/favicon/apple-icon-57x57.png">
 <link rel="apple-touch-icon" sizes="60x60" href="<?php echo FILES_CDN?>img/favicon/apple-icon-60x60.png">
@@ -159,7 +159,6 @@ fbq('track', '<?php echo $this->data['pixel']??'PageView'?>');
         <li class="nav-news-korea"><a href="<?php echo self::uri(['korea'])?>" title="ข่าวเกาหลี">ข่าวเกาหลี</a></li>
         <li class="nav-search"><form action="<?php echo self::uri(['search'])?>" method="get"><input type="text" name="q" placeholder="ค้นหา" class="hsearch ev"><button type="submit" class="glyphicon glyphicon-search"></button></form></li>
       </ul>
-      <?php if(self::$sub!='Chat'):?>
       <ul class="nav navbar-nav pull-right">
         <?php if(self::$my):?>
           <li class="notify_setting hidden-xs"><a href="<?php echo self::$my['link']?>" rel="setting" class="dropdown-toggle" data-toggle="dropdown">เมนูสมาชิก <span class="caret"></span></a>
@@ -185,7 +184,6 @@ fbq('track', '<?php echo $this->data['pixel']??'PageView'?>');
         <li><a href="<?php echo self::uri(['oauth','/login?redirect_uri='.urlencode(URI)])?>">ล็อคอิน</a></li>
         <?php endif?>
       </ul>
-      <?php endif?>
     </nav>
     <div id="jarm-navbar-collapse" class="row collapse">
       <div class="col-xs-6 col-sm-3 col-md-2"><a href="<?php echo self::uri([''])?>" title="<?php echo self::$conf['domain']?>">หน้าแรก</a></div>
@@ -229,7 +227,9 @@ fbq('track', '<?php echo $this->data['pixel']??'PageView'?>');
   <div style="margin:0px -5px;"><div id='div-gpt-ad-1475485285325-0' style="padding:15px 0px;text-align:center;margin:0px auto"><script>googletag.cmd.push(function() { googletag.display('div-gpt-ad-1475485285325-0'); });</script></div></div>
   <?php endif?>
 </div>
+<?php if($this->data['nav-header']):?>
 <div id="nav-header"><div class="container"><?php echo $this->data['nav-header']?></div></div>
+<?php endif?>
 <div class="container">
   <?php if($this->data['div_row']):?>
   <div class="row col-one">
@@ -290,6 +290,7 @@ fbq('track', '<?php echo $this->data['pixel']??'PageView'?>');
   </div>
 </div>
 <div id="fb-root"></div>
+<?php if($this->data['sc-bottom']):?>
 <div id="sc-bottom">
   <div>
     <p>ติดตามเราจากช่องทางอื่นๆ</p>
@@ -301,6 +302,7 @@ fbq('track', '<?php echo $this->data['pixel']??'PageView'?>');
     </div>
   </div>
 </div>
+<?php endif?>
 <script>
 (function(d, s, id) {
   var js, fjs = d.getElementsByTagName(s)[0];

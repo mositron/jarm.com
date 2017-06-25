@@ -20,7 +20,7 @@ class Manage extends Service
       list($pg,$skip)=Load::Pager()->navigation(44,$count,['/manage/','page-'],$page);
       $glitter=$db->find('glitter',$arg,['_id'=>1,'t'=>1,'sv'=>1,'fd'=>1,'c'=>1,'ty'=>1,'zp'=>1,'da'=>1],['skip'=>$skip,'limit'=>44,'sort'=>['_id'=>-1]]);
     }
-    Load::$core->data['content']=Load::$core
+    return Load::$core
       ->assign('count',$count)
       ->assign('glitter',$glitter)
       ->assign('pager',$pg)

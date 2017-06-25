@@ -20,12 +20,11 @@ class Hit extends Service
 
     $app=$db->find('guess',['pl'=>1,'dd'=>['$exists'=>false]],['t'=>1,'d'=>1,'l'=>1,'fd'=>1,'p'=>1,'do'=>1,'u'=>1,'f'=>1],['sort'=>['do'=>-1],'skip'=>$skip,'limit'=>100]);
 
-    Load::$core->data['content']=Load::$core
+    return Load::$core
       ->assign('pager',$pg)
       ->assign('user',Load::User())
       ->assign('app',$app)
       ->fetch('guess/hit');
-
   }
 }
 ?>

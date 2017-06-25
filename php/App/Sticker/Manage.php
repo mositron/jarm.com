@@ -13,25 +13,25 @@ class Manage extends Service
     }
     if(is_numeric(Load::$path[1])||Load::$path[1]=='new')
     {
-      $this->manage_view();
+      return $this->manage_view();
     }
     else
     {
-      $this->manage_home();
+      return $this->manage_home();
     }
   }
 
   public function manage_home()
   {
     Load::Ajax()->register(['newapp','delapp','frominet']);
-    Load::$core->assign('getapp',getapp());
-    Load::$core->data['content']=Load::$core->fetch('sticker/manage.home');
+    return Load::$core
+      ->assign('getapp',getapp())
+      ->fetch('sticker/manage.home');
   }
 
   public function manage_view()
   {
     $db=Load::DB();
-
     $app=[];
     if(Load::$path[1]!='new')
     {
@@ -177,11 +177,11 @@ class Manage extends Service
         $app=array_merge($app,$arg);
       }
     }
-
-    Load::$core->assign('app',$app);
-    Load::$core->assign('icon',$db->find('sticker_icon',['p'=>$app['_id'],'dd'=>['$exists'=>false]]));
-    Load::$core->assign('error',$error);
-    Load::$core->data['content']=Load::$core->fetch('sticker/manage.view');
+    return Load::$core
+      ->assign('app',$app)
+      ->assign('icon',$db->find('sticker_icon',['p'=>$app['_id'],'dd'=>['$exists'=>false]]))
+      ->assign('error',$error)
+      ->fetch('sticker/manage.view');
   }
 
   public function getapp($page=1)

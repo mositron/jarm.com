@@ -36,7 +36,7 @@ $(function() {
     "upload"
     ],
     toolbar: "code | bold italic underline | forecolor backcolor | bullist numlist | alignleft aligncenter alignright | link media upload | table",
-
+    content_css:'/_cdn/css/jarm.tinymce.content.css',
     menubar:false,
     statusbar: false,
     paste_as_text: true,

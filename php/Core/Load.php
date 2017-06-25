@@ -6,8 +6,8 @@
 |     https://jarm.com
 |     positron@jarm.comm
 |
-|     $Revision: 3.0.0 $
-|     $Date: 2017/02/22 20:58:00 $
+|     $Revision: 3.0.4 $
+|     $Date: 2017/06/25 19:58:00 $
 |     $Author: Positron $
 +-----------------------------------------------------------------------------+
 */
@@ -216,9 +216,19 @@ class Load
         // load banner
         $this->data['banner']=self::banner(self::$sub);
         // call method by link name
-        $data=(array)(self::$app->{$p}($arg));
+        //$data=(array)(self::$app->{$p}($arg));
+        $data=(self::$app->{$p}($arg));
+        if(is_string($data))
+        {
+          $this->data['content']=$data;
+        }
+        elseif(is_array($data))
+        {
+          $this->data=array_merge($this->data,$data);
+        }
         // merge data and return
-        return array_merge($this->data,$data);
+        //return array_merge($this->data,$data);
+        return $this->data;
       }
       else
       {

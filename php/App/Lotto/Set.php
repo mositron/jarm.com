@@ -14,7 +14,7 @@ class Set extends Service
     Load::$core->data['keywords'] = 'หวยหุ้น, หวย, ตรวจหวยหุ้น, สถิติหวยหุ้น, หวยหุ้นวันนี้, ห้วยหุ้นไทย';
     $index=$db->findone('msg',['_id'=>'lotto_set']);
     $topic=$db->find('forum',['c'=>['$in'=>[192]],'dd'=>['$exists'=>false]],['_id'=>1,'t'=>1,'ds'=>1,'ic'=>1,'u'=>1,'do'=>1,'cm.c'=>1,'cm.d'=>['$slice'=>-1],'da'=>1],['sort'=>['ds'=>-1],'limit'=>10],false);
-    Load::$core->data['content']=Load::$core
+    return Load::$core
       ->assign('set',$set)
       ->assign('index',$index)
       ->assign('topic',$topic)

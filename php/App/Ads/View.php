@@ -118,7 +118,7 @@ class View extends Service
       arsort($click_devices);
       arsort($click_browsers);
 
-      return ['content'=>Load::$core
+      return Load::$core
         ->assign('banner',$banner)
         ->assign('stats',$stats)
         ->assign('month',$mn)
@@ -137,11 +137,11 @@ class View extends Service
         ->assign('start',$start)
         ->assign('stop',$stop)
         ->assign('x',$x)
-        ->fetch('ads/view.'.$banner['ty'])];
+        ->fetch('ads/view.'.$banner['ty']);
     }
     else
     {
-      return ['content'=>Load::$core->fetch('ads/permission')];
+      return Load::$core->fetch('ads/permission');
     }
   }
 }

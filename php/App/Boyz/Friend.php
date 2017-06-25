@@ -146,28 +146,28 @@ class Friend extends Service
     #$cache=Load::$core;
     #if(!Load::$core->data['content']=Load::$core->get($ckey,600))
     #{
-      $db=Load::DB();
-      if($count=$db->count('msn',$_))
-      {
-        list($pg,$skip)=Load::Pager()->navigation(100,$count,[$url,'page-'],$page);
-        $msn=$db->find('msn',$_,[],['sort'=>['au'=>1,'da'=>-1],'skip'=>$skip,'limit'=>100],false);
-      }
+    $db=Load::DB();
+    if($count=$db->count('msn',$_))
+    {
+      list($pg,$skip)=Load::Pager()->navigation(100,$count,[$url,'page-'],$page);
+      $msn=$db->find('msn',$_,[],['sort'=>['au'=>1,'da'=>-1],'skip'=>$skip,'limit'=>100],false);
+    }
 
-      $pc=[];
-      foreach($this->zone as $k=>$v)
-      {
-        if($k!=4)$pc[$k]=$db->find('msn_province',['z'=>intval($k)],['t'=>1,'c'=>1],['sort'=>['c'=>-1],'limit'=>5],false);
-      }
+    $pc=[];
+    foreach($this->zone as $k=>$v)
+    {
+      if($k!=4)$pc[$k]=$db->find('msn_province',['z'=>intval($k)],['t'=>1,'c'=>1],['sort'=>['c'=>-1],'limit'=>5],false);
+    }
 
-      Load::$core->data['content']=Load::$core
-        ->assign('z',$z)
-        ->assign('p',$p)
-        ->assign('pc',$pc)
-        ->assign('pager',$pg)
-        ->assign('page',$page)
-        ->assign('error',$error)
-        ->assign('msn',$msn)
-        ->fetch('boyz/friend');
+    return Load::$core
+      ->assign('z',$z)
+      ->assign('p',$p)
+      ->assign('pc',$pc)
+      ->assign('pager',$pg)
+      ->assign('page',$page)
+      ->assign('error',$error)
+      ->assign('msn',$msn)
+      ->fetch('boyz/friend');
     #}
   }
 

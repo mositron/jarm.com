@@ -48,8 +48,7 @@ class Update extends Service
         Load::move(URL.'?updated');
       }
     }
-
-    Load::$core->data['content']=Load::$core
+    return Load::$core
       ->assign('glitter',$glitter)
       ->fetch('glitter/update');
   }
@@ -72,8 +71,8 @@ class Update extends Service
     {
       $db->update('glitter',['_id'=>intval(Load::$path[0])],['$set'=>['t'=>$arg['detail'],'c'=>array_map('intval',$arg['cate'])]]);
       #Load::$core->delete('glitter_home',0);
-      $ajax->alert('บันทึกข้อมูลกลิตเตอร์เรียบร้อยแล้ว');
-      $ajax->script('setTimeout(function(){window.location.href="'.URL.'";},2000);');
+      $ajax->alert('บันทึกข้อมูลกลิตเตอร์เรียบร้อยแล้ว')
+            ->script('setTimeout(function(){window.location.href="'.URL.'";},2000);');
     }
   }
 }

@@ -4,7 +4,6 @@ use Jarm\Core\Load;
 
 class Banner extends Service
 {
-
   public function check_perm_ads()
   {
     if(!Load::$my)
@@ -84,7 +83,7 @@ class Banner extends Service
             Load::move('/banner/'.$banner['_id'].'?completed');
           }
         }
-        Load::$core->data['content']=Load::$core
+        return Load::$core
           ->assign('banner',$banner)
           ->assign('error',$error)
           ->assign('access',$access)
@@ -104,7 +103,7 @@ class Banner extends Service
       }
       $last=$db->find('banner_click',['b'=>$banner['_id']],[],['sort'=>['_id'=>-1],'limit'=>100]);
       Load::$core->assign('banner',$banner)
-        ->assign('last',$last);
+                ->assign('last',$last);
       $mn=['ม.ค.','ก.พ.','มี.ค.','เม.ย.','พ.ค.','มิ.ย.','ก.ค.','ส.ค.','ก.ย.','ต.ค.','พ.ย.','ธ.ค.'];
       $stats = $db->aggregate('banner_click',[
         ['$match'=>['da'=>['$gte'=>Load::Time()->now(-3600*24*31)],'b'=>$banner['_id']]],
@@ -134,7 +133,7 @@ class Banner extends Service
       $i=$c+1;
       $a[] = [$i,''];
       $k[] = '';
-      Load::$core->data['content']=Load::$core
+      return Load::$core
         ->assign('app',$var)
         ->assign('stats',$stats)
         ->assign('a',$a)
@@ -162,7 +161,7 @@ class Banner extends Service
       {
         $banner=$db->find('banner',$arg,[],['sort'=>['pl'=>-1,$order=>($by=='desc'?-1:1)]]);
       }
-      Load::$core->data['content']=Load::$core
+      return Load::$core
         ->assign('count',$count)
         ->assign('enabled',$db->findone('msg',['_id'=>'ads']))
         ->assign('banner',$banner)

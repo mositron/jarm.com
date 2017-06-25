@@ -5,7 +5,6 @@ class User
 {
   public $list=[];
   public $fields=['_id'=>1,'if'=>1,'em'=>1,'st'=>1,'sc'=>1,'pf'=>1,'du'=>1,'ip'=>1,'am'=>1,'ht'=>1,'fr'=>1,'sg'=>1,'da'=>1,'dm'=>1,'sv'=>1];
-
   public function __construct()
   {
     $this->list=[];
@@ -57,13 +56,11 @@ class User
     }
     return null;
   }
-
   public function reset(int $uid): void
   {
     $md5=md5($uid=trim($uid));
     Load::$core->clean('user/'.substr($md5,0,3).'/'.substr($md5,3,3).'/'.substr($md5,6,3).'/'.$md5,false);
   }
-
   public function update(int $uid,array $update): void
   {
     Load::DB()->update('user',['_id'=>intval($uid)],$update);

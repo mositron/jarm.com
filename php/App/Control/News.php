@@ -10,16 +10,16 @@ class News extends Service
     $path=(Load::$path[1]?:'home');
     if(is_numeric($path))
     {
-      new \Jarm\App\Control\News_Update($this,$path);
+      return new \Jarm\App\Control\News_Update($this,$path);
     }
     elseif(in_array($path,['upload','report','topnews','stats']))
     {
       $c='\Jarm\App\Control\News_'.ucfirst($path);
-      new $c($this,Load::$path[2]);
+      return new $c($this,Load::$path[2]);
     }
     else
     {
-      new \Jarm\App\Control\News_Home($this,$path);
+      return new \Jarm\App\Control\News_Home($this,$path);
     }
   }
 

@@ -19,8 +19,7 @@ class View extends Service
     Load::$core->data['title'] = $app['t'].' - สติกเกอร์ไลน์ สติกเกอร์แชท Line Facebook ฟรี';
     Load::$core->data['description'] = $app['t'].' - ดาวน์โหลดสติกเกอร์ไลน์ สติกเกอร์แชท Line ฟรี';
     Load::$core->data['image']=Load::uri(['s3','/login/google']);
-
-    Load::$core->data['content']=Load::$core
+    return Load::$core
       ->assign('app',$app)
       ->assign('icon',$db->find('sticker_icon',['p'=>$app['_id'],'dd'=>['$exists'=>false]]))
       ->assign('user',Load::User()->get($app['u']))

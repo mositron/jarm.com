@@ -114,8 +114,7 @@ class Post extends Service
       Load::$core->assign('error',$error)
         ->assign('post',$_POST);
     }
-    Load::$core->data['content']=Load::$core
-      ->fetch('glitter/post');
+    return Load::$core->fetch('glitter/post');
   }
 }
 ?>
