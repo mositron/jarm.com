@@ -12,7 +12,8 @@ class Service extends Container
       'title'=>'ทีวีย้อนหลัง',
       'description'=>'ทีวีย้อนหลัง',
       'keywords'=>'ทีวีย้อนหลัง, ดูทีวี',
-      'nav-header'=>'<div><a href="/" title="ดูทีวีย้อนหลัง รายการย้อนหลัง">ทีวีย้อนหลัง</a></div><i></i><ul>
+      'nav-header'=>'<ul>
+      <li><a href="/" title="ดูทีวีย้อนหลัง รายการย้อนหลัง">ทีวีย้อนหลัง</a></li>
       <li><a href="/lakorn-on-air"'.($path=='lakorn-on-air'?' class="active"':'').'>ละครใหม่</a></li>
       <li><a href="/music-video"'.($path=='music-video'?' class="active"':'').'>มิวสิควิดีโอ</a></li>
       <li><a href="/variety"'.($path=='variety'?' class="active"':'').'>วาไรตี้</a></li>

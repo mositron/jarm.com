@@ -6,8 +6,8 @@
 |     https://jarm.com
 |     positron@jarm.comm
 |
-|     $Revision: 3.0.4 $
-|     $Date: 2017/06/25 19:58:00 $
+|     $Revision: 3.1.0 $
+|     $Date: 2017/06/27 12:58:00 $
 |     $Author: Positron $
 +-----------------------------------------------------------------------------+
 */
@@ -85,7 +85,7 @@ Jarm\Core\Load::Init([
       'sitename'=>'jarm.com',
       'image'=>FILES_CDN.'img/logo-fb.png',
       'image_type'=>'image/png',
-      'nav-header'=>'<ul><li><a href="https://news.jarm.com/" target="_blank">ข่าววันนี้</a></li><li><a href="https://ent.jarm.com/" target="_blank">ข่าวบันเทิง</a></li><li><a href="https://korea.jarm.com/" target="_blank">ข่าวเกาหลี</a></li><li><a href="http://www.autocar.in.th/" target="_blank">ราคารถใหม่</a></li><li><a href="https://lotto.jarm.com/" target="_blank">ตรวจหวย</a></li><li><a href="https://music.jarm.com/" target="_blank">เพลงใหม่</a></li><li><a href="https://movie.jarm.com/" target="_blank">หนังใหม่</a></li><li><a href="https://beauty.jarm.com/" target="_blank">ผู้หญิง</a></li><li><a href="https://knowledge.jarm.com/" target="_blank">เกร็ดความรู้</a></li><li><a href="https://eat.jarm.com/" target="_blank">อาหาร</a></li></ul>',
+      'nav-header'=>'<ul><li><a href="https://news.jarm.com/">ข่าววันนี้</a></li><li><a href="https://ent.jarm.com/">ข่าวบันเทิง</a></li><li><a href="https://korea.jarm.com/">ข่าวเกาหลี</a></li><li><a href="https://lotto.jarm.com/">ตรวจหวย</a></li><li><a href="https://music.jarm.com/">เพลงใหม่</a></li><li><a href="https://movie.jarm.com/">หนังใหม่</a></li><li><a href="https://beauty.jarm.com/">ผู้หญิง</a></li><li><a href="https://knowledge.jarm.com/">เกร็ดความรู้</a></li><li><a href="https://eat.jarm.com/">อาหาร</a></li><li><a href="https://english.jarm.com/">ฝึกคำศัพท์ภาษาอังกฤษ</a></li></ul>',
       'feed'=>['title'=>'ข่าววันนี้','url'=>'https://feed.jarm.com/news/rss'],
       'login'=>1,
       'content'=>'',

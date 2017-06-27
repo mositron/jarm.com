@@ -15,7 +15,8 @@ class Service extends Container
     if(Load::$my)
     {
       $path=(Load::$path[0]??'');
-      Load::$core->data['nav-header']='<div><a href="/" title="แผงควบคุม">แผงควบคุม</a></div><i></i><ul>
+      Load::$core->data['nav-header']='<ul>
+      <li><a href="/" title="แผงควบคุม">แผงควบคุม</a></li>
       <li><a href="'.Load::$my['link'].'" title=""'.($path=='user'?' class="active"':'').'>โปรไฟล์</a></li>
       <li><a href="/settings" title=""'.($path=='settings'?' class="active"':'').'>ตั้งค่าใช้งาน</a></li>
       </ul>';

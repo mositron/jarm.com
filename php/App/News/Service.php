@@ -29,7 +29,7 @@ class Service extends Container
           {
             $tmp.='<li><a href="/cate/'.$k.'"'.($path==$k?' class="active"':'').'>'.$v['t'].'</a></li>';
           }
-          Load::$core->data['nav-header']='<div><a href="/" title="'.$cate['t'].'">'.$cate['t'].'</a></div><i></i><ul>'.$tmp.'</ul>';
+          Load::$core->data['nav-header']='<ul><li><a href="/" title="'.$cate['t'].'">'.$cate['t'].'</a></li>'.$tmp.'</ul>';
         }
       }
     }

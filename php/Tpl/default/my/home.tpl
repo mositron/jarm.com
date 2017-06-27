@@ -26,7 +26,7 @@
 .b-right{border-right:1px solid #ccc}
 .b-bottom{border-bottom:1px solid #ccc}
 
-.i-sc a{margin:15px 7px;display:block;padding:20px;font-size:42px;text-align:center;font-family:"thaisansneue";letter-spacing: 1px;color:#fff;}
+.i-sc a{margin:15px 7px;display:block;padding:10px;font-size:20px;text-align:center;letter-spacing: 1px;color:#fff;}
 .i-sc .i-fb a{background:#3B5998}
 .i-sc .i-yt a{background:#CC181E}
 .i-sc .i-tw a{background:#1DA1F2}
@@ -56,7 +56,7 @@
   <div class="col-md-4">
     <div class="mbox">
       <h3 class="bar-heading">เพื่อนใหม่ <small class="pull-right" style="margin-top:12px;"></small></h3>
-      <div>
+      <div class="table-responsive">
         <table class="table table-hover table-striped" width="100%">
           <thead><tr><th>#</th><th>ชื่อ</th><th>สมัครเมื่อ</th></tr></thead>
           <tbody><?php foreach($this->friend as $v):?><?php $u=$this->user->get($v['_id'],true);?><tr><td class="c wimg"><a href="<?php echo $u['link']?>" target="_blank"><img src="<?php echo $u['img']?>"></a></td><td><a href="<?php echo $u['link']?>" target="_blank"><?php echo $u['name']?></a><br><?php echo $u['em']?></td><td class="c w130"><span class="ago" datetime="<?php echo self::Time()->sec($v['da'])?>"><?php echo self::Time()->from($v['da'],'ago')?></span><br>ที่ผ่านมา</td></tr><?php endforeach?></tbody>
