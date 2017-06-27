@@ -19,7 +19,7 @@
 
 <div style="text-align:center;padding:5px 0px"><a href="https://play.google.com/store/apps/details?id=com.doodroid.guess" title="เกมทายใจ ผ่านแอพ Android ฟรี" target="_blank"><img src="https://cdn.jarm.com/img/banner/guess-banner.gif" class="img-responsive"></a></div>
 
-<div class="row news-left">
+<div class="row news-left2">
     <?php for($i=0;$i<count($this->app);$i++):$u=$this->user->get($this->app[$i]['u']);?>
     <div class="col-sm-6">
         <a href="/game/<?php echo $this->app[$i]['_id']?>" target="_blank">

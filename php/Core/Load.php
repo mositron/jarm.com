@@ -252,7 +252,17 @@ class Load
     {
       if(!empty($data['content']))
       {
-        echo $this->assign('data',$data)->fetch('global',true);
+        if(defined('HASH'))
+        {
+          while(@ob_end_clean());
+          header('Content-type:application/json');
+          echo json_encode(['title'=>$data['title'],'content'=>$data['content'],'div_row'=>$data['div_row'],'nav-header'=>$data['nav-header']]);
+          exit;
+        }
+        else
+        {
+          echo $this->assign('data',$data)->fetch('global',true);
+        }
       }
       if(!empty($data['echo']))
       {
@@ -367,6 +377,11 @@ class Load
     elseif(defined('IS_AJAX'))
     {
       echo '<html><body><script type="text/javascript">parent.location.href=\''.$u.'\';</script></body></html>';
+    }
+    elseif(defined('HASH'))
+    {
+      header('Content-type: application/json');
+      echo json_encode(['move'=>$u]);
     }
     else
     {

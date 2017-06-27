@@ -122,12 +122,12 @@ $(function(){
 });
 
 function initImageUpload(editor){
-  var inp = $('<input id="tinymce-uploader" type="file" name="pic" accept="image/*" style="display:none">');
+  var inp = $('<input id="tinymce-uploader" type="file" name="pic" accept="image/*" style="position:absolute;left:100px;z-index:100;top:100px;">');
   $(editor.getElement()).parent().append(inp);
   editor.addButton('imageupload', {
     text: '',
     icon: 'image',
-    onclick: function(e){inp.trigger('click');}
+    onclick: function(e){$('#tinymce-uploader').focus().click();return false;/*inp.trigger('click');*/}
   });
   inp.on("change", function(e){
     uploadFile($(this), editor);
@@ -199,7 +199,7 @@ function uploadFile(inp, editor) {
 <option value="<?php echo $k?>"<?php echo $c==$k?' selected':''?>><?php echo $v['t']?></option>
 <?php endforeach ?>
 </select></div>
-<div class="col-sm-6"><input type="text" class="form-control" name="tags" id="tags" value="<?php echo implode(', ',$this->post['tags'])?>" placeholder="ป้ายกำกับ (คั่นด้วย , และไม่เกิน 5 คำ)"></div>
+<div class="col-sm-6"><input type="text" class="form-control" name="tags" id="tags" value="<?php echo implode(', ',(array)$this->post['tags'])?>" placeholder="ป้ายกำกับ (คั่นด้วย , และไม่เกิน 5 คำ)"></div>
 </div>
 <div class="form-actions">
 <span id="status" class="pull-right" style="margin-top:7px;"><?php echo $this->post['pl']?'<a href="/'.$this->post['bl'].'/'.$this->post['_id'].'/'.$this->post['l'].'">เผยแพร่แล้ว</a>':'ฉบับร่าง'?></span>
@@ -210,7 +210,7 @@ function uploadFile(inp, editor) {
 </form>
 </div>
 
-<div class="modal modal-warning fade" id="delpost" role="dialog" aria-labelledby="myModalLabel">
+<div class="modal modal-warning fade" id="delpost" role="dialog" aria-labelledby="myModalLabel" data-backdrop="false">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">

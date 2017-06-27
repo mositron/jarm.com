@@ -16,13 +16,13 @@
 .table .do div{height: 55px;line-height: 55px;color: #000;border: 1px solid #ccc;border-radius: 4px;width: 90px;background-color: #f5f5f5;}
 .table .a{ width:170px; text-align:right; padding:4px 0px;}
 .table .a div{text-align:center; margin-top:5px;}
-.table .a .btn{padding:11px 8px;font-size:11px;}
+.table .a .btn{padding:11px 8px;font-size:11px;border-bottom:2px solid #2b9fa5;}
 .tbpage{padding:5px; text-align:right}
 .tbpage .pager{text-align:right}
 .table .dropdown-menu{left:auto; right:0px; min-width:100px;}
 .table .btn-group{margin-top:8px;}
 
-.nowrap a{ color:#06c; font-size:16px;}
+.nowrap a{font-size:16px;}
 
 .nav-clist{margin-left:5px; list-style:inside decimal; max-height:2650px; overflow:scroll; padding:0px;}
 .nav-clist ul{margin-left:10px; list-style:inside circle; padding:0px;}
@@ -90,7 +90,7 @@ function cdel(i){_.box.confirm({title:'ลบประกาศ',detail:'คุ�
 </ul>
 
 <div class="row">
-<div class="col-xs-10">
+<div class="col-md-10">
 <table class="table">
 <tr><th>รูปภาพ</th><!--th>ต้องการ</th--><th>รายละเอียด</th><th>ผู้ชม</th><th></th></tr>
 <?php $last=time()-(3600*24*EXPIRE_NEWS);for($i=0;$i<count($this->news);$i++):?>
@@ -143,7 +143,7 @@ function cdel(i){_.box.confirm({title:'ลบประกาศ',detail:'คุ�
 </table>
 <div align="center"><?php echo $this->pager?></div>
 </div>
-<div class="col-xs-2">
+<div class="col-md-2 hidden-xs hidden-sm">
 
 
 <style>

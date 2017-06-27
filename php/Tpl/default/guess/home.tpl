@@ -31,7 +31,7 @@
 <?php require(__CONF.'ads/ads.adsense.body2.php');?>
 
 <h3 class="bar-heading"><a href="/hit">เกมส์ทายใจยอดฮิต</a></h3>
-<div class="row news-left">
+<div class="row news-left2">
     <?php for($i=0;$i<count($this->app);$i++):$u=$this->user->get($this->app[$i]['u']);?>
     <div class="col-sm-6">
         <a href="/game/<?php echo $this->app[$i]['_id']?>" target="_blank">
@@ -42,7 +42,7 @@
     <?php endfor?>
 </ul>
 <h3 class="bar-heading"><a href="/recent">เกมส์ทายใจมาใหม่</a> <small>(<a href="/recent">ทั้งหมด</a>)</small></h3>
-<div class="row news-left">
+<div class="row news-left2">
     <?php for($i=0;$i<count($this->appn);$i++):$u=$this->user->get($this->appn[$i]['u'])?>
     <div class="col-sm-6">
         <a href="/game/<?php echo $this->appn[$i]['_id']?>" target="_blank">

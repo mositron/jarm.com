@@ -14,14 +14,15 @@ class Service extends Container
       'title'=>'ระบบควบคุม | Jarm.com',
       'description'=>'ระบบควบคุม | Jarm.com',
       'keywords'=>'control, jarm',
-      'nav-header'=>'<div><a href="/" title="ควบคุม">ควบคุม</a></div><i></i><ul>
-      <li><a href="/news" title=""'.($path=='news'?' class="active"':'').'>ข่าว</a></li>
-      <li><a href="/lotto" title=""'.($path=='lotto'?' class="active"':'').'>ตรวจหวย</a></li>
-      <li><a href="/user" title=""'.($path=='user'?' class="active"':'').'>ผู้ดูแล</a></li>
-      <li><a href="/home-banner" title=""'.($path=='home-banner'?' class="active"':'').'>แบนเนอร์หน้าแรก</a></li>
-      <li><a href="/banner" title=""'.($path=='banner'?' class="active"':'').'>แบนเนอร์ทั้งหมด</a></li>
-      <li><a href="/job" title=""'.($path=='job'?' class="active"':'').'>รับสมัครงาน</a></li>
-      <li><a href="/live" title=""'.($path=='live'?' class="active"':'').'>เครื่องมือ Live</a></li>
+      'nav-header'=>'<ul>
+      <li><a href="/" title="ควบคุม">ควบคุม</a></li>
+      <li><a href="/news"'.($path=='news'?' class="active"':'').'>ข่าว</a></li>
+      <li><a href="/lotto"'.($path=='lotto'?' class="active"':'').'>ตรวจหวย</a></li>
+      <li><a href="/user"'.($path=='user'?' class="active"':'').'>ผู้ดูแล</a></li>
+      <li><a href="/home-banner"'.($path=='home-banner'?' class="active"':'').'>แบนเนอร์หน้าแรก</a></li>
+      <li><a href="/banner"'.($path=='banner'?' class="active"':'').'>แบนเนอร์ทั้งหมด</a></li>
+      <li><a href="/job"'.($path=='job'?' class="active"':'').'>รับสมัครงาน</a></li>
+      <li><a href="/live"'.($path=='live'?' class="active"':'').'>เครื่องมือ Live</a></li>
       </ul>',
       'hide_adsense'=>true,
       'sc-bottom'=>false,

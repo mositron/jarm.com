@@ -8,15 +8,14 @@ body{background:#f7f7f7;}
 .story .pboard div>div{font-size:12px;}
 .story .pboard h1{margin:0px;}
 .story .pboard h2{margin:0px;font-size:16px;color:#999;font-weight:normal;}
-.story .pboard .pull-right{padding-left:20px;border-left:1px solid #eee;}
-.story .pboard .pull-right img{width:40px;margin:0px 0px -1px 8px;float:right;border-radius:3px;}
-.story .pboard .glyphicon{color:#999;font-size:7px;border:1px solid #ddd;padding:2px;border-radius:2px;vertical-align:middle;margin-top:-4px;}
+.story .pboard .pull-right{padding-left:20px;border-left:1px solid #eee;text-align:right;}
 
 .story .pcard{margin:10px;padding-bottom:10px;border-bottom:1px solid #f0f0f0;}
 .story .pcard .-avatar{float:left;}
 .story .pcard .-avatar img{width:40px;height:40px;border-radius:4px;}
 .story .pcard .-poster{margin-left:50px;}
 .story .pcard .-time{margin-left:50px;font-size:12px;color:#ccc;}
+.story .pcard .pull-right>div{font-size:12px;}
 
 .story .post{border:1px solid #eee;background:#fff;margin:10px 0px 10px;border-radius:4px;}
 .story .post .-title{margin:0px;padding:0px 10px;}
@@ -32,7 +31,8 @@ body{background:#f7f7f7;}
       <h2><?php echo $this->blog['d']?></h2>
     </div>
     <div class="pull-right">
-      <div><span class="glyphicon glyphicon-list"></span> <?php echo $this->cate[$this->blog['c']]['t']?></div>
+      <a href="/post" class="btn btn-xs btn-success"><span class="glyphicon glyphicon-plus"></span> เขียนเรื่องใหม่</a>
+      <a href="/blog" class="btn btn-xs btn-info"><span class="glyphicon glyphicon-list-alt"></span> จัดการบล็อก</a>
     </div>
   </div>
   <div class="posts">
@@ -45,11 +45,11 @@ body{background:#f7f7f7;}
           <div class="-time"><?php echo self::Time()->from($this->post[$i]['ds'],'date')?></div>
         </div>
         <div class="pull-right">
-
+          <div><span class="glyphicon glyphicon-th-list"></span> <?php echo $this->cate[$this->post[$i]['c']]['t']?></div>
         </div>
       </div>
-      <h3 class="-title"><a href="/<?php echo $this->post[$i]['bl'].'/'.$this->post[$i]['_id'].'/'.$this->post[$i]['l']?>"><?php echo $this->post[$i]['t']?></a></h3>
-      <div class="-detail"><?php echo $this->post[$i]['d']?></div>
+      <h3 class="-title"><a href="<?php echo $l='/'.$this->post[$i]['bl'].'/'.$this->post[$i]['_id'].'/'.$this->post[$i]['l']?>"><?php echo $this->post[$i]['t']?></a></h3>
+      <div class="-detail"><a href="<?php echo $l?>"><?php echo preg_replace('#</?a(\s[^>]*)?>#i','',$this->post[$i]['d']);?></a></div>
     </div>
     <?php endfor?>
   </div>

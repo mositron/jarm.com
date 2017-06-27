@@ -23,7 +23,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Kanit:300&amp;subset=latin-ext,thai,vietnamese">
-<link rel="stylesheet" type="text/css" href="<?php echo FILES_CDN?>css/jarm-all.css" />
+<link rel="stylesheet" type="text/css" href="<?php echo FILES_CDN?>css/jarm-all.css?v3.1.0" />
 <link rel="apple-touch-icon" sizes="57x57" href="<?php echo FILES_CDN?>img/favicon/apple-icon-57x57.png">
 <link rel="apple-touch-icon" sizes="60x60" href="<?php echo FILES_CDN?>img/favicon/apple-icon-60x60.png">
 <link rel="apple-touch-icon" sizes="72x72" href="<?php echo FILES_CDN?>img/favicon/apple-icon-72x72.png">
@@ -43,7 +43,7 @@
 <meta name="msapplication-TileImage" content="<?php echo FILES_CDN?>img/favicon/ms-icon-144x144.png">
 <meta name="theme-color" content="#FFFFFF">
 <link rel="alternate" type="application/rss+xml" title="<?php echo $this->data['feed']['title']?>" href="<?php echo $this->data['feed']['url']?>" />
-<script type="text/javascript" src="<?php echo FILES_CDN?>js/jarm-all.js"></script>
+<script type="text/javascript" src="<?php echo FILES_CDN?>js/jarm-all.js?v3.1.0"></script>
 <!--[if lt IE 9]>
 <script src="<?php echo FILES_CDN?>js/html5shiv/html5shiv.js"></script>
 <![endif]-->
@@ -140,42 +140,23 @@ fbq('track', '<?php echo $this->data['pixel']??'PageView'?>');
 </head>
 <body class="body-<?php echo $name=strtolower(self::$sub)?> body-<?php echo $name?>-<?php echo self::$path[0]??'home'?>"><div id="_pgb"><div><p></p><p></p><p></p></div></div>
 <noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=723126181102933&ev=<?php echo $this->data['pixel']??'PageView'?>&noscript=1" /></noscript>
-<!--div id="ribbon" onclick="$(this).remove()"></div-->
-<div id="navbar-header" class="navbar-fixed-top">
-  <!--style>body{padding-top: 0px;}#navbar-header{margin-bottom:10px;}</style>
-  <div style="background:#62C1ED;text-align:center"><img src="https://static.jarm.com/img/global/mom-day.jpg" class="img-responsive" style="margin:0px auto;"></div-->
-  <div class="container">
-    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#jarm-navbar-collapse" aria-expanded="false">
-      <span class="sr-only">jarm.com</span>
-      <span class="icon-bar"></span>
-      <span class="icon-bar"></span>
-      <span class="icon-bar"></span>
-    </button>
-    <a class="navbar-brand" href="<?php echo self::uri([''])?>" title="Jarm.com"></a>
-    <nav role="navigation">
-      <ul class="nav navbar-nav pull-left">
-        <li class="nav-news-today"><a href="<?php echo self::uri(['news'])?>" title="ข่าววันนี้">ข่าววันนี้</a></li>
-        <li class="nav-news-ent"><a href="<?php echo self::uri(['ent'])?>" title="ข่าวบันเทิง ข่าวดารา">ข่าวบันเทิง</a></li>
-        <li class="nav-news-korea"><a href="<?php echo self::uri(['korea'])?>" title="ข่าวเกาหลี">ข่าวเกาหลี</a></li>
-        <li class="nav-search"><form action="<?php echo self::uri(['search'])?>" method="get"><input type="text" name="q" placeholder="ค้นหา" class="hsearch ev"><button type="submit" class="glyphicon glyphicon-search"></button></form></li>
-      </ul>
-      <ul class="nav navbar-nav pull-right">
+
+<div id="wrap">
+  <div id="nav-slide">
+    <div class="-top">
+      <h3>MENU<a href="javascript:;" class="-close pull-right"><span class="glyphicon glyphicon-remove"></span></a></h3>
+      <ul>
         <?php if(self::$my):?>
-          <li class="notify_setting hidden-xs"><a href="<?php echo self::$my['link']?>" rel="setting" class="dropdown-toggle" data-toggle="dropdown">เมนูสมาชิก <span class="caret"></span></a>
-          <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu">
-            <li><a href="<?php echo self::uri(['my'])?>">แผงควบคุม</a></li>
-            <li><a href="<?php echo self::$my['link']?>">- โปรไฟล์ส่วนตัว</a></li>
-            <li><a href="<?php echo self::uri(['my','/settings'])?>">- ตั้งค่าการใช้งาน</a></li>
-            <li class="divider"></li>
-            <?php if(self::$my['am']):?>
-            <li><a href="<?php echo self::uri(['control'])?>">ระบบควบคุม(ผู้ดูแล)</a></li>
-            <li><a href="<?php echo self::uri(['control','/news'])?>">- เขียนข่าว</a></li>
-            <li><a href="<?php echo self::uri(['control','/lotto'])?>">- ตรวจหวย</a></li>
-            <li class="divider"></li>
-            <?php endif?>
-            <li><a href="<?php echo self::uri(['oauth','/logout'])?>"> ออกจากระบบ</a></li>
-          </ul>
-        </li>
+        <li><a href="<?php echo self::uri(['my'])?>">แผงควบคุม</a></li>
+        <li><a href="<?php echo self::$my['link']?>">- โปรไฟล์ส่วนตัว</a></li>
+        <li><a href="<?php echo self::uri(['my','/settings'])?>">- ตั้งค่าการใช้งาน</a></li>
+        <li><a href="<?php echo self::uri(['oauth','/logout'])?>"> ออกจากระบบ</a></li>
+        <?php if(self::$my['am']):?>
+        <li class="divider"></li>
+        <li><a href="<?php echo self::uri(['control'])?>">ระบบควบคุม(ผู้ดูแล)</a></li>
+        <li><a href="<?php echo self::uri(['control','/news'])?>">- เขียนข่าว</a></li>
+        <li><a href="<?php echo self::uri(['control','/lotto'])?>">- ตรวจหวย</a></li>
+        <?php endif?>
         <?php elseif(self::$app=='oauth'):?>
         <li><a href="<?php echo self::uri(['oauth','/signup?'.$_SERVER['QUERY_STRING']])?>">สมัครสมาชิก</a></li>
         <li><a href="<?php echo self::uri(['oauth','/login?'.$_SERVER['QUERY_STRING']])?>">ล็อคอิน</a></li>
@@ -183,109 +164,121 @@ fbq('track', '<?php echo $this->data['pixel']??'PageView'?>');
         <li><a href="<?php echo self::uri(['oauth','/signup?redirect_uri='.urlencode(URI)])?>">สมัครสมาชิก</a></li>
         <li><a href="<?php echo self::uri(['oauth','/login?redirect_uri='.urlencode(URI)])?>">ล็อคอิน</a></li>
         <?php endif?>
+        <li class="divider"></li>
+        <li><a href="<?php echo self::uri([''])?>" title="<?php echo self::$conf['domain']?>">หน้าแรก</a></li>
+        <li><a href="<?php echo self::uri(['news'])?>" title="ข่าว ข่าววันนี้ ข่าวเด่น ข่าวด่วน ข่าวสด ข่าวตามกระแส">ข่าววันนี้</a></li>
+        <li><a href="<?php echo self::uri(['ent'])?>" title="ข่าวบันเทิง ดารา บันเทิง ข่าวดารา ซุบซิบดารา ติดกระแสดารา ภาพหลุดดารา">ข่าวบันเทิง</a></li>
+        <li><a href="<?php echo self::uri(['korea'])?>" title="เกาหลี ดาราเกาหลี นักร้องเกาหลี ซีรีย์เกาหลี ข่าวเกาหลี">ข่าวเกาหลี</a></li>
+        <li class="divider"></li>
+        <li><a href="<?php echo self::uri(['live'])?>" title="Facebook Live - ถ่ายทอดสด">ถ่ายทอดสด</a></li>
+        <li><a href="<?php echo self::uri(['english'])?>" title="ฝึกคำศัพท์ ท่องศัพท์ ภาษาอังกฤษ 300 คำ">คำศัพท์ภาษาอังกฤษ</a></li>
+        <li><a href="<?php echo self::uri(['knowledge'])?>" title="เกร็ดความรู้ สาระน่ารู้">เกร็ดความรู้</a></li>
+        <li><a href="<?php echo self::uri(['eat'])?>" title="อาหาร ร้านอาหาร เมนูอาหาร">อาหาร</a></li>
+        <li><a href="<?php echo self::uri(['beauty'])?>" title="ผู้หญิง แฟนชั่น">ผู้หญิง</a></li>
+        <li><a href="<?php echo self::uri(['healthy'])?>" title="สุขภาพ">สุขภาพ</a></li>
+        <li><a href="<?php echo self::uri(['home'])?>" title="บ้านและสวน">บ้านและสวน</a></li>
+        <li><a href="<?php echo self::uri(['tech'])?>" title="เทคโนโลยี ข่าวไอที">เทคโนโลยี</a></li>
+        <li><a href="<?php echo self::uri(['lotto'])?>" title="หวย ตรวจหวย เลขเด็ด">ตรวจหวย</a></li>
+        <li><a href="<?php echo self::uri(['lotto','/set'])?>" title="หวยหุ้น หวยหุ้นวันนี้">หวยหุ้น</a></li>
+        <li><a href="<?php echo self::uri(['movie'])?>" title="หนัง หนังใหม่ ดูหนังออนไลน์ หนังเข้าใหม่">หนังใหม่</a></li>
+        <li><a href="<?php echo self::uri(['music'])?>" title="เพลง เพลงใหม่ เนื้อเพลง">เพลงใหม่</a></li>
+        <li><a href="<?php echo self::uri(['radio'])?>" title="ฟังวิทยุออนไลน์">วิทยุออนไลน์</a></li>
+        <li><a href="<?php echo self::uri(['horo'])?>" title="ดูดวง ดูดวงรายวัน ดูดวงความรัก ทำนายฝัน">ดูดวง</a></li>
+        <li><a href="<?php echo self::uri(['horo','/phone'])?>" title="ดูดวงเบอร์โทรศัพท์ เบอร์มือถือ">ดูดวงเบอร์โทรศัพท์</a></li>
+        <li><a href="<?php echo self::uri(['weather'])?>" title="พยากรณ์อากาศ สภาพอากาศ">พยากรณ์อากาศ</a></li>
+        <li><a href="<?php echo self::uri(['game'])?>" title="เกมส์ เกม เกมส์ออนไลน์">เกมส์</a></li>
+        <li><a href="<?php echo self::uri(['guess'])?>" title="เกมทายใจ เกมส์วัดดวง เกมเฟสบุ๊ค เกมทายนิสัย เกมตลก เกมฮาฮา">เกมทายใจ</a></li>
+        <li><a href="<?php echo self::uri(['tv'])?>" title="ทีวีย้อนหลัง ละครย้อนหลัง">ทีวีย้อนหลัง</a></li>
+        <li><a href="<?php echo self::uri(['gold'])?>" title="ราคาทอง ราคาทองคำวันนี้">ราคาทองวันนี้</a></li>
+        <li><a href="<?php echo self::uri(['feed'])?>" title="RSS Feed">RSS Feed</a></li>
       </ul>
-    </nav>
-    <div id="jarm-navbar-collapse" class="row collapse">
-      <div class="col-xs-6 col-sm-3 col-md-2"><a href="<?php echo self::uri([''])?>" title="<?php echo self::$conf['domain']?>">หน้าแรก</a></div>
-      <div class="col-xs-6 col-sm-3 col-md-2"><a href="<?php echo self::uri(['news'])?>" title="ข่าว ข่าววันนี้ ข่าวเด่น ข่าวด่วน ข่าวสด ข่าวตามกระแส">ข่าววันนี้</a></div>
-      <div class="col-xs-6 col-sm-3 col-md-2"><a href="<?php echo self::uri(['ent'])?>" title="ข่าวบันเทิง ดารา บันเทิง ข่าวดารา ซุบซิบดารา ติดกระแสดารา ภาพหลุดดารา">ข่าวบันเทิง</a></div>
-      <div class="col-xs-6 col-sm-3 col-md-2"><a href="<?php echo self::uri(['korea'])?>" title="เกาหลี ดาราเกาหลี นักร้องเกาหลี ซีรีย์เกาหลี ข่าวเกาหลี">ข่าวเกาหลี</a></div>
-      <div class="col-xs-6 col-sm-3 col-md-2"><a href="<?php echo self::uri(['live'])?>" title="Facebook Live - ถ่ายทอดสด">ถ่ายทอดสด</a></div>
-      <div class="col-xs-6 col-sm-3 col-md-2"><a href="<?php echo self::uri(['english'])?>" title="ฝึกคำศัพท์ ท่องศัพท์ ภาษาอังกฤษ 300 คำ">คำศัพท์ภาษาอังกฤษ</a></div>
-      <div class="col-xs-6 col-sm-3 col-md-2"><a href="<?php echo self::uri(['tv'])?>" title="ทีวีย้อนหลัง ละครย้อนหลัง">ทีวีย้อนหลัง</a></div>
-      <div class="col-xs-6 col-sm-3 col-md-2"><a href="<?php echo self::uri(['gold'])?>" title="ราคาทอง ราคาทองคำวันนี้">ราคาทองวันนี้</a></div>
-      <div class="col-xs-6 col-sm-3 col-md-2"><a href="<?php echo self::uri(['chat'])?>" title="แชท คุยสด แชทหาเพื่อน">แชท คุยสด</a></div>
-      <div class="col-xs-6 col-sm-3 col-md-2"><a href="<?php echo self::uri(['knowledge'])?>" title="เกร็ดความรู้ สาระน่ารู้">เกร็ดความรู้</a></div>
-      <div class="col-xs-6 col-sm-3 col-md-2"><a href="<?php echo self::uri(['eat'])?>" title="อาหาร ร้านอาหาร เมนูอาหาร">อาหาร</a></div>
-      <div class="col-xs-6 col-sm-3 col-md-2"><a href="<?php echo self::uri(['beauty'])?>" title="ผู้หญิง แฟนชั่น">ผู้หญิง</a></div>
-      <div class="col-xs-6 col-sm-3 col-md-2"><a href="<?php echo self::uri(['healthy'])?>" title="สุขภาพ">สุขภาพ</a></div>
-      <div class="col-xs-6 col-sm-3 col-md-2"><a href="<?php echo self::uri(['home'])?>" title="บ้านและสวน">บ้านและสวน</a></div>
-      <div class="col-xs-6 col-sm-3 col-md-2"><a href="<?php echo self::uri(['tech'])?>" title="เทคโนโลยี ข่าวไอที">เทคโนโลยี</a></div>
-      <div class="col-xs-6 col-sm-3 col-md-2"><a href="<?php echo self::uri(['lotto'])?>" title="หวย ตรวจหวย เลขเด็ด">ตรวจหวย</a></div>
-      <div class="col-xs-6 col-sm-3 col-md-2"><a href="<?php echo self::uri(['lotto','/set'])?>" title="หวยหุ้น หวยหุ้นวันนี้">หวยหุ้น</a></div>
-      <div class="col-xs-6 col-sm-3 col-md-2"><a href="<?php echo self::uri(['movie'])?>" title="หนัง หนังใหม่ ดูหนังออนไลน์ หนังเข้าใหม่">หนังใหม่</a></div>
-      <div class="col-xs-6 col-sm-3 col-md-2"><a href="<?php echo self::uri(['music'])?>" title="เพลง เพลงใหม่ เนื้อเพลง">เพลงใหม่</a></div>
-      <div class="col-xs-6 col-sm-3 col-md-2"><a href="<?php echo self::uri(['radio'])?>" title="ฟังวิทยุออนไลน์">วิทยุออนไลน์</a></div>
-      <div class="col-xs-6 col-sm-3 col-md-2"><a href="<?php echo self::uri(['horo'])?>" title="ดูดวง ดูดวงรายวัน ดูดวงความรัก ทำนายฝัน">ดูดวง</a></div>
-      <div class="col-xs-6 col-sm-3 col-md-2"><a href="<?php echo self::uri(['horo','/phone'])?>" title="ดูดวงเบอร์โทรศัพท์ เบอร์มือถือ">ดูดวงเบอร์โทรศัพท์</a></div>
-      <div class="col-xs-6 col-sm-3 col-md-2"><a href="<?php echo self::uri(['weather'])?>" title="พยากรณ์อากาศ สภาพอากาศ">พยากรณ์อากาศ</a></div>
-      <div class="col-xs-6 col-sm-3 col-md-2"><a href="<?php echo self::uri(['game'])?>" title="เกมส์ เกม เกมส์ออนไลน์">เกมส์</a></div>
-      <div class="col-xs-6 col-sm-3 col-md-2"><a href="<?php echo self::uri(['guess'])?>" title="เกมทายใจ เกมส์วัดดวง เกมเฟสบุ๊ค เกมทายนิสัย เกมตลก เกมฮาฮา">เกมทายใจ</a></div>
-      <div class="col-xs-6 col-sm-3 col-md-2"><a href="<?php echo self::uri(['feed'])?>" title="RSS Feed">RSS Feed</a></div>
     </div>
+    <div class="-bottom"></div>
   </div>
-</div>
-<div class="container">
-  <?php if(!empty($this->data['banner']['a'])):?>
-  <!-- BEGIN - BANNER : A -->
-  <div class="_banner _banner-a"><?php echo $this->data['banner']['a']?></div>
-  <!-- END - BANNER : A -->
-  <div class="_banner _banner-l" id="jarm_b_l" style="display:none"></div>
-  <div class="_banner _banner-r" id="jarm_b_r" style="display:none"></div>
-<?php elseif(!$this->data['hide_adsense']):?>
-  <!-- /52288173/LeaderBoard -->
-  <div style="margin:0px -5px;"><div id='div-gpt-ad-1475485285325-0' style="padding:15px 0px;text-align:center;margin:0px auto"><script>googletag.cmd.push(function() { googletag.display('div-gpt-ad-1475485285325-0'); });</script></div></div>
-  <?php endif?>
-</div>
-<?php if($this->data['nav-header']):?>
-<div id="nav-header"><div class="container"><?php echo $this->data['nav-header']?></div></div>
-<?php endif?>
-<div class="container">
-  <?php if($this->data['div_row']):?>
-  <div class="row col-one">
-    <?php echo $this->data['content']?>
-  </div>
-  <?php else:?>
-  <?php echo $this->data['content']?>
-  <?php endif?>
-</div>
-<div class="footer">
-  <?php if(!empty($this->data['banner']['f'])):?>
-  <div class="container">
-    <div style="text-adivgn:center; overflow:hidden; line-height:0px;padding:20px 10px; text-align:center;">
-      <!-- BEGIN - BANNER : F -->
-      <div class="_banner _banner-f"><?php echo $this->data['banner']['f']?></div>
-      <!-- END - BANNER : F -->
-    </div>
-  </div>
-  <div style="height:2px;overflow:hidden;border-top:1px solid #222;border-bottom: 1px solid #393939;box-sizing: border-box;margin-bottom: 20px;"></div>
-  <?php endif?>
-  <div class="l1">
-    <div class="container clear-line">
-      <div class="col-xs-6 col-sm-4 col-md-2 col-lg-2">
-        <div><a href="<?php echo self::uri(['news'])?>" title="ข่าว ข่าววันนี้ ข่าวเด่น ข่าวด่วน ข่าวสด ข่าวตามกระแส" target="_blank">ข่าว</a></div>
-        <div><a href="<?php echo self::uri(['ent'])?>" title="ข่าวบันเทิง ดารา บันเทิง ข่าวดารา ซุบซิบดารา ติดกระแสดารา ภาพหลุดดารา" target="_blank">ข่าวบันเทิง</a></div>
-        <div><a href="<?php echo self::uri(['korea'])?>" title="เกาหลี ดาราเกาหลี นักร้องเกาหลี ซีรีย์เกาหลี ข่าวเกาหลี" target="_blank">ข่าวเกาหลี</a></div>
-      </div>
-      <div class="col-xs-6 col-sm-4 col-md-2 col-lg-2">
-        <div><a href="<?php echo self::uri(['beauty'])?>" title="ผู้หญิง แฟนชั่น" target="_blank">ผู้หญิง</a></div>
-        <div><a href="<?php echo self::uri(['lotto'])?>" title="หวย ตรวจหวย เลขเด็ด" target="_blank">ตรวจหวย</a></div>
-        <div><a href="<?php echo self::uri(['english'])?>" title="ฝึกคำศัพท์ ภาษาอังกฤษ 300 คำ" target="_blank">คำศัพท์ภาษาอังกฤษ</a></div>
-      </div>
-      <div class="col-xs-6 col-sm-4 col-md-2 col-lg-2">
-        <div><a href="<?php echo self::uri(['horo'])?>" title="ดูดวง ดูดวงรายวัน ดูดวงความรัก ทำนายฝัน" target="_blank">ดูดวง</a></div>
-        <div><a href="<?php echo self::uri(['horo','/phone'])?>" title="ดูดวงเบอร์โทรศัพท์ เบอร์มือถือ" target="_blank">ดูดวงเบอร์โทรศัพท์</a></div>
-        <div><a href="<?php echo self::uri(['weather'])?>" title="พยากรณ์อากาศ สภาพอากาศ" target="_blank">พยากรณ์อากาศ</a></div>
-      </div>
-      <div class="col-xs-6 col-sm-4 col-md-2 col-lg-2">
-        <div><a href="<?php echo self::uri(['game'])?>" title="เกมส์ เกม เกมส์ออนไลน์" target="_blank">เกมส์</a></div>
-        <div><a href="<?php echo self::uri(['movie'])?>" title="หนัง หนังใหม่ ดูหนังออนไลน์ หนังเข้าใหม่" target="_blank">หนังใหม่</a></div>
-        <div><a href="<?php echo self::uri(['music'])?>" title="เพลง เพลงใหม่ เนื้อเพลง" target="_blank">เพลงใหม่</a></div>
-      </div>
-      <div class="col-xs-6 col-sm-4 col-md-2 col-lg-2">
-        <div><a href="<?php echo self::uri(['tech'])?>" title="เทคโนโลยี ข่าวไอที" target="_blank">เทคโนโลยี</a></div>
-        <div><a href="<?php echo self::uri(['radio'])?>" title="ฟังวิทยุออนไลน์" target="_blank">วิทยุออนไลน์</a></div>
-        <div><a href="<?php echo self::uri(['guess'])?>" title="เกมทายใจ เกมส์วัดดวง เกมเฟสบุ๊ค เกมทายนิสัย เกมตลก เกมฮาฮา" target="_blank">เกมทายใจ</a></div>
-      </div>
-      <div class="col-xs-6 col-sm-4 col-md-2 col-lg-2">
-        <div><a href="http://www.boxzaracing.com/" title="รถแต่ง รถแข่ง รถสวย แต่งรถ" target="_blank">รถแต่ง</a></div>
-        <div><a href="http://www.autocar.in.th/" title="รถ ราคารถใหม่ รถใหม่ป้ายแดง" target="_blank">ราคารถใหม่</a></div>
-      </div>
-    </div>
-  </div>
-  <div class="l2">
+  <div id="navbar-header" class="navbar-fixed-top">
+    <!--style>body{padding-top: 0px;}#navbar-header{margin-bottom:10px;}</style>
+    <div style="background:#62C1ED;text-align:center"><img src="https://static.jarm.com/img/global/mom-day.jpg" class="img-responsive" style="margin:0px auto;"></div-->
     <div class="container">
-      <div class="pull-left text-left"><span class="hidden-xs">ติดต่อลง</span>โฆษณา: 0880-900-800<span class="hidden-xs">, </span><span class="visible-xs"></span>อีเมล์: ads@jarm.com<br>แนะนำติชม<span class="hidden-xs">/ฝากข่าวประชาสัมพันธ์</span>: info@jarm.com<br>&copy; 2017 jarm.com<span class="hidden-xs">, All Rights Reserved.</span></div>
+      <button type="button" class="navbar-toggle collapsed">
+        <span class="icon-bar icon-bar-top"></span>
+        <span class="icon-bar icon-bar-middle"></span>
+        <span class="icon-bar icon-bar-bottom"></span>
+      </button>
+      <a class="navbar-brand" href="<?php echo self::uri([''])?>" title="Jarm.com"></a>
+      <nav role="navigation">
+        <ul class="nav navbar-nav pull-left">
+          <li class="nav-news-today"><a href="<?php echo self::uri(['news'])?>" title="ข่าววันนี้">ข่าววันนี้</a></li>
+          <li class="nav-news-ent"><a href="<?php echo self::uri(['ent'])?>" title="ข่าวบันเทิง ข่าวดารา">ข่าวบันเทิง</a></li>
+          <li class="nav-news-korea"><a href="<?php echo self::uri(['korea'])?>" title="ข่าวเกาหลี">ข่าวเกาหลี</a></li>
+          <li class="nav-search"><form action="<?php echo self::uri(['search'])?>" method="get"><input type="text" name="q" placeholder="ค้นหา" class="hsearch ev"><button type="submit" class="glyphicon glyphicon-search"></button></form></li>
+        </ul>
+        <ul class="nav navbar-nav pull-right">
+          <?php if(self::$my):?>
+            <li><a href="<?php echo self::$my['link']?>" rel="setting" class="dropdown-toggle" data-toggle="dropdown">เมนูสมาชิก <span class="caret"></span></a>
+            <ul class="dropdown-menu dropdown-menu-right" role="menu" aria-labelledby="dropdownMenu">
+              <li><a href="<?php echo self::uri(['my'])?>">แผงควบคุม</a></li>
+              <li><a href="<?php echo self::$my['link']?>">- โปรไฟล์ส่วนตัว</a></li>
+              <li><a href="<?php echo self::uri(['my','/settings'])?>">- ตั้งค่าการใช้งาน</a></li>
+              <li class="divider"></li>
+              <?php if(self::$my['am']):?>
+              <li><a href="<?php echo self::uri(['control'])?>">ระบบควบคุม(ผู้ดูแล)</a></li>
+              <li><a href="<?php echo self::uri(['control','/news'])?>">- เขียนข่าว</a></li>
+              <li><a href="<?php echo self::uri(['control','/lotto'])?>">- ตรวจหวย</a></li>
+              <li class="divider"></li>
+              <?php endif?>
+              <li><a href="<?php echo self::uri(['oauth','/logout'])?>"> ออกจากระบบ</a></li>
+            </ul>
+          </li>
+          <?php elseif(self::$app=='oauth'):?>
+          <li><a href="<?php echo self::uri(['oauth','/signup?'.$_SERVER['QUERY_STRING']])?>">สมัครสมาชิก</a></li>
+          <li><a href="<?php echo self::uri(['oauth','/login?'.$_SERVER['QUERY_STRING']])?>">ล็อคอิน</a></li>
+          <?php else:?>
+          <li><a href="<?php echo self::uri(['oauth','/signup?redirect_uri='.urlencode(URI)])?>">สมัครสมาชิก</a></li>
+          <li><a href="<?php echo self::uri(['oauth','/login?redirect_uri='.urlencode(URI)])?>">ล็อคอิน</a></li>
+          <?php endif?>
+        </ul>
+      </nav>
+    </div>
+  </div>
+  <div class="container">
+    <?php if(!empty($this->data['banner']['a'])):?>
+    <!-- BEGIN - BANNER : A -->
+    <div class="_banner _banner-a"><?php echo $this->data['banner']['a']?></div>
+    <!-- END - BANNER : A -->
+    <div class="_banner _banner-l" id="jarm_b_l" style="display:none"></div>
+    <div class="_banner _banner-r" id="jarm_b_r" style="display:none"></div>
+  <?php elseif(!$this->data['hide_adsense']):?>
+    <!-- /52288173/LeaderBoard -->
+    <div style="margin:0px -5px;"><div id='div-gpt-ad-1475485285325-0' style="padding:15px 0px;text-align:center;margin:0px auto"><script>googletag.cmd.push(function() { googletag.display('div-gpt-ad-1475485285325-0'); });</script></div></div>
+    <?php endif?>
+  </div>
+  <?php if($this->data['nav-header']):?>
+  <div id="nav-header"><div class="container"><?php echo $this->data['nav-header']?></div></div>
+  <?php endif?>
+  <div class="container" id="content">
+    <?php if($this->data['div_row']):?>
+    <div class="row col-one">
+      <?php echo $this->data['content']?>
+    </div>
+    <?php else:?>
+    <?php echo $this->data['content']?>
+    <?php endif?>
+  </div>
+  <div class="footer">
+    <?php if(!empty($this->data['banner']['f'])):?>
+    <div class="container">
+      <div style="text-adivgn:center; overflow:hidden; line-height:0px;padding:20px 10px; text-align:center;">
+        <!-- BEGIN - BANNER : F -->
+        <div class="_banner _banner-f"><?php echo $this->data['banner']['f']?></div>
+        <!-- END - BANNER : F -->
+      </div>
+    </div>
+    <div style="height:2px;overflow:hidden;border-top:1px solid #222;border-bottom: 1px solid #393939;box-sizing: border-box;margin-bottom: 20px;"></div>
+    <?php endif?>
+    <div class="l2">
+      <div class="container">
+        <div class="pull-left text-left"><span class="hidden-xs">ติดต่อลง</span>โฆษณา: 0880-900-800<span class="hidden-xs">, </span><span class="visible-xs"></span>อีเมล์: ads@jarm.com<br>แนะนำติชม<span class="hidden-xs">/ฝากข่าวประชาสัมพันธ์</span>: info@jarm.com<br>&copy; 2017 jarm.com<span class="hidden-xs">, All Rights Reserved.</span></div>
+      </div>
     </div>
   </div>
 </div>

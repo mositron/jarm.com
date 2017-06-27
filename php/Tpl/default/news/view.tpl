@@ -377,10 +377,10 @@
     <?php endif?>
     <?php endif?>
     <div class="col-xs-6 col-sm-6 col-md-12">
-      <a href="<?php echo $v2['link']?>" title="<?php echo $v2['title']?>" target="_blank">
+      <a href="<?php echo $v2['link']?>" title="<?php echo $v2['title']?>">
         <img src="<?php echo $v2['img_t']?>" alt="<?php echo $v2['title']?>" class="img-responsive">
       </a>
-      <h4><a href="<?php echo $v2['link']?>" target="_blank"><?php echo $v2['title']?></a></h4>
+      <h4><a href="<?php echo $v2['link']?>"><?php echo $v2['title']?></a></h4>
     </div>
     <?php endfor?>
   </div>

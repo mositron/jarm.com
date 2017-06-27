@@ -1,12 +1,12 @@
 <?php if($this->_banner['b']):?>
 <!-- BEGIN - BANNER : B -->
 <div class="_banner _banner-b"><?php echo $this->_banner['b']?></div>
-<!-- END - BANNER : B --> 
+<!-- END - BANNER : B -->
 <?php endif?>
 <?php if($this->_banner['c']):?>
 <!-- BEGIN - BANNER : C -->
 <div class="_banner _banner-c"><?php echo $this->_banner['c']?></div>
-<!-- END - BANNER : C --> 
+<!-- END - BANNER : C -->
 <?php endif?>
 
 <ul class="breadcrumb">
@@ -16,7 +16,7 @@
 </ul>
 
 <h4 class="bar-heading"><i></i>เกมส์ทายใจ ประเภท<?php echo $this->cate[$this->c]['t']?></h4>
-<div class="row news-left">
+<div class="row news-left2">
     <?php for($i=0;$i<count($this->app);$i++):$u=$this->user->get($this->app[$i]['u']);?>
     <div class="col-sm-6">
         <a href="/game/<?php echo $this->app[$i]['_id']?>" target="_blank">
