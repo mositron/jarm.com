@@ -10,12 +10,13 @@ class Service extends Container
   public $zone;
   public function __construct()
   {
+    $path=(Load::$path[0]?:'home');
     Load::$core->data=array_merge(Load::$core->data,[
       'title'=>'เกย์ สังคมชาวเกย์ เกย์ไบ เกย์โบท เกย์คิง เกย์ควีน หาเพื่อนเกย์ สังคมชาวเกย์ ชายรักชาย กระเทย ตุ๊ด',
       'description'=>'เกย์ สังคมชาวเกย์ เกย์ไบ เกย์โบท เกย์คิง เกย์ควีน ชายรักชาย แลกเปลี่ยนพูดคุย หาเพื่อน หาคู่ได้ที่นี่',
       'keywords'=>'เกย์, เกย์ไบ, เกย์โบท, เกย์คิง, เกย์ควีน, ชายรักชาย, หาเพื่อนเกย์',
       'nav-header'=>'<ul>
-      <li><a href="/" title="เกย์">เกย์</a></li>
+      <li><a href="/" title="เกย์"'.($path=='home'?' class="active"':'').'>เกย์</a></li>
       <li><a href="/friend" title="หาเพื่อนเกย์"'.($path=='friend'?' class="active"':'').'>หาเพื่อนเกย์</a></li>
       <li><a href="/forum" title="เว็บบอร์ดเกย์"'.($path=='forum'?' class="active"':'').'>เว็บบอร์ดเกย์</a></li>
       <li><a href="'.Load::uri(['chat','/boyz']).'" title="แชทเกย์ แชทห้องเกย์ แชทหาเพื่อนเกย์">แชทหาเพื่อนเกย์</a></li>

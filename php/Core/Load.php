@@ -343,14 +343,14 @@ class Load
           {
             if(empty($_b[$k]))
             {
-              if($v['tyc']=='1')
-              {
-                $_b[$k]='<script type="text/javascript">document.write(\'\x3Cscript type="text/javascript" src="https://code.jarm.com/impression/?key='.substr(md5(self::$conf['ads']['key'].'-'.md5(HOST)),10,16).'&slot='.$domain.'-'.$type.'-'.$k.'&width=\'+window.screen.width+\'&height=\'+window.screen.height+\'">\x3C/script>\');</script>';//'<div class="jarm-ads" data-slot="racing-'.$type.'-'.$k.'"></div>';
-              }
-              else
-              {
-                $_b[$k]='<span id="jarm_b_'.$k.'"></span><script type="text/javascript">document.write(\'\x3Cscript type="text/javascript" src="https://code.jarm.com/impression/?key='.substr(md5(self::$conf['ads']['key'].'-'.md5(HOST)),10,16).'&slot='.$domain.'-'.$type.'-'.$k.'&width=\'+window.screen.width+\'&height=\'+window.screen.height+\'&outer=jarm_b_'.$k.'" async>\x3C/script>\');</script>';//'<div class="jarm-ads" data-slot="racing-'.$type.'-'.$k.'"></div>';
-              }
+              #if($v['tyc']=='1')
+              #{
+              #  $_b[$k]='<script type="text/javascript">document.write(\'\x3Cscript type="text/javascript" src="https://code.jarm.com/impression/?key='.substr(md5(self::$conf['ads']['key'].'-'.md5(HOST)),10,16).'&slot='.$domain.'-'.$type.'-'.$k.'&width=\'+window.screen.width+\'&height=\'+window.screen.height+\'">\x3C/script>\');</script>';//'<div class="jarm-ads" data-slot="racing-'.$type.'-'.$k.'"></div>';
+              #}
+              #else
+              #{
+                $_b[$k]='<span id="jarm_b_'.$k.'"></span><script>(function(){var i=document.createElement("script");i.type="text/javascript";i.async=true;i.charset="utf-8";i.src="https://code.jarm.com/impression/?key='.substr(md5(self::$conf['ads']['key'].'-'.md5(HOST)),10,16).'&slot='.$domain.'-'.$type.'-'.$k.'&width="+window.screen.width+"&height="+window.screen.height+"&outer=jarm_b_'.$k.'&time="+Math.random();var s=document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0];s.appendChild(i);})()</script>';
+              #}
             }
           }
         }

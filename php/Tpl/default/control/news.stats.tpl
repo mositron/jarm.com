@@ -18,11 +18,11 @@
 </style>
 
 <ul class="breadcrumb">
-<li><a href="/" title="ข่าว ข่าววันนี้">ข่าว</a></li>
-<span class="divider">&raquo;</span>
-<li><a href="/news">ระบบจัดการข้อมูล</a></li>
-<span class="divider">&raquo;</span>
-<li>สถิติ</li>
+  <li><a href="/" title="ควบคุม"><span class="glyphicon glyphicon-home"></span> ควบคุม</a></li>
+  <span class="divider">&raquo;</span>
+   <li><a href="/news">จัดการข่าว</a></li>
+  <span class="divider">&raquo;</span>
+  <li>สถิติ</li>
 </ul>
 
 <h2 style="padding:5px; margin:5px; background:#f9f9f9; text-align:center">สถิติ</h2>

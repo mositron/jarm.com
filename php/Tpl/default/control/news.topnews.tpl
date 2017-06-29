@@ -20,7 +20,7 @@
 
 
 <ul class="breadcrumb" style="margin-bottom:5px;">
-  <li><a href="/" title="ข่าว"><span class="glyphicon glyphicon-home"></span> ข่าว</a></li>
+  <li><a href="/" title="ควบคุม"><span class="glyphicon glyphicon-home"></span> ควบคุม</a></li>
   <span class="divider">&raquo;</span>
    <li><a href="/news">จัดการข่าว</a></li>
    <span class="divider">&raquo;</span>

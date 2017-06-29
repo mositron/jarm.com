@@ -48,7 +48,7 @@ class News_Home
     if($count=$db->count('news',$arg))
     {
       list($pg,$skip)=Load::Pager()->navigation(50,$count,[$url,'page-'],$page);
-      $news=(new \Jarm\App\News\Service(['ignore'=>1]))->find($arg,['wt'=>1],['skip'=>$skip,'limit'=>50,'sort'=>['da'=>-1]]);
+      $news=(new \Jarm\App\News\Service(['ignore'=>1]))->find($arg,['wt'=>1,'img'=>1],['skip'=>$skip,'limit'=>50,'sort'=>['da'=>-1]]);
     }
     $date = intval(date('Ymd',strtotime('-5 days')));
     $key=$db->find('trend_key',['date'=>['$gte'=>$date],'dd'=>['$exists'=>false]],[],['sort'=>['date'=>-1,'time'=>-1]]);

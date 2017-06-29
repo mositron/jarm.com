@@ -9,13 +9,13 @@ class Service extends Container
 
   public function __construct()
   {
-    $path=(Load::$path[0]??'');
+    $path=(Load::$path[0]?:'');
     Load::$core->data=array_merge(Load::$core->data,[
       'title'=>'ระบบควบคุม | Jarm.com',
       'description'=>'ระบบควบคุม | Jarm.com',
       'keywords'=>'control, jarm',
       'nav-header'=>'<ul>
-      <li><a href="/" title="ควบคุม">ควบคุม</a></li>
+      <li><a href="/" title="ควบคุม"'.($path=='home'?' class="active"':'').'>ควบคุม</a></li>
       <li><a href="/news"'.($path=='news'?' class="active"':'').'>ข่าว</a></li>
       <li><a href="/lotto"'.($path=='lotto'?' class="active"':'').'>ตรวจหวย</a></li>
       <li><a href="/user"'.($path=='user'?' class="active"':'').'>ผู้ดูแล</a></li>

@@ -1,8 +1,3 @@
-<?php /*
-<div class="col-sm-9">
-*/
-?>
-
 <style>
 .table .i{width:50px; line-height:0px;}
 .table .t{width:60px; font-size:18px; color:#666; text-align:center; vertical-align:middle}
@@ -69,7 +64,7 @@ function cdel(i){_.box.confirm({title:'ลบประกาศ',detail:'คุ�
 </div>
 
 <ul class="breadcrumb" style="margin-bottom:5px;">
-  <li><a href="/" title="ข่าว ข่าววันี้"><span class="glyphicon glyphicon-home"></span> ข่าว</a></li>
+  <li><a href="/" title="ควบคุม"><span class="glyphicon glyphicon-home"></span> ควบคุม</a></li>
   <span class="divider">&raquo;</span>
   <li><a href="/news">จัดการข่าว</a></li>
   <?php if(!empty($this->cp[0])):?>
@@ -96,7 +91,7 @@ function cdel(i){_.box.confirm({title:'ลบประกาศ',detail:'คุ�
 <?php $last=time()-(3600*24*EXPIRE_NEWS);for($i=0;$i<count($this->news);$i++):?>
 <?php $l=$this->news[$i]['link'];?>
 <tr class="l<?php echo $i%2?>">
-<td class="i"><a href="<?php echo $l?>" target="_blank"><img src="https://<?php echo self::getServ($this->news[$i]['sv'])?>.jarm.com/news/<?php echo $this->news[$i]['fd']?>/s.jpg?<?php echo $last?>" style="height:55px;"></a></td>
+<td class="i"><?php if($this->news[$i]['img']):?><a href="<?php echo $l?>" target="_blank"><img src="https://<?php echo self::getServ($this->news[$i]['sv'])?>.jarm.com/news/<?php echo $this->news[$i]['fd']?>/s.jpg?<?php echo $last?>" style="height:55px;"></a><?php endif?></td>
 <td class="d">
 <div class="nowrap"><a href="/news/c-<?php echo $this->news[$i]['c']?>"><?php echo self::$conf['news'][$this->news[$i]['c']]['t']?></a> -  <a href="<?php echo $l?>" target="_blank"><?php echo $this->news[$i]['t']?></a></div>
 <?php $u=$this->user->get($this->news[$i]['u'],true);?>
@@ -120,7 +115,7 @@ function cdel(i){_.box.confirm({title:'ลบประกาศ',detail:'คุ�
 
 <div class="btn-group" role="group" aria-label="เครื่องมือ">
 <?php if($this->news[$i]['do']>0):?>
-<a href="/news/stats/<?php echo $this->news[$i]['_id']?>" target="_blank" class="btn btn-default"><span class="glyphicon glyphicon-stats"></span><br>สถิติ</a>
+<a href="/news/stats/<?php echo $this->news[$i]['_id']?>" class="btn btn-default"><span class="glyphicon glyphicon-stats"></span><br>สถิติ</a>
 <?php endif?>
 <a href="javascript:;" onClick="instant(<?php echo $this->news[$i]['_id']?>)" class="btn btn-default"><span class="glyphicon glyphicon-open"></span><br>Instant</a>
 <?php if(self::Time()->sec($this->news[$i]['da'])<$last):?>

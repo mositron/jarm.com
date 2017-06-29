@@ -9,13 +9,13 @@ class Service extends Container
   public $rlink=[];
   public function __construct()
   {
-    $path=(Load::$path[0]??'');
+    $path=(Load::$path[0]?:'home');
     Load::$core->data=array_merge(Load::$core->data,[
       'title'=>'ฟังเพลง ฟังเพลงออนไลน์ ฟังวิทยุออนไลน์ วิทยุออนไลน์ ฟังเพลง24ชม',
       'description'=>'ฟังเพลงออนไลน์ ฟังเพลง ฟังวิทยุออนไลน์ทุกคลื่นทั่วไทย ฟังเพลงรัก ฟังเพลงอกหัก ฟังเพลงใหม่ ทั้งไทยและสากลได้ที่นี่',
       'keywords'=>'ฟังเพลง, วิทยุออนไลน์, ฟังวิทยุออนไลน์, ฟังเพลงออนไลน์, วิทยุออนไลน์, วิทยุ, ออนไลน์',
       'nav-header'=>'<ul>
-      <li><a href="/" title="ฟังเพลง ฟังเพลงออนไลน์ ฟังวิทยุออนไลน์">ฟังเพลง</a></li>
+      <li><a href="/" title="ฟังเพลง ฟังเพลงออนไลน์ ฟังวิทยุออนไลน์"'.($path=='home'?' class="active"':'').'>ฟังเพลง</a></li>
       <li><a href="/89.0" title="89.0 Chill FM"'.($path=='89.0'?' class="active"':'').'>89.0 Chill FM</a></li>
       <li><a href="/91.5" title="91.5 HotWave"'.($path=='91.5'?' class="active"':'').'>91.5 HotWave</a></li>
       <li><a href="/93.0" title="93.0 Cool FM"'.($path=='93.0'?' class="active"':'').'>93.0 Cool FM</a></li>

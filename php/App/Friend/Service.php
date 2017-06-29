@@ -10,13 +10,13 @@ class Service extends Container
   public $zone;
   public function __construct()
   {
-    $path=(Load::$path[0]??'');
+    $path=(Load::$path[0]?:'home');
     Load::$core->data=array_merge(Load::$core->data,[
       'title'=>'หาเพื่อน หาแฟน หากิ๊ก หาคู่ คุย แชท msn กล้อง เว็บแคม พบปะพูดคุยกับเพื่อนใหม่ๆได้ทีนี่',
       'description'=>'หาเพื่อน หาแฟน หากิ๊ก หาคู่ คุย msn ออกเดท พบปะพูดคุยกับเพื่อนใหม่ๆ  ผู้หญิง, ผู้ชาย, เลสเบี้ยน, ทอม, ดี้, เกย์, สาวประเภทสอง ทุกเพศทุกวัยได้ที่นี่',
       'keywords'=>'หาเพื่อน, หาแฟน, หากิ๊ก, หาคู่, ออกเดท, พบปะ, พูดคุย, ผู้หญิง, ผู้ชาย, เลสเบี้ยน, ทอม, ดี้, เกย์, สาวประเภทสอง',
       'nav-header'=>'<ul>
-      <li><a href="/" title="หาเพื่อน">หาเพื่อน</a></li>
+      <li><a href="/" title="หาเพื่อน"'.($path=='home'?' class="active"':'').'>หาเพื่อน</a></li>
       <li><a href="/t-girl" title="หาเพื่อนหญิง"'.($path=='girl'?' class="active"':'').'>หาเพื่อนหญิง</a></li>
       <li><a href="/t-boy" title="หาเพื่อนชาย"'.($path=='boy'?' class="active"':'').'>หาเพื่อนชาย</a></li>
       <li><a href="'.Load::uri(['boyz','/friend']).'" title="หาเพื่อนเกย์">หาเพื่อนเกย์</a></li>

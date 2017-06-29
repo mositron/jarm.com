@@ -72,20 +72,16 @@
 <label class="col-sm-2 control-label">ประเภท:</label>
 <div class="col-sm-10">
 <label class="checkbox-inline"><input type="radio" name="type" onClick="checktype()" value="0"<?php echo !$this->banner['tyc']?' checked':''?>> รูปภาพ</label>
-<label class="checkbox-inline"><input type="radio" name="type" onClick="checktype()" value="1"<?php echo $this->banner['tyc']?' checked':''?>> โค๊ด</label>
+<!--label class="checkbox-inline"><input type="radio" name="type" onClick="checktype()" value="1"<?php echo $this->banner['tyc']?' checked':''?>> โค๊ด</label-->
 </div>
 </div>
 
 <div id="type_img">
 <div class="form-group">
-<label class="col-sm-2 control-label" for="input10">รูปภาพ / Flash:</label>
+<label class="col-sm-2 control-label" for="input10">รูปภาพ:</label>
 <div class="col-sm-10">
 <?php if($this->banner['s']):?>
-<?php if($this->banner['ex']=='swf'):?>
-<object width="<?php echo $this->banner['w']?>" height="<?php echo $this->banner['h']?>"><param name="movie" value="https://ads.jarm.com/_upload/<?php echo $this->banner['fd']?>/<?php echo $this->banner['s']?>"></param><param name="allowFullScreen" value="true"></param><param name="allowscriptaccess" value="always"></param><param name="wmode" value="transparent"><embed src="https://s2.jarm.com/banner/<?php echo $this->banner['fd']?>/<?php echo $this->banner['s']?>" type="application/x-shockwave-flash" width="<?php echo $this->banner['w']?>" height="<?php echo $this->banner['h']?>" allowscriptaccess="always" allowfullscreen="true" wmode="transparent"></embed></object>
-<?php else:?>
 <img src="https://ads.jarm.com/_upload/<?php echo $this->banner['fd']?>/<?php echo $this->banner['s']?>?rnd=<?php echo rand(1,9999)?>" class="img-responsive"><br>
-<?php endif?>
 <div style="padding:5px; border:1px solid #ddd; background:#f5f5f5;">ประเภทไฟล์: <?php echo $this->banner['ex']?>, กว้าง: <?php echo $this->banner['w']?>, สูง: <?php echo $this->banner['h']?> </div>
 <?php endif?>
 <input type="file" id="input10" class="form-control" size="20" name="o">

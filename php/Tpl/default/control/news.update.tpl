@@ -1,15 +1,15 @@
 <div class="col-sm-9">
 <style>
 .form-horizontal .control-group {margin-bottom:8px;padding-bottom: 10px;border-bottom: 1px dashed #F0F0F0;}
+
+.fixed-toolbar .mce-tinymce{padding-top:36px;}
+.fixed-toolbar .mce-toolbar-grp{position:fixed;top:45px;z-index:999;width:700px;}
 </style>
 <script>window.tinyMCEPreInit = {suffix:'.min',base:'/_cdn/lib/tinymce'};</script>
 <script type="text/javascript" src="/_cdn/lib/tinymce/tinymce.min.js"></script>
 <!--script type="text/javascript" src="/_cdn/lib/tinymce/jquery.tinymce.min.js"></script-->
 <script>
 function instant(i){_.box.confirm({title:'อัพเดทข้อมูลไปยัง Instant Article',detail:'ระบบนี้ใช้สำหรับข่าวเก่าที่ยังไม่เคยแสดงบน Instant Aticle หรือข่าวเก่าที่มีการแก้ไขหรืออัพเดทเนื้อหาใหม่ เพื่อส่งเข้าคิวการอัพเดทให้ Facebook (ใช้เวลาประมาณ 3-5 นาที)<br>ต้องการดำเนินการต่อหรือไม่.',click:function(){_.ajax.gourl('/news','instant',i)}});}
-
-var tmr,curlang;
-
 function setctlink()
 {
   if($('input[name="exlink"]:checked').val()=='1')
@@ -33,10 +33,11 @@ $(function() {
     "advlist autolink lists link image print preview anchor",
     "searchreplace visualblocks code fullscreen table",
     "media table contextmenu paste textcolor colorpicker",
-    "upload"
+    "upload autoresize"
     ],
     toolbar: "code | bold italic underline | forecolor backcolor | bullist numlist | alignleft aligncenter alignright | link media upload | table",
     content_css:'/_cdn/css/jarm.tinymce.content.css',
+    branding: false,
     menubar:false,
     statusbar: false,
     paste_as_text: true,
@@ -68,8 +69,40 @@ $(function() {
     convert_urls : true,
     relative_urls : false,
     remove_script_host : false,
+
+    autoresize_bottom_margin: 20,
+    autoresize_min_height: 300,
+    autoresize_overflow_padding: 10,
   });
   setctlink();
+
+  $(window).scroll(function(){
+    if($('.mce-tinymce').length<1)return;
+    var scr=$(window).scrollTop(),top=$('.mce-tinymce').offset().top;
+    if(scr >= top-45)
+    {
+      if($('.mce-tinymce').outerHeight()+top<scr+45+36)
+      {
+        if($('body').hasClass('fixed-toolbar'))
+        {
+          $('body').removeClass('fixed-toolbar');
+        }
+      }
+      else
+      {
+        if(!$('body').hasClass('fixed-toolbar'))
+        {
+          $('body').addClass('fixed-toolbar');
+          $('.mce-toolbar-grp').width($('.mce-tinymce').width());
+        }
+      }
+    }
+    else if($('body').hasClass('fixed-toolbar'))
+    {
+      $('body').removeClass('fixed-toolbar');
+      $('.mce-toolbar-grp').width($('.mce-tinymce').width());
+    }
+  });
 });
 
 function selectcate(e)
@@ -95,9 +128,9 @@ function delrelated(i)
 
 <div>
 <ul class="breadcrumb">
-  <li><a href="/" title="ข่าว ข่าววันนี้">ข่าว</a></li>
+  <li><a href="/" title="ควบคุม"><span class="glyphicon glyphicon-home"></span> ควบคุม</a></li>
   <span class="divider">&raquo;</span>
-  <li><a href="/news">ระบบจัดการข้อมูล</a></li>
+   <li><a href="/news">จัดการข่าว</a></li>
   <span class="divider">&raquo;</span>
   <li><a href="/news/c-<?php echo $this->news['c']?>"><?php echo self::$conf['news'][$this->news['c']]['t']?></a></li>
   <span class="divider">&raquo;</span>
@@ -173,7 +206,7 @@ function delrelated(i)
 <div class="control-group">
 <label class="control-label" for="input10">รูปภาพ:</label>
 <div class="controls">
-<img src="<?php echo self::uri([$this->news['sv'],'/news/'.$this->news['fd'].'/s.jpg?'.rand(1,9999)])?>"><br>
+<?php if($this->news['img']):?><img src="<?php echo self::uri([$this->news['sv'],'/news/'.$this->news['fd'].'/s.jpg?'.rand(1,9999)])?>"><br><?php endif?>
 <input type="file" id="input10" size="20" name="o">
 <p class="help-block">* บังคับเลือก (รูปภาพที่ใช้อัพโหลดตามอัตราส่วน 3:2 หรืออย่างน้อย 330x220px โดย crop ด้านบนเป็นหลัก)</p>
 </div>
@@ -224,7 +257,7 @@ function delrelated(i)
 
 <div class="control-box-ct" style="margin-top:10px;">
 <div><strong>เนื้อหา</strong> - <span style="color:#c00;">ห้ามใช้ภาพหรือข้อความ ที่มีความรุนแรง , อนาจาร, โป้เปลือย, วาบหวิว</span></div>
-<textarea class="mceEditor" name="detail" style="height:700px; width:630px;" minlength="20"><?php echo htmlspecialchars($this->news['d'],ENT_QUOTES,"UTF-8")?></textarea>
+<textarea class="mceEditor" name="detail" style="height:700px;" minlength="20"><?php echo htmlspecialchars($this->news['d'],ENT_QUOTES,"UTF-8")?></textarea>
 </div>
 
 <?php /*

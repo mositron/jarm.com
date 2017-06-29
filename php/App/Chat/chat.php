@@ -41,8 +41,9 @@ require_once(
 );
 
 
+$path=(Load::$path[0]?:'home');
 Load::$core->data['nav-header']='<ul>
-<li><a href="/" title="แชท คุยสด แชทหาเพื่อน">แชท</a></li>
+<li><a href="/" title="แชท คุยสด แชทหาเพื่อน"'.($path=='home'?' class="active"':'').'>แชท</a></li>
 <li><a href="/lobby" title="ห้องนั่งเล่น ห้องทั่วไป"'.(Load::$path[0]=='lobby'?' class="active"':'').'>ห้องนั่งเล่น</a></li>
 <li><a href="/boyz" title="ห้องเกย์ ห้องแชทเกย์"'.(Load::$path[0]=='boyz'?' class="active"':'').'>ห้องเกย์</a></li>
 <li><a href="/lesbian" title="ห้องเลสเบี้ยน ห้องแชทเลสเบี้ยน ทอม ดี้"'.(Load::$path[0]=='lesbian'?' class="active"':'').'>ห้องเลสเบี้ยน</a></li>

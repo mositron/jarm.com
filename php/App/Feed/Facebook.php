@@ -15,7 +15,7 @@ class Facebook
     $skip=0;
     $limit=50;
     $sort=['di'=>-1,'ds'=>-1];
-    $start_time = Load::Time()->from('2017-06-09 16:00:00');
+    $start_time = Load::Time()->from('2017-06-28 11:30:00');
 
     if($tmp=(new \Jarm\App\News\Service(['ignore'=>1]))->find($arg,['_id'=>1,'u'=>1,'t'=>1,'d'=>1,'sv'=>1,'fd'=>1,'c'=>1,'cs'=>1,'da'=>1,'ds'=>1,'di'=>1,'de'=>1,'exl'=>1,'url'=>1,'na'=>1],['sort'=>$sort,'skip'=>$skip,'limit'=>$limit]))
     {
@@ -184,17 +184,16 @@ class Facebook
   </header>
   '.$data[$i]['content'].'
 
-  <figure><img src="https://cdn.jarm.com/img/misc/simdaijai.jpg"></figure>
-  <p>
-  <a href="https://www.facebook.com/simdaijai" target="_blank" ref="nofollow">
-  ซิมถูก โทรฟรี เน็ตไม่อั้น ไม่ลดสปีด เฉลี่ยวันละ 3 บ. นิดๆ ถูกกว่านี้ไม่มีแล้ว จำนวนจำกัด !!!<br>
-  + ราคา 399 บ. / ใช้งานได้ 4 เดือน<br>
-  + ราคา 799 บ. / ใช้งานได้ 8 เดือน<br>
-  + ราคา 1,199 บ. / ใช้งานได้ 12 เดือน<br>
-  + ราคา 1,999 บ. / ใช้งานได้ 20 เดือน<br>
-  +++ความเร็วเน็ต 1 Mbps | เฉลี่ยเดือนละ 100 บ. เท่านั้น!!<br><br>
-  <strong>รายละเอียดเพิ่มเติม คลิกเลย</strong></a>
-  </p>
+  <figure><a href="https://www.facebook.com/simdaijai" target="_blank" ref="nofollow"><img src="https://cdn.jarm.com/img/misc/simdaijai.jpg"></a></figure>
+  <p><a href="https://www.facebook.com/simdaijai" target="_blank" ref="nofollow">
+  ซิมถูก โทรฟรี เน็ตไม่อั้น ไม่ลดสปีด เฉลี่ยวันละ 3 บ. นิดๆ ถูกกว่านี้ไม่มีแล้ว จำนวนจำกัด !!!</a></p>
+  <p>+ ราคา 399 บ. / ใช้งานได้ 4 เดือน</p>
+  <p>+ ราคา 799 บ. / ใช้งานได้ 8 เดือน</p>
+  <p>+ ราคา 1,199 บ. / ใช้งานได้ 12 เดือน</p>
+  <p>+ ราคา 1,999 บ. / ใช้งานได้ 20 เดือน</p>
+  <p>+++ ความเร็วเน็ต 1 Mbps | เฉลี่ยเดือนละ 100 บ. เท่านั้น!!</p><br>
+  <p><a href="https://www.facebook.com/simdaijai" target="_blank" ref="nofollow"><strong>รายละเอียดเพิ่มเติม คลิกเลย</strong></a></p>
+
   <footer>
     <aside><p>ติดต่อโฆษณา: 0880-900-800</p><p>อีเมล์: ads@jarm.com</p></aside>
     <small>&copy; 2017 jarm.com</small>

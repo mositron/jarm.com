@@ -1,4 +1,4 @@
-# Jarm.com - Micro CMS v.3  
+# Jarm.com - Micro CMS v3.1
 
 [![Build Status](https://travis-ci.org/positronth/jarm.com.svg?branch=master)](https://travis-ci.org/positronth/jarm.com)
 [![Build Status](https://scrutinizer-ci.com/g/positronth/jarm.com/badges/build.png?b=master)](https://scrutinizer-ci.com/g/positronth/jarm.com/build-status/master)
