@@ -138,7 +138,7 @@ fbq('track', '<?php echo $this->data['pixel']??'PageView'?>');
 <!-- End Facebook Pixel Code -->
 <script>$(document).ready(function(){setTimeout(function(){$('#_pgb').css('display','none');},10);});</script>
 </head>
-<body class="body-<?php echo $name=strtolower(self::$sub)?> body-<?php echo $name?>-<?php echo self::$path[0]??'home'?>"><div id="_pgb"><div><p></p><p></p><p></p></div></div>
+<body class="body-<?php echo $name=strtolower(self::$sub)?> body-<?php echo $name?>-<?php echo self::$path[0]??'home'?><?php echo $this->data['sc-bottom']?' body-sc-bottom':''?>"><div id="_pgb"><div><p></p><p></p><p></p></div></div>
 <noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=723126181102933&ev=<?php echo $this->data['pixel']??'PageView'?>&noscript=1" /></noscript>
 <div id="wrap">
   <div id="nav-slide">
@@ -289,7 +289,6 @@ fbq('track', '<?php echo $this->data['pixel']??'PageView'?>');
   </div>
 </div>
 <div id="fb-root"></div>
-<?php if($this->data['sc-bottom']):?>
 <div id="sc-bottom">
   <div>
     <p>ติดตามเราจากช่องทางอื่นๆ</p>
@@ -301,7 +300,6 @@ fbq('track', '<?php echo $this->data['pixel']??'PageView'?>');
     </div>
   </div>
 </div>
-<?php endif?>
 <script>
 (function(d, s, id) {
   var js, fjs = d.getElementsByTagName(s)[0];
