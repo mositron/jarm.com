@@ -1,40 +1,32 @@
 <?php
-namespace Jarm\App\Feed;
+namespace Jarm\App\Story;
 use Jarm\Core\Load;
 
-class Facebook2
+class Fb extends Service
 {
-  public function __construct()
+  public function get_fb()
   {
     $db=Load::DB();
-    $sitename = 'Jarm News';
-    $siteurl = Load::uri(['news']);
-    $arg=['dd'=>['$exists'=>false],'pl'=>['$in'=>[1,2]],'c'=>['$nin'=>[8,11,12,29]]];
+    $sitename = 'Jarm Story';
+    $siteurl = Load::uri(['story']);
+    $arg=['dd'=>['$exists'=>false],'pl'=>['$in'=>[1,2]]];
 
     $data=[];
     $skip=0;
-    $limit=50;
+    $limit=100;
     $sort=['di'=>-1,'ds'=>-1];
-    $start_time = Load::Time()->from('2017-05-18 17:55:00');
+    $start_time = Load::Time()->from('2017-06-28 11:30:00');
 
-    if($tmp=(new \Jarm\App\News\Service(['ignore'=>1]))->find($arg,['_id'=>1,'u'=>1,'t'=>1,'d'=>1,'sv'=>1,'fd'=>1,'c'=>1,'cs'=>1,'da'=>1,'ds'=>1,'di'=>1,'de'=>1,'exl'=>1,'url'=>1],['sort'=>$sort,'skip'=>$skip,'limit'=>$limit]))
+    if($tmp=$db->find('story_post',$arg,[],['sort'=>$sort,'skip'=>$skip,'limit'=>$limit]))
     {
-      $skip2=rand(1,200)*50;
-      $tmp2=(new \Jarm\App\News\Service(['ignore'=>1]))->find($arg,['_id'=>1,'u'=>1,'t'=>1,'d'=>1,'sv'=>1,'fd'=>1,'c'=>1,'cs'=>1,'da'=>1,'ds'=>1,'di'=>1,'de'=>1,'exl'=>1,'url'=>1],['sort'=>$sort,'skip'=>$skip2,'limit'=>(100-$limit)]);
-      $tmp=array_merge($tmp,$tmp2);
       foreach($tmp as $v)
       {
-        if($v['exl'])continue;
-        $link=$v['link'];
-        $ct = $v['d'].'<p style="text-align:center">| <a href="'.$siteurl.'" target="_blank">อ่านข่าววันนี้ทั้งหมด คลิกที่นี่</a> |</p>';
+        $link='https://story.jarm.com/'.$v['bl'].'/'.$v['_id'].'/'.$v['l'];
+        $ct = $v['d'];
         $ct = str_replace('"//www.','"https://www.',$ct);
         $ct = str_replace(
                           ['http://s1.boxza.com','http://s2.boxza.com','http://s3.boxza.com','http://s4.boxza.com','http://f1.jarm.com','http://f2.jarm.com','http://f3.jarm.com','http://f4.jarm.com'],
                           ['https://f1.jarm.com','https://f2.jarm.com','https://f3.jarm.com','https://f4.jarm.com','https://f1.jarm.com','https://f2.jarm.com','https://f3.jarm.com','https://f4.jarm.com'],
-                        $ct);
-        $ct = str_replace(
-                          ['f1.jarm.com','f2.jarm.com','f3.jarm.com','f4.jarm.com'],
-                          ['cache.jarm.com/f1','cache.jarm.com/f2','cache.jarm.com/f3','cache.jarm.com/f4'],
                         $ct);
         $ct = str_ireplace(['<br />','<br>','<br/>'],"\r\n",$ct);
         $ct = preg_replace_callback('/\<div([^\>]*)\>(.*)\<img(.+)src="([^"]+)"([^\>]*)\>(.*)\<\/div\>/i',[$this,'call_div_img'],$ct);
@@ -89,13 +81,6 @@ class Facebook2
             $last_img=$is_img;
            }
         }
-        if($v['c']!=28)
-        {
-          /*
-          $min=floor(count($detail)/2);
-          $detail[$min].="\r\n".'<p>[embed-facebook-video]=https://www.facebook.com/jarm/videos/1251813278280590/</p>'."\r\n".'<p align="center"><a href="https://news.jarm.com/view/82915">#จามแจกทอง ฉลอง 2,000,000 Likes ลุ้นทองง่ายๆ คลิกเลย</a></p>';
-          */
-        }
         $ct=implode("\r\n",$detail);
         $ct = preg_replace_callback('/\<p([^\>]*)\>(.*)\<img(.+)src="([^"]+)"([^\>]*)\>(.*)\<\/p\>/i',[$this,'call_img'],$ct);
         $ct = preg_replace('/\<p([^\>]*)\>(.*)\<iframe([^\>]+)src="([^"]+)"([^\<]+)\<\/iframe\>(.*)\<\/p\>/i','<figure class="op-interactive">'."\r\n".'<iframe src="${4}" width="320" height="180"></iframe>'."\r\n".'</figure>',$ct);
@@ -109,19 +94,18 @@ class Facebook2
         $ct=preg_replace_callback('/<\/figure>(\s+)<!--caption-(.+)-->/i',[$this,'call_convert_em'],$ct);
         $ct=preg_replace('/<!--caption-(.+)-->/i','<p><em>${1}</em></p>',$ct);
 
-        preg_match('/http\:\/\/(.+)\.jarm\.com(.+)/i',$link,$page);
         $author=Load::User()->get($v['u']);
         $data[]=[
-          'guid'=>'jarm.news.'.$v['_id'],
-          'stats'=>Load::uri(['news','/stats/'.$v['_id']]),
-          'page'=>'fb:'.$page[1],
+          'guid'=>'jarm.story.'.$v['_id'],
+          'stats'=>Load::uri(['story','/stats/'.$v['_id']]),
           'title'=>$v['t'],
           'content'=>$ct,
           'author'=>$author['name'],
           'added'=>$v['ds'],
+          'no_ads'=>$v['na'],
           'updated'=>($v['de']&&Load::Time()->sec($v['de'])>Load::Time()->sec($v['di']))?$v['de']:$v['di'],
           'description'=>mb_substr(trim(str_replace(['&nbsp;',' '],[' ',' '],strip_tags($v['d']))),0,250,'utf-8').'... <a href="'.$link.'" target="_blank">อ่านต่อ</a>',
-          'image'=>Load::uri(['cache','/'.Load::getServ($v['sv']).'/news/'.$v['fd'].'/m.jpg']),
+          'image'=>(count($v['img'])>0?Load::uri([Load::getServ($v['sv']),'/story/'.$v['fd'].'/'.$v['img'][0]]):''),
           'link'=>$link,
           'pubDate'=>date('r',Load::Time()->sec($v['ds']))
         ];
@@ -132,15 +116,12 @@ class Facebook2
   <rss version="2.0" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
   <title>'.$sitename.' | '.$skip.'</title>
-  <description><![CDATA[ข่าว ข่าวเด่น ข่าวติดกระแส ข่าวบันเทิง ข่าวเกมส์ ข่าวเทคโนโลยี ข่าวภาพยนตร์ ข่าวกีฬา ข่าวไลฟ์สไตล์ ข่าวหวย อัพเดทเรื่องอินเทรนด์]]></description>
+  <description><![CDATA[Jarm Story]]></description>
   <link>'.$siteurl.'</link>
   ';
     for($i=0;$i<count($data);$i++)
     {
       $u = $data[$i]['updated']?$data[$i]['updated']:$data[$i]['added'];
-      print_r($u);
-      print_r($start_time);
-
       if(Load::Time()->sec($u) > Load::Time()->sec($start_time))
       {
         $update_time = $u;
@@ -149,8 +130,6 @@ class Facebook2
       {
         $update_time = $start_time;
       }
-      print_r($update_time);
-      echo '-------------------'."\r\n";
   Load::$core->data['content'].='<item>
   <title><![CDATA['.$data[$i]['title'].']]></title>
   <content:encoded><![CDATA[
@@ -160,9 +139,8 @@ class Facebook2
   <title>'.$data[$i]['title'].'</title>
   <meta charset="utf-8">
   <meta property="fb:article_style" content="default">
-  <meta property="fb:use_automatic_ad_placement" content="enable=true ad_density=default">
+  '.($data[$i]['no_ads']?'':'<meta property="fb:use_automatic_ad_placement" content="enable=true ad_density=default">').'
   <meta property="fb:likes_and_comments" content="enable">
-  <meta property="fb:op-recirculation-ads" content="placement_id=1579651482324810_1741751516114805">
   <meta property="fb:app_id" content="'.Load::$conf['social']['facebook']['appid'].'">
   <link rel="canonical" href="'.$data[$i]['link'].'">
   <author>'.$data[$i]['author'].'</author>
@@ -173,13 +151,17 @@ class Facebook2
     <h1>'.$data[$i]['title'].'</h1>
     <address><a>'.$data[$i]['author'].'</a></address>
     <time class="op-published" dateTime="'.date('c',Load::Time()->sec($data[$i]['added'])).'">'.Load::Time()->from($data[$i]['added'],'datetime').'</time>
-    <time class="op-modified" dateTime="'.date('c',Load::Time()->sec($update_time)).'">'.Load::Time()->from($update_time,'datetime').'</time>
-    <section class="op-ad-template">
-      <figure class="op-ad"><iframe width="300" height="250" style="border:0; margin:0;" src="https://www.facebook.com/adnw_request?placement=1579651482324810_1579651618991463&adtype=banner300x250"></iframe></figure>
-      <figure class="op-ad"><iframe width="300" height="250" style="border:0; margin:0;" src="https://www.facebook.com/adnw_request?placement=1579651482324810_1579661178990507&adtype=banner300x250"></iframe></figure>
-      <figure class="op-ad"><iframe width="300" height="250" style="border:0; margin:0;" src="https://www.facebook.com/adnw_request?placement=1579651482324810_1580998728856752&adtype=banner300x250"></iframe></figure>
-      <figure class="op-ad op-ad-default"><iframe width="300" height="250" style="border:0; margin:0;" src="https://www.facebook.com/adnw_request?placement=1579651482324810_1581010088855616&adtype=banner300x250"></iframe></figure>
-    </section>
+    <time class="op-modified" dateTime="'.date('c',Load::Time()->sec($update_time)).'">'.Load::Time()->from($update_time,'datetime').'</time>';
+    if(!$data[$i]['no_ads'])
+    {
+      Load::$core->data['content'].='<section class="op-ad-template">';
+      foreach ($conf['social']['facebook']['audience'] as $v)
+      {
+        Load::$core->data['content'].='<figure class="op-ad"><iframe width="300" height="250" style="border:0; margin:0;" src="https://www.facebook.com/adnw_request?placement='.$v.'&adtype=banner300x250"></iframe></figure>';
+      }
+      Load::$core->data['content'].='</section>';
+    }
+  Load::$core->data['content'].='
   </header>
   '.$data[$i]['content'].'
   <footer>
@@ -208,9 +190,9 @@ class Facebook2
     Load::$core->data['content'].='</channel>
   </rss>';
 
-    //while(@ob_end_clean());
-    //header('Content-Type: application/xml');
-    //echo Load::$core->data['content'];
+    while(@ob_end_clean());
+    header('Content-Type: application/xml');
+    echo Load::$core->data['content'];
     exit;
   }
 

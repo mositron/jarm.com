@@ -23,7 +23,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Kanit:300&amp;subset=latin-ext,thai,vietnamese">
-<link rel="stylesheet" type="text/css" href="<?php echo FILES_CDN?>css/jarm-all.css?v3.1.0" />
+<link rel="stylesheet" type="text/css" href="<?php echo FILES_CDN?>css/jarm-all.css" />
 <link rel="apple-touch-icon" sizes="57x57" href="<?php echo FILES_CDN?>img/favicon/apple-icon-57x57.png">
 <link rel="apple-touch-icon" sizes="60x60" href="<?php echo FILES_CDN?>img/favicon/apple-icon-60x60.png">
 <link rel="apple-touch-icon" sizes="72x72" href="<?php echo FILES_CDN?>img/favicon/apple-icon-72x72.png">
@@ -43,7 +43,7 @@
 <meta name="msapplication-TileImage" content="<?php echo FILES_CDN?>img/favicon/ms-icon-144x144.png">
 <meta name="theme-color" content="#FFFFFF">
 <link rel="alternate" type="application/rss+xml" title="<?php echo $this->data['feed']['title']?>" href="<?php echo $this->data['feed']['url']?>" />
-<script type="text/javascript" src="<?php echo FILES_CDN?>js/jarm-all.js?v3.1.0"></script>
+<script type="text/javascript" src="<?php echo FILES_CDN?>js/jarm-all.js"></script>
 <!--[if lt IE 9]>
 <script src="<?php echo FILES_CDN?>js/html5shiv/html5shiv.js"></script>
 <![endif]-->
@@ -136,16 +136,19 @@ fbq('init', '723126181102933');
 fbq('track', '<?php echo $this->data['pixel']??'PageView'?>');
 </script>
 <!-- End Facebook Pixel Code -->
-<script>$(document).ready(function(){setTimeout(function(){$('#_pgb').css('display','none');},2000);});</script>
+<script>$(document).ready(function(){setTimeout(function(){$('#_pgb').css('display','none');},10);});</script>
 </head>
 <body class="body-<?php echo $name=strtolower(self::$sub)?> body-<?php echo $name?>-<?php echo self::$path[0]??'home'?>"><div id="_pgb"><div><p></p><p></p><p></p></div></div>
 <noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=723126181102933&ev=<?php echo $this->data['pixel']??'PageView'?>&noscript=1" /></noscript>
-
 <div id="wrap">
   <div id="nav-slide">
     <div class="-top">
       <h3>MENU<a href="javascript:;" class="-close pull-right"><span class="glyphicon glyphicon-remove"></span></a></h3>
       <ul>
+        <?php if($this->data['nav-fixed']):?>
+        <?php echo $this->data['nav-fixed'][1]?>
+        <li class="divider"></li>
+        <?php endif?>
         <?php if(self::$my):?>
         <li><a href="<?php echo self::uri(['my'])?>">แผงควบคุม</a></li>
         <li><a href="<?php echo self::$my['link']?>">- โปรไฟล์ส่วนตัว</a></li>
@@ -205,7 +208,7 @@ fbq('track', '<?php echo $this->data['pixel']??'PageView'?>');
         <span class="icon-bar icon-bar-bottom"></span>
       </button>
       <a class="navbar-brand" href="<?php echo self::uri([''])?>" title="Jarm.com"></a>
-      <nav role="navigation">
+      <nav role="navigation"<?php if($this->data['nav-fixed']):?> class="have-nav-fixed"<?php endif?>>
         <ul class="nav navbar-nav pull-left">
           <li class="nav-news-today"><a href="<?php echo self::uri(['news'])?>" title="ข่าววันนี้">ข่าววันนี้</a></li>
           <li class="nav-news-ent"><a href="<?php echo self::uri(['ent'])?>" title="ข่าวบันเทิง ข่าวดารา">ข่าวบันเทิง</a></li>
@@ -213,6 +216,9 @@ fbq('track', '<?php echo $this->data['pixel']??'PageView'?>');
           <li class="nav-search"><form action="<?php echo self::uri(['search'])?>" method="get"><input type="text" name="q" placeholder="ค้นหา" class="hsearch ev"><button type="submit" class="glyphicon glyphicon-search"></button></form></li>
         </ul>
         <ul class="nav navbar-nav pull-right">
+          <?php if($this->data['nav-fixed']):?>
+            <li class="dropdown-fixed"><?php echo $this->data['nav-fixed'][0]?></li>
+          <?php endif?>
           <?php if(self::$my):?>
             <li><a href="<?php echo self::$my['link']?>" rel="setting" class="dropdown-toggle" data-toggle="dropdown">เมนูสมาชิก <span class="caret"></span></a>
             <ul class="dropdown-menu dropdown-menu-right" role="menu" aria-labelledby="dropdownMenu">

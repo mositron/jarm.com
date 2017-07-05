@@ -1,18 +1,12 @@
 <?php
-namespace Jarm\App\Story\Method;
+namespace Jarm\App\Story;
 use Jarm\Core\Load;
 
-class Blog
+class Blog extends Service
 {
-  private $story;
-  public function __construct($story)
+  public function _blog()
   {
     Load::Session()->logged();
-    $this->story = $story;
-  }
-
-  public function get()
-  {
     if(Load::$path[1])
     {
       if(Load::$path[2]=='edit')
@@ -49,7 +43,43 @@ class Blog
       return ['move'=>'/blog'];
     }
 
+    Load::Ajax()->register(['delnews','newnews','instant']);
+    $allby=['desc'=>'หลังไปหน้า','asc'=>'หน้าไปหลัง'];
+    extract(Load::Split()->get('/',0,['c'],['ds'=>'อัพเดทล่าสุด'],$allby));
+    if(!empty($c))
+    {
+      $cp=explode('_',$c);
+      if(empty(Load::$conf['news'][$cp[0]]))
+      {
+        unset($c);
+      }
+    }
+    $url='/news/';
+
+    $db=Load::DB();
+    extract(Load::Split()->get('/blog/'.$blog['l'].'/',2,['page','c']));
+    $arg = ['dd'=>['$exists'=>false]];
+    if(!Load::$my['am'])
+    {
+      $arg['u']=Load::$my['_id'];
+    }
+    //Load::$core->data['title']='Admin - หน้ารวมข่าว';
+    if(isset($c))
+    {
+      $arg['c']=intval($cp[0]);
+      $url .= 'c-'.$c.'/';
+    }
+    if($count=$db->count('story_post',$arg))
+    {
+      list($pg,$skip)=Load::Pager()->navigation(50,$count,[$url,'page-'],$page);
+      $post=$db->find('story_post',$arg,[],['skip'=>$skip,'limit'=>50,'sort'=>['_id'=>-1]]);
+    }
+
     return Load::$core
+      ->assign('count',$count)
+      ->assign('post',$post)
+      ->assign('pager',$pg)
+      ->assign('user',Load::User())
       ->assign('blog',$blog)
       ->fetch('story/blog.view');
   }
@@ -73,7 +103,7 @@ class Blog
     $db=Load::DB();
     $t=mb_substr(trim(strip_tags($arg['title'])),0,100);
     $d=mb_substr(trim(strip_tags($arg['detail'])),0,200);
-    $c=($this->story->cate[$arg['cate']]?intval($arg['cate']):0);
+    $c=($this->cate[$arg['cate']]?intval($arg['cate']):0);
     $u=trim(strtolower($arg['username']));
     if(!preg_match('/^([a-z]{1})([a-z0-9]{5,15})$/',$u))
     {

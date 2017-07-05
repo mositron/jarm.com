@@ -82,6 +82,7 @@ class Service extends Container
     Load::$core->data['stats']='news:'.$id.':is';
     Load::$core->data['echo']='/* stats */';
   }
+
   public function find(array $cond=[],array $arg=[],array $sort=[]): ?array
   {
     if($n=Load::DB()->find('news',

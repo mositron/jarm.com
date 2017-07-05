@@ -1,7 +1,6 @@
 <div class="col-sm-9">
 <style>
 .form-horizontal .control-group {margin-bottom:8px;padding-bottom: 10px;border-bottom: 1px dashed #F0F0F0;}
-
 .fixed-toolbar .mce-tinymce{padding-top:36px;}
 .fixed-toolbar .mce-toolbar-grp{position:fixed;top:45px;z-index:999;width:700px;}
 </style>
@@ -137,7 +136,6 @@ function delrelated(i)
   <li>แก้ไขข่าว</li>
 </ul>
 <h2 class="bar-heading" style="padding:5px; margin:5px;">แก้ไขข่าว
-
 <small class="right" style="margin-top:10px;">
 โดย: <a href="<?php echo $this->user['link']?>" target="_blank" rel="nofollow"><?php echo $this->user['name']?></a>
   <?php if(isset($this->news['ds'])):?>

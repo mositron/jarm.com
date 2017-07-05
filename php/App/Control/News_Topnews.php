@@ -37,8 +37,15 @@ class News_Topnews
     $u=[];
 
     $user=Load::User();
-    $news=(new \Jarm\App\News\Service(['ignore'=>1]))->find(['da'=>['$gte'=>Load::Time()->from($dfrom),'$lte'=>Load::Time()->from($dto)]],['wt'=>1,'google'=>1],['sort'=>['do'=>-1]]);
+    $news=(new \Jarm\App\News\Service(['ignore'=>1]))->find(['da'=>['$gte'=>Load::Time()->from($dfrom),'$lte'=>Load::Time()->from($dto)]],['wt'=>1,'google'=>1,'do'=>1,'is'=>1],['sort'=>['do'=>-1]]);
 
+    $tmp=[];
+    for($i=0;$i<count($news);$i++)
+    {
+      $f=intval($news[$i]['is'])+intval($news[$i]['do']);
+      $tmp[$i]=$f;
+    }
+    array_multisort($tmp,SORT_NUMERIC, SORT_DESC,$news);
     return Load::$core
       ->assign('user',$user)
       ->assign('news',$news)

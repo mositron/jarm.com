@@ -1,20 +1,14 @@
 <?php
-namespace Jarm\App\Story\Method;
+namespace Jarm\App\Story;
 use Jarm\Core\Load;
 
-class Post
+class Post extends Service
 {
-  public $story;
   public $blog;
   public $post;
-  public function __construct($story)
+  public function _post()
   {
     Load::Session()->logged();
-    $this->story = $story;
-  }
-
-  public function get()
-  {
     $db=Load::DB();
     if(!Load::$path[1])
     {
@@ -75,7 +69,7 @@ class Post
       }
     }
 
-    Load::$core->data['title']=(isset($this->post['pl'])?'แก้ไข':'เพิ่มเรื่องใหม่');
+    Load::$core->data['title']=($this->post['pl']?'แก้ไข':'เพิ่มเรื่องใหม่').' - '.$this->blog['t'];
     Load::Ajax()->register(['savepost','delpost'],$this);
     return Load::$core
       ->assign('post',$this->post)
@@ -104,7 +98,7 @@ class Post
     $img=(array)($this->getimg($dc));
     $set=['t'=>$t,'d'=>$dc,'l'=>Load::Format()->link(mb_substr($t,0,50,'utf-8')),'img'=>$img];
     $set['bl']=$this->blog['l'];
-    if($arg['cate']&&isset($this->story->cate[$arg['cate']]))
+    if($arg['cate']&&isset($this->cate[$arg['cate']]))
     {
       $set['c']=intval($arg['cate']);
     }
@@ -141,10 +135,10 @@ class Post
     $db->update('story_post',['_id'=>$this->post['_id']],['$set'=>$set]);
     $ajax->script('$("#save").data("status","saved").html("บันทึกข้อมูลเรียบร้อยแล้ว...");');
     $this->setcount($this->blog['_id']);
-    if($set['pl'])
+    if($set['pl']||$this->post['pl'])
     {
       $ajax->script('$("#status").html("<a href=\'/'.$this->blog['l'].'/'.$this->post['_id'].'/'.$set['l'].'\'>เผยแพร่แล้ว</a>");');
-      $ajax->script('$("#btn-save").html("บันทึก");');
+      $ajax->script('$("#btn-publish").remove();');
     }
   }
 

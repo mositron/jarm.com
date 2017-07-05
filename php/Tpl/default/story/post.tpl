@@ -1,12 +1,4 @@
 <style>
-.story{margin:20px auto;max-width:700px;}
-.story .bcard{background:#fcfcfc;padding:10px;border-radius:4px;border:1px solid #eee;margin-bottom:10px;}
-.story .bcard div>div{font-size:12px;}
-.story .bcard .pull-right{padding-left:20px;border-left:1px solid #eee;margin-top:16px;}
-.story .bcard .pull-right img{width:40px;margin:0px 0px -1px 8px;float:right;border-radius:3px;}
-.story .bcard .glyphicon2{color:#999;font-size:7px;border:1px solid #ddd;padding:2px;border-radius:2px;vertical-align:middle;margin-top:-4px;}
-
-.story .bar-heading{margin:0px 0px 10px;}
 
 .mce-panel{border:none;}
 .form-control{border:none;border-radius:0px;height:50px; font-size:22px;}
@@ -18,71 +10,28 @@
 
 .fixed-toolbar .mce-tinymce{padding-top:36px;}
 .fixed-toolbar .mce-toolbar-grp{position:fixed;top:45px;z-index:999;width:700px;}
+
+.form-div{padding:0px 0px 10px;margin:0px 10px;}
+.form-div>label{padding:0px 0px 3px;margin:0px 0px -3px;border-bottom:1px dashed #eee;display:block;}
 </style>
 <div class="story">
 <script>window.tinyMCEPreInit = {suffix:'.min',base:'/_cdn/lib/tinymce'};</script>
 <script type="text/javascript" src="/_cdn/lib/tinymce/tinymce.min.js"></script>
 <script>
-var pid='<?php echo $this->post['_id']?>',last='',tmrsave;
+_.mce={upload:'/upload/<?php echo $this->post['bl']?>/<?php echo $this->post['_id']?>'};
 
-function checksave()
-{
-  if($('#save').data("status")=="saved")
-  {
-    $('#save').html('');
-  }
-}
-function autosave(ty)
-{
-  var txt=$('#title').val();
-  if(txt)
-  {
-    _.ajax.gourl('<?php echo URL?>','savepost',{'title':$('#title').val(),'detail':tinyMCE.activeEditor.getContent(),'cate':$('#cate').val(),'tags':$('#tags').val()});
-    $('#save').data("status","saving").html('กำลังบันทึก...');
-  }
-}
-function savepost()
-{
-  if(!$.trim($('#title').val()))
-  {
-    $('#title').focus();
-    return;
-  }
-  _.ajax.gourl('<?php echo URL?>','savepost',{'published':1,'title':$('#title').val(),'detail':tinyMCE.activeEditor.getContent(),'cate':$('#cate').val(),'tags':$('#tags').val()});
-  $('#save').data("status","saving").html('กำลังบันทึก...');
-}
-
-$(window).scroll(function(){
-  if($(window).scrollTop() >= $('.mce-tinymce').offset().top-45)
-  {
-    $('body').addClass('fixed-toolbar');
-  }
-  else
-  {
-    $('body').removeClass('fixed-toolbar');
-  }
-});
-$(window).resize(function(){
-  $('.mce-toolbar-grp').width($('.mce-tinymce').width());
-});
 $(function(){
-  tmrsave=setInterval(function(){
-    autosave();
-    checksave();
-  },10000);
   tinymce.init({
     selector: "textarea",
     plugins: [
     "advlist autolink lists link print preview anchor",
     "searchreplace visualblocks code fullscreen",
     "table contextmenu paste",
-    "autoresize placeholder hr"
+    "upload autoresize placeholder hr"
     ],
-    toolbar: "hr | bold italic underline | bullist numlist | alignleft aligncenter alignright | link imageupload | table",
-    setup: function(editor) {
-      initImageUpload(editor);
-    },
+    toolbar: "hr | bold italic underline | bullist numlist | alignleft aligncenter alignright | link upload | table",
     content_css:'/_cdn/css/jarm.tinymce.content.css',
+    branding: false,
     menubar:false,
     statusbar: false,
     paste_as_text: true,
@@ -104,7 +53,7 @@ $(function(){
     },
     invalid_styles: 'font-size font-family',
     keep_styles: false,
-    extended_valid_elements : "a[href|title|target=_blank|rel=nofollow],img[src|data-width|data-height]",
+    extended_valid_elements : "a[href|title|target=_blank|rel=nofollow]",
     invalid_elements : "br,pre,div",
     forced_root_block : 'p',
     force_p_newlines : true,
@@ -118,78 +67,71 @@ $(function(){
     autoresize_min_height: 100,
     autoresize_overflow_padding: 10,
   });
-  $(window).trigger('resize');
-});
+  //$(window).trigger('resize');
 
-function initImageUpload(editor){
-  var inp = $('<input id="tinymce-uploader" type="file" name="pic" accept="image/*" style="position:absolute;left:100px;z-index:100;top:100px;">');
-  $(editor.getElement()).parent().append(inp);
-  editor.addButton('imageupload', {
-    text: '',
-    icon: 'image',
-    onclick: function(e){$('#tinymce-uploader').focus().click();return false;/*inp.trigger('click');*/}
-  });
-  inp.on("change", function(e){
-    uploadFile($(this), editor);
-  });
-}
-
-function uploadFile(inp, editor) {
-  console.log('uploadFile:',inp,editor);
-  var input = inp.get(0);
-  var data = new FormData();
-  data.append('image', input.files[0]);
-  $('#save').data("status","saving").html('กำลังอัพโหลดรูปภาพ...');
-  $.ajax({
-    url: '/upload/<?php echo $this->blog['l']?>/<?php echo $this->post['_id']?>',
-    type: 'POST',
-    data: data,
-    processData: false, // Don't process the files
-    contentType: false, // Set content type to false as jQuery will tell the server its a query string request
-    success: function(rd, textStatus, jqXHR) {
-      console.log(rd);
-      var rs=JSON.parse(rd);
-      console.log(rs.status);
-      if(rs.status=='OK')
+  $(window).scroll(function(){
+    if($('.mce-tinymce').length<1)return;
+    var scr=$(window).scrollTop(),top=$('.mce-tinymce').offset().top;
+    if(scr >= top-45)
+    {
+      if($('.mce-tinymce').outerHeight()+top<scr+45+36)
       {
-        console.log('---------- '+rs.data.url+' ---=');
-        editor.insertContent('<p style="text-align:center"><img src="'+rs.data.url+'" data-width="'+rs.data.w+'" data-height="'+rs.data.h+'" /></p><p>&nbsp;</p>');
-        editor.execCommand('mceAutoResize');
+        if($('body').hasClass('fixed-toolbar'))
+        {
+          $('body').removeClass('fixed-toolbar');
+        }
       }
-      $('#save').data("status","saved").html('');
-    },
-    error: function(jqXHR, textStatus, errorThrown) {
-      if(jqXHR.responseText) {
-        errors = JSON.parse(jqXHR.responseText).errors
-        console.log('Error uploading image: ' + errors.join(", ") + '. Make sure the file is an image and has extension jpg/jpeg/png.');
+      else
+      {
+        if(!$('body').hasClass('fixed-toolbar'))
+        {
+          $('body').addClass('fixed-toolbar');
+          $('.mce-toolbar-grp').width($('.mce-tinymce').width());
+        }
       }
-      $('#save').data("status","saved").html('');
+    }
+    else if($('body').hasClass('fixed-toolbar'))
+    {
+      $('body').removeClass('fixed-toolbar');
+      $('.mce-toolbar-grp').width($('.mce-tinymce').width());
     }
   });
-}
+});
 </script>
-<div class="bcard clearfix">
+<div class="pboard clearfix">
   <div class="pull-left">
-    <a href="/<?php echo $this->blog['l']?>"><?php echo $this->blog['t']?></a>
+    <h1><a href="/<?php echo $this->blog['l']?>"><?php echo $this->blog['t']?></a></h1>
     <div><span class="glyphicon glyphicon-list"></span> <?php echo $this->cate[$this->post['c']?:$this->blog['c']]['t']?></div>
   </div>
   <div class="pull-right">
     <a href="/post/<?php echo $this->blog['l']?>" class="btn btn-xs btn-success"><span class="glyphicon glyphicon-plus"></span> เขียนเรื่องใหม่</a>
-    <a href="/blog" class="btn btn-xs btn-info"><span class="glyphicon glyphicon-list-alt"></span> จัดการบล็อก</a>
     <a href="/blog/<?php echo $this->blog['l']?>" class="btn btn-xs btn-default"><span class="glyphicon glyphicon-th-list"></span> จัดการโพสต์</a>
-    <a href="/blog/<?php echo $this->blog['l']?>/edit" class="btn btn-xs btn-warning"><span class="glyphicon glyphicon-pencil"></span> แก้ไขบล็อก</a>
   </div>
 </div>
 
+<div class="post">
+<div class="-detail">
+  <h2 class="bar-heading">
+  <?php if($this->post['pl']):?>
+  แก้ไขโพสต์ <small class="pull-right"><button class="btn btn-xs btn-danger" data-toggle="modal" data-target="#delpost"><span class="glyphicon glyphicon-trash"></span> ลบโพสต์นี้</button></small>
+  <?php else:?>
+  เพิ่มเรื่องใหม่
+  <?php endif?>
+  </h2>
 
-<h2 class="bar-heading">
-<?php if($this->post['pl']):?>
-แก้ไขโพสต์ <small class="pull-right"><button class="btn btn-xs btn-danger" data-toggle="modal" data-target="#delpost"><span class="glyphicon glyphicon-trash"></span> ลบโพสต์นี้</button></small>
-<?php else:?>
-เพิ่มเรื่องใหม่
-<?php endif?>
-</h2>
-<form method="post" action="<?php echo URL?>" onsubmit="savepost();return false;" enctype="multipart/form-data" id="sensubmit" class="form-horizontal">
+  <?php if($_SERVER['QUERY_STRING']=='completed'):?>
+  <div class="alert alert-success">
+    <a class="close" data-dismiss="alert" href="#">×</a>
+    <h4 class="alert-heading">เรียบร้อยแล้ว!</h4>
+   ระบบทำการบันทึกข้อมูลเรียบร้อยแล้ว  (<a href="/<?php echo $this->post['bl'].'/'.$this->post['_id'].'/'.$this->post['l']?>">หน้าแสดงผล </a>)
+  </div>
+  <?php elseif($this->post['pl']):?>
+  <div class="alert alert-info">
+    <h4 class="alert-heading">เผยแพร่แล้ว!</h4>
+   บทความนี้ทำการเผยแพร่แล้ว. กลับไปยัง <a href="/<?php echo $this->post['bl'].'/'.$this->post['_id'].'/'.$this->post['l']?>">หน้าแสดงผล</a>
+  </div>
+  <?php endif?>
+<form method="post" action="<?php echo URL?>" enctype="multipart/form-data" id="sensubmit">
 <fieldset>
 <input type="text" class="form-control" id="title" name="title" value="<?php echo htmlspecialchars($this->post['t'],ENT_QUOTES,'utf-8')?>" placeholder="หัวข้อ">
 <textarea class="mceEditor" name="detail" placeholder="บอกเล่าเรื่องราวของคุณ..."><?php echo htmlspecialchars($this->post['d'],ENT_QUOTES,"UTF-8")?></textarea>
@@ -201,15 +143,23 @@ function uploadFile(inp, editor) {
 </select></div>
 <div class="col-sm-6"><input type="text" class="form-control" name="tags" id="tags" value="<?php echo implode(', ',(array)$this->post['tags'])?>" placeholder="ป้ายกำกับ (คั่นด้วย , และไม่เกิน 5 คำ)"></div>
 </div>
+<div class="form-div">
+  <label class="control-label">การเผยแพร่:</label>
+  <div>
+    <div class="radio"><label><input type="radio" name="publish" value="1"<?php echo $this->post['pl']==1?' checked':''?>> แสดงผล (แสดงผลรูปภาพและหัวข้อข่าวในหน้ารวมข่าวเหมือนปรกติ)</label></div>
+    <div class="radio"><label><input type="radio" name="publish" value="2"<?php echo $this->post['pl']==2?' checked':''?>> แสดงเฉพาะหน้าเนื้อหา (เฉพาะผู้ที่มีลิ้งค์ข่าวนี้เท่านั้นถึงดูเนื้อหาได้)</label></div>
+    <div class="radio"><label><input type="radio" name="publish" value="0"<?php echo !$this->post['pl']?' checked':''?>> ไม่แสดง</label></div>
+  </div>
+</div>
 <div class="form-actions">
-<span id="status" class="pull-right" style="margin-top:7px;"><?php echo $this->post['pl']?'<a href="/'.$this->post['bl'].'/'.$this->post['_id'].'/'.$this->post['l'].'">เผยแพร่แล้ว</a>':'ฉบับร่าง'?></span>
-<button type="button" id="btn-save" class="btn btn-primary" onclick="$('#sensubmit').submit();"><?php echo $this->post['pl']?'บันทึก':'เผยแพร่'?></button>
-<span id="save"></span>
+<button type="submit" class="btn btn-primary">บันทึก</button>
+<a class="btn" href="/blog/<?php echo $this->blog['l']?>">ยกเลิก, กลับไปหน้าจัดการโพสต์</a>
 </div>
 </fieldset>
 </form>
 </div>
-
+</div>
+</div>
 <div class="modal modal-warning fade" id="delpost" role="dialog" aria-labelledby="myModalLabel" data-backdrop="false">
   <div class="modal-dialog" role="document">
     <div class="modal-content">

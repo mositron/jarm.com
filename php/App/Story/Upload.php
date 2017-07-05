@@ -1,18 +1,12 @@
 <?php
-namespace Jarm\App\Story\Method;
+namespace Jarm\App\Story;
 use Jarm\Core\Load;
 
-class Upload
+class Upload extends Service
 {
-  private $story;
-  public function __construct($story)
+  public function _upload()
   {
     Load::Session()->logged();
-    $this->story = $story;
-  }
-
-  public function get()
-  {
     $db=Load::DB();
     if($this->blog=$db->findone('story_blog',['dd'=>['$exists'=>false],'l'=>Load::$path[1]]))
     {

@@ -82,7 +82,7 @@
     <div class="col-md-8">
       <div class="row news-bottom2 clear-line">
         <?php for($i=0;$i<6;$i++):$v2=$this->live[$i];?>
-        <div class="col-xs-6 col-sm-4 col-md-4">
+        <div class="col-xs-6 col-sm-4 col-md-4 col-lg-4">
           <a href="<?php echo $v2['link']?>" title="<?php echo $v2['title']?>" target="_blank"><img data-original="<?php echo $v2['img_t']?>" alt="<?php echo $v2['title']?>" class="img-responsive lazy"><strong><?php echo self::$conf['news'][$v2['c']]['t']?></strong></a>
           <h4><a href="<?php echo $v2['link']?>" target="_blank"><?php echo $v2['title']?></a></h4>
           <p><span class="glyphicon glyphicon-time"></span> <span class="ago" datetime="<?php echo $v2['sec']?>"><?php echo $v2['ago']?></span><span class="hidden-xs">ที่ผ่านมา</span></p>
@@ -128,7 +128,7 @@
     <div class="col-md-8">
       <div class="row news-bottom2 clear-line">
         <?php for($i=0;$i<6;$i++):$v2=$this->knowledge[$i];?>
-        <div class="col-xs-6 col-sm-4 col-md-4">
+        <div class="col-xs-6 col-sm-4 col-md-4 col-lg-4">
           <a href="<?php echo $v2['link']?>" title="<?php echo $v2['title']?>" target="_blank"><img data-original="<?php echo $v2['img_t']?>" alt="<?php echo $v2['title']?>" class="img-responsive lazy"><strong><?php echo self::$conf['news'][$v2['c']]['t']?></strong></a>
           <h4><a href="<?php echo $v2['link']?>" target="_blank"><?php echo $v2['title']?></a></h4>
         </div>
@@ -158,7 +158,7 @@
     </div>
   </div>
 </div>
-<div class="layer-4 row">
+<div class="layer-4">
   <h3><a href="<?php echo self::uri(['eat','/'])?>" target="_blank">อาหาร</a> <small class="hidden-xs">กิน ดื่ม ร้านอาหาร เมนูอาหาร</small></h3>
   <div class="row news-bottom2 clear-line">
     <?php for($i=0;$i<count($this->eat);$i++):$v2=$this->eat[$i];?>
@@ -175,7 +175,7 @@
     <div class="col-md-8">
       <div class="row news-bottom2 clear-line">
         <?php for($i=0;$i<6;$i++):$v2=$this->tech[$i];?>
-        <div class="col-xs-6 col-sm-4 col-md-4">
+        <div class="col-xs-6 col-sm-4 col-md-4 col-lg-4">
           <a href="<?php echo $v2['link']?>" title="<?php echo $v2['title']?>" target="_blank"><img data-original="<?php echo $v2['img_t']?>" alt="<?php echo $v2['title']?>" class="img-responsive lazy"><strong><?php echo self::$conf['news'][$v2['c']]['t']?></strong></a>
           <h4><a href="<?php echo $v2['link']?>" target="_blank"><?php echo $v2['title']?></a></h4>
         </div>
@@ -217,7 +217,7 @@
     <div class="col-md-8">
       <div class="row news-bottom2 clear-line">
         <?php for($i=0;$i<6;$i++):$v2=$this->car[$i];?>
-        <div class="col-xs-6 col-sm-4 col-md-4">
+        <div class="col-xs-6 col-sm-4 col-md-4 col-lg-4">
           <a href="<?php echo $v2['link']?>" title="<?php echo $v2['title']?>" target="_blank"><img data-original="<?php echo $v2['img_t']?>" alt="<?php echo $v2['title']?>" class="img-responsive lazy"><strong><?php echo self::$conf['news'][$v2['c']]['t']?></strong></a>
           <h4><a href="<?php echo $v2['link']?>" target="_blank"><?php echo $v2['title']?></a></h4>
           <p><span class="glyphicon glyphicon-time"></span> <span class="ago" datetime="<?php echo $v2['sec']?>"><?php echo $v2['ago']?></span><span class="hidden-xs">ที่ผ่านมา</span></p>
@@ -246,7 +246,7 @@
 <div class="layer-4 layer-9">
   <h3 class="bar-heading" style="margin-top:15px;"><a href="/">Web Directory</a> <small>ร่วมลิ้งค์เว็บที่น่าสนใจ</small></h3>
   <div class="row link-list clear-line">
-    <div class="col-xs-6 col-sm-4 col-md-3">
+    <div class="col-xs-6 col-sm-4 col-md-3 col-lg-3">
       <h4 class="bar-heading">หนังสือพิมพ์</h4>
       <div><a href="http://www.bangkokbiznews.com" target="_blank" rel="nofollow" title="กรุงเทพธุรกิจ"><span class="glyphicon glyphicon-globe"></span> กรุงเทพธุรกิจ</a></div>
       <div><a href="http://www.khaosod.co.th" target="_blank" rel="nofollow" title="ข่าวสด"><span class="glyphicon glyphicon-globe"></span> ข่าวสด</a></div>
