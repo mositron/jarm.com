@@ -2,7 +2,7 @@
 namespace Jarm\App\Control;
 use Jarm\Core\Load;
 
-class News_Topnews
+class News_Viewday
 {
   public function __construct()
   {
@@ -23,7 +23,7 @@ class News_Topnews
       }
       else
       {
-        Load::move('/news/topnews');
+        Load::move('/news/view-day');
       }
     }
     else
@@ -36,6 +36,7 @@ class News_Topnews
 
     $u=[];
 
+    Load::$core->data['title']='อ่านข่าวประจำวัน - '.Load::$core->data['title'];
     $user=Load::User();
     $news=(new \Jarm\App\News\Service(['ignore'=>1]))->find(['da'=>['$gte'=>Load::Time()->from($dfrom),'$lte'=>Load::Time()->from($dto)]],['wt'=>1,'google'=>1,'do'=>1,'is'=>1],['sort'=>['do'=>-1]]);
 
@@ -50,7 +51,7 @@ class News_Topnews
       ->assign('user',$user)
       ->assign('news',$news)
       ->assign('dfrom',$dfrom)
-      ->fetch('control/news.topnews');
+      ->fetch('control/news.view-day');
   }
 }
 ?>

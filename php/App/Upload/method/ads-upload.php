@@ -51,7 +51,10 @@ if($_FILES['file'])
         }
         $sz=$_POST['data']['size'][0].'x'.$_POST['data']['size'][1];
         exec($cmd.' -resize '.$sz.'^ -gravity center -extent '.$sz.' '._FILES.$folder.'/'.$n,$outs);
-
+        if($type=='jpg')
+        {
+          exec('/usr/bin/convert -strip -interlace Plane -sampling-factor 4:2:0 -define jpeg:dct-method=float -quality 85% '._FILES.$folder.'/'.$n.' '._FILES.$folder.'/'.$n);
+        }
         $size=@getimagesize(_FILES.$folder.'/'.$n);
         $width=$size[0];
         $height=$size[1];

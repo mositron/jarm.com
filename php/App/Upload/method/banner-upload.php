@@ -54,6 +54,10 @@ if($_FILES['file'])
         //print_r($outs);
         //echo $cmd.' -resize '.$sz.'^ -gravity center -extent '.$sz.' '._FILES.$folder.'/'.$n;
         //exit;
+        if($type=='jpg')
+        {
+          exec('/usr/bin/convert -strip -interlace Plane -sampling-factor 4:2:0 -define jpeg:dct-method=float -quality 85% '._FILES.$folder.'/'.$n.' '._FILES.$folder.'/'.$n);
+        }
         $size=@getimagesize(_FILES.$folder.'/'.$n);
         $width=$size[0];
         $height=$size[1];

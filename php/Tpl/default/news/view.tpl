@@ -1,5 +1,4 @@
 <script>/*fixed bug: load with ajax on history.pushStare*/delete window.loaded_blocks_yengo</script>
-<?php //echo file_get_contents('http://anti-adblock.adnow.com/aadbAdnow.php?ids=85519,85592,87535,87537,88865,117738,117776');?>
 <article class="col-md-9 col-content">
   <?php if(!$this->data['hide_adsense']):?>
   <div id='div-gpt-ad-1473244406891-0' style="text-align:center;margin-bottom:10px;">
@@ -7,7 +6,15 @@
   </div>
   <?php endif?>
 <style>
-.SC_TBlock table tr td{padding:0px !important; line-height:18px !important;}
+.SC_TBlock table{width:auto !important;margin:auto !important;}
+.SC_TBlock table table{width:100% !important;}
+.SC_TBlock td{padding:5px !important; line-height:18px !important;vertical-align:top !important;}
+.SC_TBlock td td{padding:0px !important;}
+.SC_TBlock td img{margin:0px !important;}
+@media (max-width:768px){
+.SC_TBlock td a{width:150px !important;}
+.SC_TBlock td img{min-width:150px !important;width:150px !important;height:150px !important;}
+}
 </style>
 
 <ul class="breadcrumb">
@@ -53,7 +60,7 @@
     function getyengo($e,$div=true)
     {
       $t=$e.'_'.rand(100000,999999);
-      return ($div?'<p style="background: #f0f0f0;color: #AAA;padding: 0px 5px;text-align: left;font-size: 11px;height: 20px;line-height: 20px;width: 336px;margin: 0px auto 3px;">Advertisement</p><div style="width:336px;margin:0px auto;text-align:center;">':'').
+      return ($div?'<p class="bn-native">Advertisement</p><div class="bn-native">':'').
       '<script id="'.$t.'">(function(e){var js = document.getElementById("'.$t.'");var block = document.createElement("div");block.id = "DIV_YNG_"+e+"_"+parseInt(Math.random()*1e3);block.className = "yengo-block yengo-block-"+e;block.style = "display:block !important";js.parentNode.insertBefore(block, js);if("undefined"===typeof window.loaded_blocks_yengo){window.loaded_blocks_yengo=[];function n(){var e=window.loaded_blocks_yengo.shift();var t=e.adp_id;var r=e.div;var i=document.createElement("script");i.async=true;i.charset="utf-8";i.src="//code.yengo.com/data/"+t+".js?async=1&div="+r+"&t="+Math.random();var s=document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0];s.appendChild(i);var o=setInterval(function(){if(document.getElementById(r)&&document.getElementById(r).innerHTML&&window.loaded_blocks_yengo.length){console.log(\'clear-\'+r+\'-\'+t);n();clearInterval(o)};},50)}setTimeout(n);}window.loaded_blocks_yengo.push({adp_id:e,div:block.id})})('.$e.')</script>'.
       ($div?'</div>':'');
     }
@@ -69,7 +76,14 @@
       $this->_tmp['ads'][]=getyengo(146315);
       //adnow
       //$this->_tmp['ads'][] = '<p style="background: #f0f0f0;color: #AAA;padding: 0px 5px;text-align: left;font-size: 11px;height: 20px;line-height: 20px;width: 336px;margin: 0px auto 3px;">Advertisement</p><div style="width:336px;margin:0px auto"><div id="SC_TBlock_85519" class="SC_TBlock">loading...</div></div><script type="text/javascript">var SC_CId = "85519",SC_Domain="n.ads3-adnow.com";SC_Start_85519=(new Date).getTime();</script><script type="text/javascript" src="https://st-n.ads3-adnow.com/js/adv_out.js"></script>';
+      #adnow
+      //$this->_tmp['ads'][]='<div id="SC_TBlock_377357" class="SC_TBlock">loading...</div><script type="text/javascript">(sc_adv_out=window.sc_adv_out||[]).push({id:"377357",domain:"n.ads1-adnow.com"});</script><script type="text/javascript" src="//st-n.ads1-adnow.com/js/adv_out.js"></script>';
+      //$this->_tmp['ads'][]='<div id="SC_TBlock_386595" class="SC_TBlock">loading...</div><script type="text/javascript">(sc_adv_out=window.sc_adv_out||[]).push({id:"386595",domain:"n.ads3-adnow.com"});</script><script type="text/javascript" src="//st-n.ads3-adnow.com/js/adv_out.js"></script>';
 
+      if(!$this->data['hide_adsense'])
+      {
+        //$this->_tmp['ads'][]='<ins class="adsbygoogle" style="display:block; text-align:center;" data-ad-format="fluid" data-ad-layout="in-article" data-ad-client="ca-pub-8383574629063856" data-ad-slot="5888636993"></ins><script>(adsbygoogle = window.adsbygoogle || []).push({});</script>';
+      }
 
       $this->_tmp['ads'][]=getyengo(146424);//$div1.'<script>(function(e){var t="DIV_YNG_"+e+"_"+parseInt(Math.random()*1e3); document.write(\'<div id="\'+t+\'" class="yengo-block yengo-block-\'+e+\'"></div>\'); if("undefined"===typeof window.loaded_blocks_yengo){window.loaded_blocks_yengo=[]; function n(){var e=window.loaded_blocks_yengo.shift(); var t=e.adp_id; var r=e.div; var i=document.createElement("script"); i.type="text/javascript"; i.async=true; i.charset="windows-1251"; i.src="//code.yengo.com/data/"+t+".js?async=1&div="+r+"&t="+Math.random(); var s=document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]; s.appendChild(i); var o=setInterval(function(){if(document.getElementById(r).innerHTML&&window.loaded_blocks_yengo.length){n(); clearInterval(o)}},50)} setTimeout(n)}window.loaded_blocks_yengo.push({adp_id:e,div:t})})(146424)</script>'.$div2;
       $this->_tmp['ads'][]=getyengo(146423);//$div1.'<script>(function(e){var t="DIV_YNG_"+e+"_"+parseInt(Math.random()*1e3); document.write(\'<div id="\'+t+\'" class="yengo-block yengo-block-\'+e+\'"></div>\'); if("undefined"===typeof window.loaded_blocks_yengo){window.loaded_blocks_yengo=[]; function n(){var e=window.loaded_blocks_yengo.shift(); var t=e.adp_id; var r=e.div; var i=document.createElement("script"); i.type="text/javascript"; i.async=true; i.charset="windows-1251"; i.src="//code.yengo.com/data/"+t+".js?async=1&div="+r+"&t="+Math.random(); var s=document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]; s.appendChild(i); var o=setInterval(function(){if(document.getElementById(r).innerHTML&&window.loaded_blocks_yengo.length){n(); clearInterval(o)}},50)} setTimeout(n)}window.loaded_blocks_yengo.push({adp_id:e,div:t})})(146423)</script>'.$div2;
@@ -88,6 +102,10 @@
 
       if(!$this->data['hide_adsense'])
       {
+        /*
+<ins class="adsbygoogle" style="display:block; text-align:center;" data-ad-format="fluid" data-ad-layout="in-article" data-ad-client="ca-pub-8383574629063856" data-ad-slot="5888636993"></ins><script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+<ins class="adsbygoogle" style="display:block; text-align:center;" data-ad-format="fluid" data-ad-layout="in-article" data-ad-client="ca-pub-8383574629063856" data-ad-slot="5521326558"></ins><script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+*/
         $this->_tmp['ads'][] = file_get_contents(__CONF.'ads/ads.dfp-1.php');
         // dfp
         $this->_tmp['ads'][] = file_get_contents(__CONF.'ads/ads.dfp-2.php');
@@ -312,7 +330,7 @@
 <a href="https://www.facebook.com/simdaijai" target="_blank" ref="nofollow">
 <img src="https://cdn.jarm.com/img/misc/simdaijai.jpg" class="img-responsive" style="margin-bottom:10px;">
 ซิมถูก โทรฟรี เน็ตไม่อั้น ไม่ลดสปีด เฉลี่ยวันละ 3 บ. นิดๆ ถูกกว่านี้ไม่มีแล้ว จำนวนจำกัด !!!<br>
-+ ราคา 399 บ. / ใช้งานได้ 4 เดือน (หมด)<br>
++ ราคา 399 บ. / ใช้งานได้ 4 เดือน (มาเพิ่มแล้ว จำนวนจำกัด!!)<br>
 + ราคา 799 บ. / ใช้งานได้ 8 เดือน (เหลือน้อย)<br>
 + ราคา 1,199 บ. / ใช้งานได้ 12 เดือน<br>
 + ราคา 1,999 บ. / ใช้งานได้ 20 เดือน<br>
@@ -340,6 +358,10 @@
   }
 </script>
   <style>
+  p.bn-native{background: #f0f0f0;color: #AAA;padding: 0px 5px;text-align: left;font-size: 11px;height: 20px;line-height: 20px;width: 336px;margin: 0px auto 3px;}
+  div.bn-native{width:336px;margin:0px auto;text-align:center;}
+  div.bn-native:after{display:block;content:"";clear:both;}
+  .news-native{padding:0px !important;margin:0px !important;}
   .news-native div {padding:0px;border-bottom: 1px dashed #ddd;margin-bottom: 10px;}
   .news-native div > a { position:relative;overflow:hidden; display:block}
   .news-native div > a strong{font-weight:normal;position:absolute; left:0px; top:0px; background:#000; background-color:rgba(0,0,0,0.6);color:#ccc; font-size:12px; padding:1px 5px; border-bottom-right-radius: 5px;z-index:1;}
@@ -373,10 +395,38 @@
 </div>
 <script>$('.news-detail').attr('unselectable', 'on').css('user-select', 'none').on('selectstart', false);</script>
 <?php if(!defined('HIDE_ADS')):?>
-<div style="text-align:center"><?php echo getyengo(146357,false)  /*<script>(function(e){var t="DIV_YNG_"+e+"_"+parseInt(Math.random()*1e3); document.write('<div id="'+t+'" class="yengo-block yengo-block-'+e+'"></div>'); if("undefined"===typeof loaded_blocks_yengo){loaded_blocks_yengo=[]; function n(){var e=loaded_blocks_yengo.shift(); var t=e.adp_id; var r=e.div; var i=document.createElement("script"); i.type="text/javascript"; i.async=true; i.charset="windows-1251"; i.src="//code.yengo.com/data/"+t+".js?async=1&div="+r+"&t="+Math.random(); var s=document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]; s.appendChild(i); var o=setInterval(function(){if(document.getElementById(r).innerHTML&&loaded_blocks_yengo.length){n(); clearInterval(o)}},50)} setTimeout(n)}loaded_blocks_yengo.push({adp_id:e,div:t})})(146357)</script>*/?></div>
+<div class="bn-native" style="width:100%"><?php echo getyengo(146357,false)  /*<script>(function(e){var t="DIV_YNG_"+e+"_"+parseInt(Math.random()*1e3); document.write('<div id="'+t+'" class="yengo-block yengo-block-'+e+'"></div>'); if("undefined"===typeof loaded_blocks_yengo){loaded_blocks_yengo=[]; function n(){var e=loaded_blocks_yengo.shift(); var t=e.adp_id; var r=e.div; var i=document.createElement("script"); i.type="text/javascript"; i.async=true; i.charset="windows-1251"; i.src="//code.yengo.com/data/"+t+".js?async=1&div="+r+"&t="+Math.random(); var s=document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]; s.appendChild(i); var o=setInterval(function(){if(document.getElementById(r).innerHTML&&loaded_blocks_yengo.length){n(); clearInterval(o)}},50)} setTimeout(n)}loaded_blocks_yengo.push({adp_id:e,div:t})})(146357)</script>*/?></div>
 <?php endif?>
 </article>
 <aside class="col-md-3">
+  <?php
+  /*
+  $all=intval($this->news['is'])+intval($this->news['do']);
+  if($all>0):
+    $stats=[];
+    $stats['is']=['t'=>'Instant','b'=>'success','c'=>number_format((intval($this->news['is'])/$all)*100,2)];
+    //$stats['do']=['t'=>'','c'=>number_format((intval($this->news['do'])/$all)*100,2)];
+    $stats['mb']=['t'=>'Mobile','b'=>'info','c'=>number_format((intval($this->news['mb'])/$all)*100,2)];
+    $stats['tb']=['t'=>'Tablet','b'=>'warning','c'=>number_format((intval($this->news['tb'])/$all)*100,2)];
+    $stats['dt']=['t'=>'Desktop','b'=>'danger','c'=>number_format((intval($this->news['dt'])/$all)*100,2)];
+  ?>
+  <style>
+  .-bar-stats{border-bottom:1px solid #f0f0f0;margin-bottom:5px;}
+  .-bar-stats>span{display:block;float:left;width:60px;}
+  .-bar-stats>div{margin-left:65px;margin-bottom:5px;}
+  </style>
+  <h3 class="bar-heading">สถิติ</h3>
+  <div>
+    <div class="-bar-stats"><span>อ่าน</span><div class="text-right"><?php echo number_format($all)?></div></div>
+    <?php foreach ($stats as $k=>$v):?>
+    <div class="-bar-stats"><span><?php echo $v['t']?></span>
+      <div class="progress">
+        <div class="progress-bar progress-bar-striped progress-bar-<?php echo $v['b']?> active" role="progressbar" aria-valuenow="<?php echo $v['c']?>" aria-valuemin="0" aria-valuemax="100" style="min-width:40px;width:<?php echo $v['c']?>%"><?php echo $v['c']?>%</div>
+      </div>
+    </div>
+    <?php endforeach?>
+  </div>
+  <?php endif */?>
   <h3 class="bar-heading">ข่าวใกล้เคียง</h3>
   <div class="row news-bottom3 clear-line">
   <?php $loaded=false;for($i=0;$i<count($this->relate);$i++):$v2=$this->relate[$i];?>

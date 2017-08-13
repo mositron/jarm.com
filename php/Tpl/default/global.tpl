@@ -39,9 +39,9 @@
 <link rel="icon" type="image/png" sizes="16x16" href="<?php echo FILES_CDN?>img/favicon/favicon-16x16.png">
 <link rel="icon" type="image/x-icon" href="<?php echo FILES_CDN?>img/favicon/favicon.ico" />
 <link rel="manifest" href="<?php echo FILES_CDN?>img/favicon/manifest.json">
-<meta name="msapplication-TileColor" content="#FFFFFF">
+<meta name="msapplication-TileColor" content="#52BBC3">
 <meta name="msapplication-TileImage" content="<?php echo FILES_CDN?>img/favicon/ms-icon-144x144.png">
-<meta name="theme-color" content="#FFFFFF">
+<meta name="theme-color" content="#52BBC3">
 <link rel="alternate" type="application/rss+xml" title="<?php echo $this->data['feed']['title']?>" href="<?php echo $this->data['feed']['url']?>" />
 <script type="text/javascript" src="<?php echo FILES_CDN?>js/jarm-all.js"></script>
 <!--[if lt IE 9]>
@@ -138,7 +138,7 @@ fbq('track', '<?php echo $this->data['pixel']??'PageView'?>');
 <!-- End Facebook Pixel Code -->
 <script>$(document).ready(function(){setTimeout(function(){$('#_pgb').css('display','none');},10);});</script>
 </head>
-<body class="body-<?php echo $name=strtolower(self::$sub)?> body-<?php echo $name?>-<?php echo self::$path[0]??'home'?><?php echo $this->data['sc-bottom']?' body-sc-bottom':''?>"><div id="_pgb"><div><p></p><p></p><p></p></div></div>
+<body class="body-<?php echo $name=strtolower(self::$sub)?> body-<?php echo $name?>-<?php echo self::$path[0]??'home'?><?php echo $this->data['sc-bottom']?' body-sc-bottom':''?> theme-blue"><div id="_pgb"><div><p></p><p></p><p></p></div></div>
 <noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=723126181102933&ev=<?php echo $this->data['pixel']??'PageView'?>&noscript=1" /></noscript>
 <div id="wrap">
   <div id="nav-slide">
@@ -199,8 +199,8 @@ fbq('track', '<?php echo $this->data['pixel']??'PageView'?>');
     <div class="-bottom"></div>
   </div>
   <div id="navbar-header" class="navbar-fixed-top">
-    <!--style>body{padding-top: 0px;}#navbar-header{margin-bottom:10px;}</style>
-    <div style="background:#62C1ED;text-align:center"><img src="https://static.jarm.com/img/global/mom-day.jpg" class="img-responsive" style="margin:0px auto;"></div-->
+    <!--style>#wrap{padding-top: 0px;}#navbar-header{position:static;}#_pgb{top:0px;}</style>
+    <div style="background:#CBA739;text-align:center"><img src="https://cdn.jarm.com/img/global/dad-day.jpg" class="img-responsive" style="margin:0px auto;"></div!-->
     <div class="container">
       <button type="button" class="navbar-toggle collapsed">
         <span class="icon-bar icon-bar-top"></span>

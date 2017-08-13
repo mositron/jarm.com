@@ -28,6 +28,7 @@
    </ul>
 
 <?php foreach($this->writer as $k=>$v):?>
+<a name="u<?php echo $v['profile']['_id']?>"></a>
 <h3><a target="_blank" href="https://jarm.com/user/<?php echo $v['profile']['_id']?>"><img src="<?php echo $v['profile']['img']?>" style="width:32px;"> <?php echo $v['profile']['name']?></a><small> - <?php echo count($v['news'])?> บทความ</small></h3>
 <table class="table">
 <?php for($i=0;$i<count($v['news']);$i++):?>

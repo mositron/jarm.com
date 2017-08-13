@@ -76,7 +76,6 @@ class News_Upload
               {
                 Load::Upload()->post($parent->news['sv'],'watermark','news/'.$parent->news['fd'].'/'.$q['data']['n'],['watermark'=>'news/watermark2.png']);
               }
-              //Load::Photo()->thumb(time(),$f,'news/'.$parent->news['fd'],600,1000,'inboth','jpg');
             }
           }
         }

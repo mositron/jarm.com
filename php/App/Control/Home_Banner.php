@@ -6,6 +6,7 @@ class Home_Banner extends Service
 {
   public function _home_banner()
   {
+    Load::$core->data['title']='แบนเนอร์หน้าแรก - '.Load::$core->data['title'];
     $access=$this->check_perm('home-banner',1);
     $position=['img'=>'TALK OF THE TOWN','bottom'=>'เรื่องเด่น ประเด็นร้อน'];
     Load::$core->assign('position',$position);

@@ -13,13 +13,16 @@ if($_POST['file'])
       {
         if(preg_match("/([a-zA-Z0-9_\-]+)\.(jpg|gif)$/iU",$dir,$path)&&!in_array($dir,['s.jpg','t.jpg']))
         {
-          array_push($icon,$path[1].'.'.$path[2]);
+          $file=['n'=>$path[1].'.'.$path[2]];
+          $size=getimagesize($tmp.$file['n']);
+          $file['w']=$size[0];
+          $file['h']=$size[1];
+          array_push($icon,$file);
         }
       }
       closedir($dh);
     }
   }
-  rsort($icon);
   $status=['status'=>'OK','data'=>$icon];
 }
 else

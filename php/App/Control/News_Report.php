@@ -35,8 +35,9 @@ class News_Report
 
     $u=[];
 
+    Load::$core->data['title']='ข่าว - รายงานการเขียนข่าว - '.Load::$core->data['title'];
     $user=Load::User();
-    $news=(new \Jarm\App\News\Service(['ignore'=>1]))->find(['da'=>['$gte'=>Load::Time()->from($dfrom),'$lte'=>Load::Time()->from($dto)]],['wt'=>1],['limit'=>1000]);
+    $news=(new \Jarm\App\News\Service(['ignore'=>1]))->find(['pl'=>['$in'=>[1,2]],'da'=>['$gte'=>Load::Time()->from($dfrom),'$lte'=>Load::Time()->from($dto)]],['wt'=>1],['limit'=>1000]);
     for($i=0;$i<count($news);$i++)
     {
       $n=$news[$i];

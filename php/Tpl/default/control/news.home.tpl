@@ -79,13 +79,12 @@ function cdel(i){_.box.confirm({title:'ลบประกาศ',detail:'คุ�
   <span class="divider">&raquo;</span>
   <li><a href="/news/c-<?php echo $this->cp[0]?>_<?php echo $this->cp[1]?>_<?php echo $this->cp[2]?>"><?php echo self::$conf['news'][$this->cp[0]]['s'][$this->cp[1]]['s'][$this->cp[2]]['t']?></a></li>
    <?php endif?>
-  <li class="pull-right"><a href="/news/topnews">รายงานยอดการอ่านข่าวประจำวัน</a></li>
-  <li class="pull-right"><a href="/news/report">รายงานการเขียนข่าวประจำวัน</a></li>
+  <li class="pull-right"><a href="/news/view-day">อ่านข่าวประจำวัน</a></li>
+  <li class="pull-right"><a href="/news/report">เขียนข่าวประจำวัน</a></li>
   <li class="pull-right"><a href="javascript:;" onClick="_.box.open('#newnews')"><span class="glyphicon glyphicon-plus"></span> เพิ่มข่าวใหม่</a></li>
 </ul>
 
-<div class="row">
-<div class="col-md-10">
+
 <table class="table">
 <tr><th>รูปภาพ</th><!--th>ต้องการ</th--><th>รายละเอียด</th><th>ผู้ชม</th><th></th></tr>
 <?php $last=time()-(3600*24*EXPIRE_NEWS);for($i=0;$i<count($this->news);$i++):?>
@@ -104,7 +103,10 @@ function cdel(i){_.box.confirm({title:'ลบประกาศ',detail:'คุ�
   <em style="padding:2px;margin: -15px 0px 0px;font-size:9px;display: block;height: 20px;line-height: 20px;opacity:0.7"><?php echo number_format($this->news[$i]['do'])?> / <?php echo number_format($this->news[$i]['is'])?></em>
 </span>
 <?php elseif($this->news[$i]['pl']==2):?>
-<span class="label label-info"><?php echo number_format($this->news[$i]['do'])?></span>
+  <span class="label label-info" style="line-height:40px;">
+    <?php echo number_format($this->news[$i]['do']+$this->news[$i]['is'])?><br>
+    <em style="padding:2px;margin: -15px 0px 0px;font-size:9px;display: block;height: 20px;line-height: 20px;opacity:0.7"><?php echo number_format($this->news[$i]['do'])?> / <?php echo number_format($this->news[$i]['is'])?></em>
+  </span>
 <?php elseif(!empty($this->news[$i]['wt'])):?>
 <span class="label label-warning">รอตรวจสอบ</span>
 <?php else:?>
@@ -117,7 +119,9 @@ function cdel(i){_.box.confirm({title:'ลบประกาศ',detail:'คุ�
 <?php if($this->news[$i]['do']>0):?>
 <a href="/news/stats/<?php echo $this->news[$i]['_id']?>" class="btn btn-default"><span class="glyphicon glyphicon-stats"></span><br>สถิติ</a>
 <?php endif?>
+<?php if($this->news[$i]['pl']):?>
 <a href="javascript:;" onClick="instant(<?php echo $this->news[$i]['_id']?>)" class="btn btn-default"><span class="glyphicon glyphicon-open"></span><br>Instant</a>
+<?php endif?>
 <?php if(self::Time()->sec($this->news[$i]['da'])<$last):?>
 <a href="javascript:;" class="btn btn-disabled"><span class="glyphicon glyphicon-remove-sign"></span><br>หมดเวลาแก้ไข</a>
 <?php else:?>
@@ -137,10 +141,8 @@ function cdel(i){_.box.confirm({title:'ลบประกาศ',detail:'คุ�
 <?php endif?>
 </table>
 <div align="center"><?php echo $this->pager?></div>
-</div>
-<div class="col-md-2 hidden-xs hidden-sm">
 
-
+<?php if(!self::$path[1]):?>
 <style>
 .trends{margin-bottom:10px;}
 .trends > div{ padding:3px; border-bottom:1px solid #f0f0f0;}
@@ -151,9 +153,10 @@ function cdel(i){_.box.confirm({title:'ลบประกาศ',detail:'คุ�
 </style>
 <?php if(is_array($this->trends)):?>
 <h3 class="bar-heading" style="background:#f4f4f4; padding-left:5px;"><span class="glyphicon glyphicon-signal"></span> กระแสวันนี้</h3>
+<div class="row clear-line">
 <?php foreach($this->trends as $k=>$v):?>
+  <div class="col-md-4 col-lg-3">
 <div class="bar-heading"><?php echo self::Time()->from($k.' 00:00:00','date')?></div>
-
 <div class="trends">
 <?php if(is_array($v)):?>
 <?php foreach($v as $k2=>$v2):?>
@@ -165,8 +168,8 @@ function cdel(i){_.box.confirm({title:'ลบประกาศ',detail:'คุ�
 <?php endforeach?>
 <?php endif?>
 </div>
+</div>
 <?php endforeach?>
+</div>
 <?php endif?>
-
-</div>
-</div>
+<?php endif?>

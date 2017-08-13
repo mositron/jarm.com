@@ -5,8 +5,7 @@ use Jarm\App\Container;
 
 class Service extends Container
 {
-  //public static $arg_list=['_id'=>1,'t'=>1,'fd'=>1,'da'=>1,'ds'=>1,'di'=>1,'do'=>1,'c'=>1,'cs'=>1,'exl'=>1,'url'=>1,'sv'=>1];
-  public static $arg_view=['_id'=>1,'t'=>1,'fd'=>1,'da'=>1,'ds'=>1,'di'=>1,'do'=>1,'c'=>1,'cs'=>1,'cs2'=>1,'d'=>1,'sv'=>1,'u'=>1,'exl'=>1,'url'=>1,'tags'=>1,'sh'=>1];
+  public static $arg_view=['_id'=>1,'t'=>1,'fd'=>1,'da'=>1,'ds'=>1,'di'=>1,'do'=>1,'is'=>1,'mb'=>1,'dt'=>1,'tb'=>1,'c'=>1,'cs'=>1,'cs2'=>1,'na'=>1,'d'=>1,'sv'=>1,'u'=>1,'exl'=>1,'url'=>1,'tags'=>1,'sh'=>1];
 
   public function __construct(array $arg=[])
   {
@@ -79,7 +78,7 @@ class Service extends Container
       exit;
     }
     Load::cache();
-    Load::$core->data['stats']='news:'.$id.':is';
+    Load::$core->data['stats']='news:'.$id.':is:'.intval(Load::$path[2]);
     Load::$core->data['echo']='/* stats */';
   }
 
@@ -187,12 +186,12 @@ class Service extends Container
     }
     if($news['exl'])
     {
-      return ['move'=>$news['url'],'stats'=>'news:'.$news['_id'].':do'];
+      return ['move'=>$news['url'],'stats'=>'news:'.$news['_id'].':do:'.$news['u']];
     }
     $news=$this->fetch($news);
     $user=Load::User()->get($news['u']);
     $ctitle=(array)$news['tags'];
-    Load::$core->data['stats']='news:'.$news['_id'].':do';
+    Load::$core->data['stats']='news:'.$news['_id'].':do:'.$news['u'];
     Load::$core->data['title']=$news['t'];
     Load::$core->data['description']=$news['t'].' - '.Load::$conf['news'][$news['c']]['t'].' '.implode(' ',$ctitle).' ข่าวล่าสุด ข่าววันนี้ ข่าวด่วน ข่าวเด่น';
     Load::$core->data['keywords']=implode(', ',$ctitle).','.Load::$conf['news'][$news['c']]['t'];

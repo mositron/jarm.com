@@ -21,7 +21,7 @@ class News_Update
     }
     $parent->news=(new \Jarm\App\News\Service(['ignore'=>1]))->fetch($parent->news);
     $parent->news['sv']=Load::getServ($parent->news['sv']);
-    Load::$core->data['title']='Admin - แก้ไข: '.$parent->news['t'];
+    Load::$core->data['title']='ข่าว - แก้ไข: '.$parent->news['t'];
     if((Load::Time()->sec($parent->news['da'])<time()-(3600*24*7)) && ($parent->news['c']!=12))
     {
       #Load::move('/news');

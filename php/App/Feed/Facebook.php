@@ -116,7 +116,7 @@ class Facebook
         $author=Load::User()->get($v['u']);
         $data[]=[
           'guid'=>'jarm.news.'.$v['_id'],
-          'stats'=>Load::uri(['news','/stats/'.$v['_id']]),
+          'stats'=>Load::uri(['news','/stats/'.$v['_id'].'/'.$v['u']]),
           'page'=>'fb:'.$page[1],
           'title'=>$v['t'],
           'content'=>$ct,
@@ -187,7 +187,7 @@ class Facebook
   <figure><a href="https://www.facebook.com/simdaijai" target="_blank" ref="nofollow"><img src="https://cdn.jarm.com/img/misc/simdaijai.jpg"></a></figure>
   <p><a href="https://www.facebook.com/simdaijai" target="_blank" ref="nofollow">
   ซิมถูก โทรฟรี เน็ตไม่อั้น ไม่ลดสปีด เฉลี่ยวันละ 3 บ. นิดๆ ถูกกว่านี้ไม่มีแล้ว จำนวนจำกัด !!!</a></p>
-  <p>+ ราคา 399 บ. / ใช้งานได้ 4 เดือน (หมด)</p>
+  <p>+ ราคา 399 บ. / ใช้งานได้ 4 เดือน (มาเพิ่มแล้ว จำนวนจำกัด!!)</p>
   <p>+ ราคา 799 บ. / ใช้งานได้ 8 เดือน (เหลือน้อย)</p>
   <p>+ ราคา 1,199 บ. / ใช้งานได้ 12 เดือน</p>
   <p>+ ราคา 1,999 บ. / ใช้งานได้ 20 เดือน</p>

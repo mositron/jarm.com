@@ -145,9 +145,10 @@ class Service extends Container
         $db=Load::DB();
         $fields=Load::User()->fields;
         $fields['pw']=1;
+        $fields['ps']=1;
         if($u=$db->findOne('user',['em'=>strtolower(trim($_POST['email']))],$fields))
         {
-          if($u['pw']==md5(md5($_POST['password'])))
+          if($u['pw']==md5(md5($_POST['password']).strval($u['ps'])))
           {
             $u['aways']=intval($_POST['aways']);
             unset($u['pw']);

@@ -22,10 +22,10 @@
 <ul class="breadcrumb" style="margin-bottom:5px;">
   <li><a href="/" title="ควบคุม"><span class="glyphicon glyphicon-home"></span> ควบคุม</a></li>
   <span class="divider">&raquo;</span>
-   <li><a href="/news">จัดการข่าว</a></li>
-   <span class="divider">&raquo;</span>
-   <li><a href="/news/topnews/<?php echo self::$path[1]?>">ข่าวประจำวันที่ <?php echo self::Time()->from($this->dfrom,'date')?></a></li>
-   </ul>
+  <li><a href="/news">จัดการข่าว</a></li>
+  <span class="divider">&raquo;</span>
+  <li><a href="/news/view-day/<?php echo self::$path[1]?>">อ่านข่าวประจำวันที่ <?php echo self::Time()->from($this->dfrom,'date')?></a></li>
+</ul>
 <table class="table">
 <?php for($i=0;$i<count($this->news);$i++):$v=$this->news[$i]?>
 <?php $l=$v['link'];?>
@@ -48,13 +48,13 @@
 <h4 style="margin:0px 0px 5px 5px; background:#f0f0f0; height:24px; line-height:24px; text-align:center;">ประจำวัน</h4>
 <div class="nav-clist">
 <ul>
-<li><a href="/news/topnews"><?php echo self::Time()->day[date('w')]?> - วันนี้</a></li>
+<li><a href="/news/view-day"><?php echo self::Time()->day[date('w')]?> - วันนี้</a></li>
 <?php
 $now=time();
 for($i=0;$i<31;$i++):
 $now-=(3600*24);
 ?>
-<li><a href="/news/topnews/<?php echo date('Y-m-d',$now)?>"><?php echo self::Time()->day[date('w',$now)]?> - <?php echo self::Time()->from($now,'date')?></a></li>
+<li><a href="/news/view-day/<?php echo date('Y-m-d',$now)?>"><?php echo self::Time()->day[date('w',$now)]?> - <?php echo self::Time()->from($now,'date')?></a></li>
 <?php endfor?>
 </ul>
 </div>

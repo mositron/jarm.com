@@ -1,12 +1,12 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<title>ยืนยันการขอเปลี่ยนรหัสผ่าน - Jarm โซเชียลเน็ทเวิร์คสัญชาติไทย</title>
+<title>ยืนยันการขอเปลี่ยนรหัสผ่าน - Jarm.com</title>
 </head>
 <body style="background:#fff; text-align:center; padding:20px;font-family:Tahoma;font-size:12px; color:#333; text-decoration:none">
 <div align="center">
 <div style="width:700px; padding:10px;border:1px solid #CCCCCC;background:#FFFFFF; text-align:left; color:#333;">
-<h1 style="color:#0399BE; text-decoration:none;padding:5px; margin:5px; font-size:18px">Jarm - โซเชียลเน็ทเวิร์คสัญชาติไทย</h1>
+<h1 style="color:#0399BE; text-decoration:none;padding:5px; margin:5px; font-size:18px">Jarm.com</h1>
 <div style="border:1px dashed #CCCCCC; background:#FFFFFF; padding:3px; color:#333">
 <h2 align="center" style="color:#000000; font-size:16px;">ยืนยันการขอเปลี่ยนรหัสผ่าน</h2>
 <div style="border:1px dashed #CCCCCC; background:#f9f9f9; padding:10px;">

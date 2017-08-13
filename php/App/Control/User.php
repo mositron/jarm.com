@@ -11,6 +11,7 @@ class User extends Service
       Load::Ajax()->register(['setadmin','setban'],$this);
     }
     $db=Load::DB();
+    Load::$core->data['title']='ผู้ดูแล - '.Load::$core->data['title'];
     $arg = ['$or'=>[['am'=>['$gte'=>1]],['em'=>new \MongoDB\BSON\Regex("\@inet\-rev\.co\.th","i")]]];
     $admin=$db->find('user',$arg,['_id'=>1,'if.am'=>1,'am'=>1,'du'=>1,'em'=>1,'st'=>1],['sort'=>['am'=>-1,'du'=>-1]]);
     $active=[];

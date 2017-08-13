@@ -6,6 +6,7 @@ class Live extends Service
 {
   public function get_live()
   {
+    Load::$core->data['title']='เครื่องมือ Live - '.Load::$core->data['title'];
     $page=[
       'jarm'=>['t'=>'Jarm.com - จาม.com','id'=>'229722963822965'],
       'racing'=>['t'=>'BoxZa Racing','id'=>'130579630466464']

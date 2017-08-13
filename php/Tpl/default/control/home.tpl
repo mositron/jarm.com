@@ -1,12 +1,10 @@
 <style>
-
-
 .ipie{margin:0 auto 10px;text-align:center;display:table;vertical-align:middle;font-size:20px;}
 .ipie .piesite{display:inline-block;vertical-align:middle;position:relative;width:1em;height:1em;font-size:6em;margin:0px 10px;cursor:default;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing: border-box;}
 .ipie .percent{position:absolute;top:1.1em;left:0;width:100%;font-size:.3em;text-align:center;z-index:2}
 .ipie .piesite>#slice{position:absolute;width:1em;height:1em;clip:rect(0px,1em,1em,0.5em)}
 .ipie .piesite>#slice.gt50{clip:rect(auto,auto,auto,auto)}
-.ipie .piesite>#slice>.pie{position:absolute;border:.1em solid #444;width:.8em;height:.8em;clip:rect(0em,0.5em,1em,0em);border-radius:.5em;box-sizing:content-box;}
+.ipie .piesite>#slice>.pie{position:absolute;border:.1em solid #444;width:.8em;height:.8em;clip:rect(0em,0.5em,1em,0em);border-radius:.5em;box-sizing:content-box;transition:all 0.1s linear;}
 .ipie .piesite.red>#slice>.pie{border-color:#df6c4f}
 .ipie .piesite.green>#slice>.pie{border-color:#3c948b}
 .ipie .piesite.yellow>#slice>.pie{border-color:#ecd06f}
@@ -25,9 +23,6 @@
 .ipie .piesite.purple:before{background:#c58be5}
 .ipie .piesite.orange:before{background:#edb48e}
 .ipie .piesite.pink:before{background:#ed8ed3}
-
-
-
 
 .table thead tr th{text-align:center;}
 .table tbody tr td.c{text-align:center;}
@@ -280,10 +275,10 @@ $(function(){
   },600);
 
   setTimeout(function(){
-    sec = 5;
+    sec = 1;
     _finish = new Date().getTime()+(sec*1000);
     $(".piesite").each(function(a) {
-      _timer[a] = setInterval("stoppie("+a+", " +$("#pie_"+a).data("pie")+ "," +$("#pie_"+a).data("maxpie")+ ")", 100)
+      _timer[a] = setInterval("stoppie("+a+", " +$("#pie_"+a).data("pie")+ "," +$("#pie_"+a).data("maxpie")+ ")",100)
     });
   },1000);
 });

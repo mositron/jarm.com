@@ -4,7 +4,7 @@
 |     Jarm - for PHP 7.1
 |
 |     https://jarm.com
-|     positron@jarm.comm
+|     positron@jarm.com
 |
 |     $Revision: 3.1.0 $
 |     $Date: 2017/06/27 12:58:00 $
@@ -77,7 +77,7 @@ class Load
   public static $request;
 
   /**
-  * ใช้แทน __construct เพื่อเก็บค่า Load::$core
+  * ใช้แทน __construct เพื่อเก็บค่า self::$core
   * @param array $data ค่าเริ่มต้นของแอพ
   * @return Object $this
   */
@@ -112,7 +112,7 @@ class Load
   /**
   * Magic
   * call class in Jarm\Core namespace
-  * example: Load::DB() - new Jarm\Core\DB()
+  * example: self::DB() - new Jarm\Core\DB()
   * @param string $c is class name
   * @param string|array $n is variable for assign to __construct
   * @return Object
@@ -239,34 +239,34 @@ class Load
 
     // key for cache file
     // auto-gen by url
-    $data=(self::$request=='get'?$this->get(strtolower(HOST.'/'.$path.'/'.implode('/',array_slice(self::$path,1))),$func):$func());
-    if($data['stats'])
+    $this->data=(self::$request=='get'?$this->get(strtolower(HOST.'/'.$path.'/'.implode('/',array_slice(self::$path,1))),$func):$func());
+    if($this->data['stats'])
     {
-      $this->stats($data['stats']);
+      $this->stats($this->data['stats']);
     }
-    if(isset($data['move']))
+    if(isset($this->data['move']))
     {
-      self::move($data['move']);
+      self::move($this->data['move']);
     }
-    if(self::$request=='get' || !empty($data['content']))
+    if(self::$request=='get' || !empty($this->data['content']))
     {
-      if(!empty($data['content']))
+      if(!empty($this->data['content']))
       {
         if(defined('HASH'))
         {
           while(@ob_end_clean());
           header('Content-type:application/json');
-          echo json_encode(['title'=>$data['title'],'content'=>$data['content'],'div_row'=>$data['div_row'],'nav-header'=>$data['nav-header']]);
+          echo json_encode(['title'=>$this->data['title'],'content'=>$this->data['content'],'div_row'=>$this->data['div_row'],'nav-header'=>$this->data['nav-header']]);
           exit;
         }
         else
         {
-          echo $this->assign('data',$data)->fetch('global',true);
+          echo $this->assign('data',$this->data)->fetch('global',true);
         }
       }
-      if(!empty($data['echo']))
+      if(!empty($this->data['echo']))
       {
-        echo $data['echo'];
+        echo $this->data['echo'];
         exit;
       }
       return $this;
@@ -442,15 +442,8 @@ class Load
   public function fetch(string $f)
   {
     ob_start();
-    /*
-    if($_GET['theme'] && file_exists($fl=__TPL.$_GET['theme'].'/'.$f.'.tpl'))
-    {
-      include($fl);
-    }
-    else
-    {*/
-      include(__TPL.self::$conf['theme'].'/'.$f.'.tpl');
-    //}
+    include(__TPL.self::$conf['theme'].'/'.$f.'.tpl');
+    //include(__TPL.$f.'.tpl');
     return ob_get_clean();
   }
 
@@ -557,16 +550,19 @@ class Load
   */
   public function stats(string $key='')
   {
-    list($type,$id,$view)=explode(':',$key);
+    list($type,$id,$view,$user)=explode(':',$key);
     $cur=0;
+    //echo '1111111111111';
     if(stripos($_SERVER['HTTP_USER_AGENT'], 'facebookexternalhit') !== false)
     {
-      if(Load::$core->data['image_cache'])
+      //echo '22222222222222';
+      if($this->data['image_cache'])
        {
-        Load::$core->data['image']=Load::$core->data['image_cache'];
+        $this->data['image']=$this->data['image_cache'];
+        //echo '3333333333333';
        }
      }
-    if(!Load::$my || !Load::$my['am'])
+    if(!self::$my || !self::$my['am'])
     {
        if(stripos($_SERVER['HTTP_USER_AGENT'], 'bot') === false )
        {
@@ -574,10 +570,14 @@ class Load
         if(file_exists(_FILES.$file))
         {
           $log=unserialize(file_get_contents(_FILES.$file));
+          if(!$log['u'])
+          {
+            $log['u']=intval($user);
+          }
         }
         else
         {
-          $log=['do'=>0,'is'=>0,'mb'=>0,'tb'=>0,'dt'=>0];
+          $log=['do'=>0,'is'=>0,'mb'=>0,'tb'=>0,'dt'=>0,'u'=>intval($user)];
         }
         if($view=='do')
         {
@@ -604,7 +604,7 @@ class Load
           $log[$view]=1;
         }
         $cur = $log[$view];
-        Load::Folder()->save($file,serialize($log));
+        self::Folder()->save($file,serialize($log));
       }
     }
   }

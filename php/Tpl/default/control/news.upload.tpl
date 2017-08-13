@@ -35,37 +35,21 @@ ul li a{float:left; padding:0px 10px; height:24px; line-height:24px; border:1px 
 img.img-t{max-width:100px; max-height:100px;}
 </style>
 <link rel="icon" type="image/x-icon" href="http://<?php echo HOST?>/favicon.ico">
-<script type="text/javascript" src="<?php echo FILES_CDN?>js/jquery/jquery-1.11.2.min.js"></script>
-<script type="text/javascript" src="<?php echo FILES_CDN?>js/jarm.js"></script>
+<!--script type="text/javascript" src="<?php echo FILES_CDN?>js/jquery/jquery-1.11.2.min.js"></script-->
+<script type="text/javascript" src="<?php echo FILES_CDN?>js/jarm-all.js"></script>
 </head>
 <body>
 <script type="text/javascript">
-var simg='';
-
-
-function selectf(img)
+var simg={};
+function selectf(img,w,h)
 {
 	if($('#sbutton').css('display')!='block')$('#sbutton').css({'display':'block'});
-	simg=img;
+	simg={'url':img,'w':w,'h':h};
 }
 function addfile()
 {
 	top.tinymce.activeEditor.windowManager.getParams().oninsert(simg,$('#addclose:checked').length);
 }
-
-/*
-var UploadDialog = {
-	init : function(ed){tinyMCEPopup.resizeToInnerSize();},
-	insert : function() {
-		var ed = tinyMCEPopup.editor, dom = ed.dom;
-			tinyMCEPopup.execCommand('mceInsertContent', false,  (simg.div?' <div>':'')+' '+dom.createHTML('img', {
-				src : simg.url,
-				title : simg.title
-						})+' '+(simg.div?'</div> ':''));
-		if($('#addclose:checked')[0])tinyMCEPopup.close();
-	}
-};
-*/
 </script>
 <table cellpadding="5" cellspacing="1" border="0" width="100%">
 <tr>

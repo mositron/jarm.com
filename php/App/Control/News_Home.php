@@ -31,7 +31,7 @@ class News_Home
     {
       $arg['u']=Load::$my['_id'];
     }
-    Load::$core->data['title']='Admin - หน้ารวมข่าว';
+    Load::$core->data['title']='ข่าว - หน้ารวมข่าว - '.Load::$core->data['title'];
     if(isset($c))
     {
       $arg['c']=intval($cp[0]);

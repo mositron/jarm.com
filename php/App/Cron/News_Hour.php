@@ -10,6 +10,49 @@ class News_Hour extends Service
     {
       echo $v.' - '.Load::Http()->get('http://'.$v.':82/news-hour.php').'<br>';
     }
+
+
+    $db=Load::DB();
+    $now_h=date('G');
+    $today=mktime(0,0,0);
+    $day=3600*24;
+
+    #for($i1=1;$i1<365;$i1++)
+    #{
+    #  $today-=$day;
+
+
+    if($now_h<6)
+    {
+      $d1=$today-$day;
+      $d2=$today;
+    }
+    else
+    {
+      $d1=$today;
+      $d2=$today+$day;
+    }
+    $n=$db->find('news',['dd'=>['$exists'=>false],'pl'=>['$in'=>[1,2]],'da'=>['$gte'=>Load::Time()->from($d1),'$lt'=>Load::Time()->from($d2)]],['u'=>1]);
+    $u=[];
+    for($i=0;$i<count($n);$i++)
+    {
+      $v=$n[$i];
+      if(!isset($u[$v['u']]))
+      {
+        $u[$v['u']]=0;
+      }
+      $u[$v['u']]++;
+    }
+
+    $cday=intval(date('Ymd',$d1));
+    if($db->findone('logs',['ty'=>'news','date'=>$cday]))
+    {
+      echo 1;
+      $db->update('logs',['ty'=>'news','date'=>$cday],['$set'=>['ur'=>$u,'urc'=>count($n)]]);
+    }
+      echo '2-'.$cday.'-';
+
+  #  }
 /*
     $db=Load::DB();
     if($last=$db->find('news_hour',[],['day'=>1],['sort'=>['_id'=>-1],'limit'=>1]))

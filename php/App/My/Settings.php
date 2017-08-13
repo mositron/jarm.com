@@ -265,7 +265,7 @@ class Settings extends Service
     elseif($arg['setting']=='password')
     {
       $len=mb_strlen(trim($arg['password_new']),'utf-8');
-      $u=$db->findOne('user',['_id'=>Load::$my['_id']],['pw'=>1]);
+      $u=$db->findOne('user',['_id'=>Load::$my['_id']],['pw'=>1,'ps'=>1]);
       if(trim($arg['password_new'])!=$arg['password_new'])
       {
         $ajax->alert('ไม่สามารถใช้งานรหัสผ่านนี้ได้');
@@ -278,13 +278,14 @@ class Settings extends Service
       {
         $ajax->alert('กรุณายืนยันรหัสผ่านให้ถูกต้อง');
       }
-      elseif(md5(md5($arg['password_old']))!=$u['pw'])
+      elseif(md5(md5($arg['password_old']).strval($u['ps']))!=$u['pw'])
       {
         $ajax->alert('รหัสผ่านเดิมไม่ถูกต้อง');
       }
       else
       {
-        $user->update(Load::$my['_id'],['$set'=>['pw'=>md5(md5($arg['password_new']))]]);
+        $ps=md5(rand(1000000,9999999));
+        $user->update(Load::$my['_id'],['$set'=>['ps'=>$ps,'pw'=>md5(md5($arg['password_new']).$ps)]]);
         $ajax->alert('แก้ไขรหัสผ่านเรียบร้อยแล้ว');
         $mail=Load::Mail();
         Load::$core->assign('pass',$arg['password_new']);
@@ -297,8 +298,8 @@ class Settings extends Service
     }
     elseif($arg['setting']=='delete')
     {
-      $u=$db->findOne('user',['_id'=>Load::$my['_id']],['pw'=>1]);
-      if(md5(md5($arg['password_old']))!=$u['pw'])
+      $u=$db->findOne('user',['_id'=>Load::$my['_id']],['pw'=>1,'ps'=>1]);
+      if(md5(md5($arg['password_old']).$u['ps'])!=$u['pw'])
       {
         $ajax->alert('รหัสผ่านไม่ถูกต้อง');
       }
@@ -310,12 +311,7 @@ class Settings extends Service
       {
         $db=Load::DB();
         Load::User()->update(Load::$my['_id'],['$set'=>['st'=>2]]);
-
-        $db->update('video',['u'=>Load::$my['_id']],['$set'=>['dd'=>Load::Time()->now()]],['multiple'=>true]);
-        $db->update('forum',['u'=>Load::$my['_id']],['$set'=>['dd'=>Load::Time()->now()]],['multiple'=>true]);
-
         $db->update('user',[],['$pull'=>['ct.ig'=>Load::$my['_id'],'ct.bl'=>Load::$my['_id'],'ct.bl2'=>Load::$my['_id'],'ct.fr'=>Load::$my['_id'],'ct.fq'=>Load::$my['_id']]],['multiple'=>true]);
-
         $ajax->redirect(['oauth','/logout']);
       }
     }

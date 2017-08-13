@@ -27,6 +27,7 @@ class Banner extends Service
 
   public function _banner()
   {
+    Load::$core->data['title']='แบนเนอร์ทั้งหมด - '.Load::$core->data['title'];
     $access=$this->check_perm_ads();
     $position=[
       'car'=>['t'=>'autocar.in.th - Car','l'=>['a','b','c','d','e','f','h','i','b1','b2']],

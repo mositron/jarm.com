@@ -32,6 +32,7 @@ if($_FILES['file'])
       exec($cmd.' -resize 200x200\>'.$quality.' '.UPLOAD_PATH.'image/'.$folder.'/s.'.$type,$outt);
       exec($cmd.' -resize 600x10240\>'.$quality.' '.UPLOAD_PATH.'image/'.$folder.'/m.'.$type,$outl);
       exec($cmd.$quality.' '.UPLOAD_PATH.'image/'.$folder.'/o.'.$type,$outl);
+
       /*
       $cmd = '/usr/bin/convert '.UPLOAD_PATH.'image/'.$folder.'/';
       if($type=='jpg')

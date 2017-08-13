@@ -20,6 +20,7 @@ class Lotto extends Service
 
   public function lotto_home()
   {
+    Load::$core->data['title']='ตรวจหวย - '.Load::$core->data['title'];
     Load::Ajax()->register(['dellotto','newlotto']);
     $db=Load::DB();
     extract(Load::Split()->get('/lotto/',1,['page']));

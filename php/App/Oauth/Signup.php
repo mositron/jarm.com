@@ -108,6 +108,7 @@ class Signup extends Service
     }
     if(!count($error))
     {
+      $ps=md5(rand(1000000,9999999));
       $insert=[
         'if'=>[
           'fn'=>trim($arg['firstname']),
@@ -122,11 +123,11 @@ class Signup extends Service
           'fl'=>0
         ],
         'em'=>$arg['email'],
-        'pw'=>md5(md5($arg['password'])),
+        'ps'=>$ps,
+        'pw'=>md5(md5($arg['password']).$ps),
         'ip'=>$_SERVER['REMOTE_ADDR'],
+        'st'=>($arg['status']?1:0)
       ];
-      //$insert['em']=strtolower($insert['em']);
-      $insert['st'] = ($arg['status']?1:0);
       if($arg['fbid'])
       {
         $insert['sc'] = ['fb'=>['id'=>$arg['fbid'],'token'=>$fbtoken]];

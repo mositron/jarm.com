@@ -33,11 +33,18 @@ for($i=0;$i<count($day);$i++)
           $log2=(array)unserialize(file_get_contents($inf.$day[$i].'/'.$hour[$j].'/'.$news[$k].'/'.$imp[$m]));
           foreach($log2 as $kl=>$vl)
           {
-            if(!isset($log[$kl]))
+            if($kl=='u')
             {
-              $log[$kl]=0;
+              $log['u']=intval($vl);
             }
-            $log[$kl]+=$vl;
+            else
+            {
+              if(!isset($log[$kl]))
+              {
+                $log[$kl]=0;
+              }
+              $log[$kl]+=$vl;
+            }
           }
         }
         $all=intval($log['do'])+intval($log['is']);
@@ -60,20 +67,29 @@ for($i=0;$i<count($day);$i++)
         ]]);
         if($db->findone('logs',['ty'=>'news','date'=>$cday]))
         {
-          $db->update('logs',['ty'=>'news','date'=>$cday],['$inc'=>[
+          $inc=[
             'do'=>intval($log['do']),
             'is'=>intval($log['is']),
             'mb'=>intval($log['mb']),
             'tb'=>intval($log['tb']),
             'dt'=>intval($log['dt']),
-            'hour.'.intval($hour[$j])=>$all]
-          ]);
+            'hour.'.intval($hour[$j])=>$all];
+          if($log['u'])
+          {
+            $inc['u.'.$log['u']]=$all;
+          }
+          $db->update('logs',['ty'=>'news','date'=>$cday],['$inc'=>$inc]);
         }
         else
         {
           $log['ty']='news';
           $log['date']=$cday;
           $log['hour']=[strval(intval($hour[$j]))=>$all];
+          if($log['u'])
+          {
+            $log['u.'.$log['u']]=$all;
+            unset($log['u']);
+          }
           $db->insert('logs',$log);
         }
         $folder->clean('bin/news-view/'.$day[$i].'/'.$hour[$j].'/'.$news[$k]);
