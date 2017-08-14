@@ -158,6 +158,12 @@ class Load
         }
         self::$sub='';
       }
+      elseif(isset($map['*']))
+      {
+        // default app for wildcard sub-domains
+        self::$map=$map['*'];
+        return $this;
+      }
       else
       {
         self::$sub=(array_slice(explode('.',self::$sub),-1)[0]);
@@ -288,11 +294,11 @@ class Load
     {
       echo ($i+1).' - '.str_replace(ROOT,'/',$f[$i])."\n";
     }
-    echo 'memory (real): '.number_format(memory_get_usage(true)/1048576,3).' MB'."\n".
-    'memory (emalloc): '.number_format(memory_get_usage(false)/1048576,3).' MB'."\n".
-    'memory peak (real): '.number_format(memory_get_peak_usage(true)/1048576,3).' MB'."\n".
-    'memory peak (emalloc): '.number_format(memory_get_peak_usage(false)/1048576,3).' MB'."\n".
-    'time: '.number_format((microtime(true)-START)*1000,3).' millisec.'."\n".'-->';
+    echo 'memory (real): '.number_format(memory_get_usage(true)/1024,0).' KB'."\n".
+    'memory (emalloc): '.number_format(memory_get_usage(false)/1024,0).' KB'."\n".
+    'memory peak (real): '.number_format(memory_get_peak_usage(true)/1024,0).' KB'."\n".
+    'memory peak (emalloc): '.number_format(memory_get_peak_usage(false)/1024,0).' KB'."\n".
+    'time: '.number_format((microtime(true)-START)*1000000,0).' µs.'."\n".'-->';
     exit;
   }
 
@@ -475,18 +481,15 @@ class Load
   */
   public function get(string $key,$func=null)
   {
-    #if(!self::$my || self::$my['_id']!=1)
-    #{
-      $file=_FILES.'bin/cache/'.trim($key,'/').'.php';
-      if(file_exists($file))
+    $file=_FILES.'bin/cache/'.trim($key,'/').'.php';
+    if(file_exists($file))
+    {
+      $_=include($file);
+      if(!empty($_['expire']) && $_['expire']>self::$time)
       {
-        $_=include($file);
-        if(!empty($_['expire']) && $_['expire']>self::$time)
-        {
-          return $_['data'];
-        }
+        return $_['data'];
       }
-    #}
+    }
     if(!is_null($func))
     {
       self::$cache=['key'=>$key,'expire'=>-1];

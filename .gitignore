@@ -1,6 +1,8 @@
 *.css
 *.js
 *.jpg
+*.gif
+*.png
 *.tpl
 php/Conf/*.php
 php/Vendor/*.php
