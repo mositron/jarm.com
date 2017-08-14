@@ -446,15 +446,7 @@ class Load
   public function fetch(string $f)
   {
     ob_start();
-    #if(self::$my&&self::$my['_id']==1)
-    #{
-    #  self::$cache['expire']=-1;
-      include(__TPL.'tmp/'.$f.'.tpl');
-    #}
-    #else
-    #{
-  #    include(__TPL.self::$conf['theme'].'/'.$f.'.tpl');
-    #}
+    include(__TPL.'tmp/'.$f.'.tpl');
     return ob_get_clean();
   }
 
