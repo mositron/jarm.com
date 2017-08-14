@@ -73,7 +73,6 @@ class Home extends Service
       ->assign('member',$member)
       ->assign('pageview',$pageview)
       ->assign('admin',$db->find('user',['am'=>['$gte'=>1]],['_id'=>1,'if.am'=>1,'am'=>1,'du'=>1,'em'=>1],['sort'=>['du'=>-1]]))
-      ->assign('friend',$db->find('msn',['dd'=>['$exists'=>false],'da'=>['$gte'=>Load::Time()->now(-3600*24*30)],'sd'=>['$exists'=>true]],[],['sort'=>['sd'=>-1]]))
       ->assign('logs',$db->find('logs',['ty'=>'cache'],[],['sort'=>['_id'=>-1],'limit'=>100]))
       ->fetch('control/home');
   }

@@ -1,5 +1,8 @@
+*.css
+*.js
+*.jpg
+*.tpl
 php/Conf/*.php
-php/Tpl/default/
 php/Vendor/*.php
 php/Vendor/*/*
 composer.lock
