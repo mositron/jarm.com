@@ -226,6 +226,10 @@ class Load
         {
           $this->data=array_merge($this->data,$data);
         }
+        if(self::$cache['expire']>0 && $this->data['content'])
+        {
+          $this->data['content']=self::Minify()->minify_html($this->data['content']);
+        }
         // merge data and return
         //return array_merge($this->data,$data);
         return $this->data;
@@ -284,11 +288,11 @@ class Load
     {
       echo ($i+1).' - '.str_replace(ROOT,'/',$f[$i])."\n";
     }
-    echo 'memory (real): '.memory_get_usage(true).' bytes'."\n".
-    'memory (emalloc): '.memory_get_usage(false).' bytes'."\n".
-    'memory peak (real): '.memory_get_peak_usage(true).' bytes'."\n".
-    'memory peak (emalloc): '.memory_get_peak_usage(false).' bytes'."\n".
-    'time: '.(microtime(true)-START).' sec.'."\n".'-->';
+    echo 'memory (real): '.number_format(memory_get_usage(true)/1048576,3).' MB'."\n".
+    'memory (emalloc): '.number_format(memory_get_usage(false)/1048576,3).' MB'."\n".
+    'memory peak (real): '.number_format(memory_get_peak_usage(true)/1048576,3).' MB'."\n".
+    'memory peak (emalloc): '.number_format(memory_get_peak_usage(false)/1048576,3).' MB'."\n".
+    'time: '.number_format((microtime(true)-START)*1000,3).' millisec.'."\n".'-->';
     exit;
   }
 
@@ -442,8 +446,15 @@ class Load
   public function fetch(string $f)
   {
     ob_start();
-    include(__TPL.self::$conf['theme'].'/'.$f.'.tpl');
-    //include(__TPL.$f.'.tpl');
+    #if(self::$my&&self::$my['_id']==1)
+    #{
+    #  self::$cache['expire']=-1;
+      include(__TPL.'tmp/'.$f.'.tpl');
+    #}
+    #else
+    #{
+  #    include(__TPL.self::$conf['theme'].'/'.$f.'.tpl');
+    #}
     return ob_get_clean();
   }
 
@@ -472,15 +483,18 @@ class Load
   */
   public function get(string $key,$func=null)
   {
-    $file=_FILES.'bin/cache/'.trim($key,'/').'.php';
-    if(file_exists($file))
-    {
-      $_=include($file);
-      if(!empty($_['expire']) && $_['expire']>self::$time)
+    #if(!self::$my || self::$my['_id']!=1)
+    #{
+      $file=_FILES.'bin/cache/'.trim($key,'/').'.php';
+      if(file_exists($file))
       {
-        return $_['data'];
+        $_=include($file);
+        if(!empty($_['expire']) && $_['expire']>self::$time)
+        {
+          return $_['data'];
+        }
       }
-    }
+    #}
     if(!is_null($func))
     {
       self::$cache=['key'=>$key,'expire'=>-1];
@@ -552,14 +566,11 @@ class Load
   {
     list($type,$id,$view,$user)=explode(':',$key);
     $cur=0;
-    //echo '1111111111111';
     if(stripos($_SERVER['HTTP_USER_AGENT'], 'facebookexternalhit') !== false)
     {
-      //echo '22222222222222';
       if($this->data['image_cache'])
        {
         $this->data['image']=$this->data['image_cache'];
-        //echo '3333333333333';
        }
      }
     if(!self::$my || !self::$my['am'])
