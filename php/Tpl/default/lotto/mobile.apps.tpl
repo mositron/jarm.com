@@ -1,1 +1,0 @@
-<h3 class="lotto-bar">แอพแนะนำ</h3>
