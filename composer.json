@@ -14,7 +14,6 @@
       }
     ],
     "config": {
-      "component-dir": "files/cdn/lib",
       "vendor-dir": "php/Vendor"
     },
     "require": {
@@ -25,12 +24,10 @@
       "cbschuld/browser.php": "dev-master",
       "amnuts/opcache-gui": "^2.2",
       "phpmailer/phpmailer": "~5.2",
-      "robloach/component-installer": "*",
       "components/jquery": "^3.1",
       "components/bootstrap": "^3.3",
       "tinymce/tinymce": "^4.5",
-      "matthiasmullie/minify": "^1.3"
-    },
-    "autoload": {
+      "matthiasmullie/minify": "^1.3",
+      "nnnick/chartjs": "^2.6"
     }
 }
