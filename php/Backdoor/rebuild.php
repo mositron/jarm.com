@@ -28,7 +28,7 @@ $js->minify($FILES.'js/jarm-all.js');
 
 $tmp = file_get_contents($FILES.'js/bootstrap/css/bootstrap.min.css');
 $css = new \MatthiasMullie\Minify\CSS();
-$css->add(str_replace('../fonts/','../js/bootstrap/fonts/',$tmp));
+$css->add($FILES.'js/bootstrap/css/bootstrap.min.css');
 $css->add($FILES.'css/jarm-bootstrap.css');
 $css->minify($FILES.'css/jarm-all.css');
 
