@@ -1,5 +1,5 @@
-/Conf/*.php
-/Tpl/default/
-/Vendor/*.php
-/Vendor/*/*
+php/Conf/*.php
+php/Tpl/default/
+php/Vendor/*.php
+php/Vendor/*/*
 composer.lock
