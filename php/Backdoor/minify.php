@@ -44,7 +44,7 @@ function make_tpl($type='')
       {
         make_tpl($file2);
       }
-      else
+      elseif(substr($file,-4)=='.tpl')
       {
         $tmp = minify_html(file_get_contents(TPL_default.$file2));
         $folder->save($file2, $tmp);
