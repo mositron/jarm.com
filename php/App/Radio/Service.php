@@ -14,15 +14,15 @@ class Service extends Container
       'title'=>'ฟังเพลง ฟังเพลงออนไลน์ ฟังวิทยุออนไลน์ วิทยุออนไลน์ ฟังเพลง24ชม',
       'description'=>'ฟังเพลงออนไลน์ ฟังเพลง ฟังวิทยุออนไลน์ทุกคลื่นทั่วไทย ฟังเพลงรัก ฟังเพลงอกหัก ฟังเพลงใหม่ ทั้งไทยและสากลได้ที่นี่',
       'keywords'=>'ฟังเพลง, วิทยุออนไลน์, ฟังวิทยุออนไลน์, ฟังเพลงออนไลน์, วิทยุออนไลน์, วิทยุ, ออนไลน์',
-      'nav-header'=>'<ul>
-      <li><a href="/" title="ฟังเพลง ฟังเพลงออนไลน์ ฟังวิทยุออนไลน์"'.($path=='home'?' class="active"':'').'>ฟังเพลง</a></li>
-      <li><a href="/89.0" title="89.0 Chill FM"'.($path=='89.0'?' class="active"':'').'>89.0 Chill FM</a></li>
-      <li><a href="/91.5" title="91.5 HotWave"'.($path=='91.5'?' class="active"':'').'>91.5 HotWave</a></li>
-      <li><a href="/93.0" title="93.0 Cool FM"'.($path=='93.0'?' class="active"':'').'>93.0 Cool FM</a></li>
-      <li><a href="/94.0" title="94.0 EFM"'.($path=='94.0'?' class="active"':'').'>94.0 EFM</a></li>
-      <li><a href="/96.0" title="96.0 Sport Radio"'.($path=='96.0'?' class="active"':'').'>96.0 Sport Radio</a></li>
-      <li><a href="/105.5" title="105.5 Eazy FM"'.($path=='105.5'?' class="active"':'').'>105.5 Eazy FM</a></li>
-      </ul>'
+      'nav-header'=>'<ul>'.
+      '<li><a href="/" title="ฟังเพลง ฟังเพลงออนไลน์ ฟังวิทยุออนไลน์"'.($path=='home'?' class="active"':'').'>ฟังเพลง</a></li>'.
+      '<li><a href="/89.0" title="89.0 Chill FM"'.($path=='89.0'?' class="active"':'').'>89.0 Chill FM</a></li>'.
+      '<li><a href="/91.5" title="91.5 HotWave"'.($path=='91.5'?' class="active"':'').'>91.5 HotWave</a></li>'.
+      '<li><a href="/93.0" title="93.0 Cool FM"'.($path=='93.0'?' class="active"':'').'>93.0 Cool FM</a></li>'.
+      '<li><a href="/94.0" title="94.0 EFM"'.($path=='94.0'?' class="active"':'').'>94.0 EFM</a></li>'.
+      '<li><a href="/96.0" title="96.0 Sport Radio"'.($path=='96.0'?' class="active"':'').'>96.0 Sport Radio</a></li>'.
+      '<li><a href="/105.5" title="105.5 Eazy FM"'.($path=='105.5'?' class="active"':'').'>105.5 Eazy FM</a></li>'.
+      '</ul>'
     ]);
 
     $tmp=require(__CONF.'radio.php');

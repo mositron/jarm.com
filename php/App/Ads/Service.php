@@ -90,12 +90,12 @@ class Service extends Container
       ->assign('relate_position',$this->relate_position);
 
     $path=(Load::$path[0]?:'home');
-    Load::$core->data['nav-header']='<ul>
-    <li><a href="/" title="Advertising Management System"'.($path=='home'?' class="active"':'').'>Advertising Management System</a></li>
-    <li><a href="/home/active" title=""'.($path=='home'?' class="active"':'').'>แบนเนอร์</a></li>
-    <li><a href="/advertorial/active" title=""'.($path=='advertorial'?' class="active"':'').'>บทความ</a></li>
-    <li><a href="/relate/active" title=""'.($path=='relate'?' class="active"':'').'>ข่าวใกล้เคียง</a></li>
-    </ul>';
+    Load::$core->data['nav-header']='<ul>'.
+    '<li><a href="/" title="Advertising Management System"'.($path=='home'?' class="active"':'').'>Advertising Management System</a></li>'.
+    '<li><a href="/home/active" title=""'.($path=='home'?' class="active"':'').'>แบนเนอร์</a></li>'.
+    '<li><a href="/advertorial/active" title=""'.($path=='advertorial'?' class="active"':'').'>บทความ</a></li>'.
+    '<li><a href="/relate/active" title=""'.($path=='relate'?' class="active"':'').'>ข่าวใกล้เคียง</a></li>'.
+    '</ul>';
   }
 
   public function check_perm($key)

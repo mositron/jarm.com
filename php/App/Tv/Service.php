@@ -12,15 +12,15 @@ class Service extends Container
       'title'=>'ทีวีย้อนหลัง',
       'description'=>'ทีวีย้อนหลัง',
       'keywords'=>'ทีวีย้อนหลัง, ดูทีวี',
-      'nav-header'=>'<ul>
-      <li><a href="/" title="ดูทีวีย้อนหลัง รายการย้อนหลัง"'.($path=='home'?' class="active"':'').'>ทีวีย้อนหลัง</a></li>
-      <li><a href="/lakorn-on-air"'.($path=='lakorn-on-air'?' class="active"':'').'>ละครใหม่</a></li>
-      <li><a href="/music-video"'.($path=='music-video'?' class="active"':'').'>มิวสิควิดีโอ</a></li>
-      <li><a href="/variety"'.($path=='variety'?' class="active"':'').'>วาไรตี้</a></li>
-      <li><a href="/cartoon"'.($path=='cartoon'?' class="active"':'').'>การ์ตูน</a></li>
-      <li><a href="/news"'.($path=='news'?' class="active"':'').'>ข่าว</a></li>
-      <li><a href="/series"'.($path=='series'?' class="active"':'').'>ซีรีย์</a></li>
-      </ul>'
+      'nav-header'=>'<ul>'.
+      '<li><a href="/" title="ดูทีวีย้อนหลัง รายการย้อนหลัง"'.($path=='home'?' class="active"':'').'>ทีวีย้อนหลัง</a></li>'.
+      '<li><a href="/lakorn-on-air"'.($path=='lakorn-on-air'?' class="active"':'').'>ละครใหม่</a></li>'.
+      '<li><a href="/music-video"'.($path=='music-video'?' class="active"':'').'>มิวสิควิดีโอ</a></li>'.
+      '<li><a href="/variety"'.($path=='variety'?' class="active"':'').'>วาไรตี้</a></li>'.
+      '<li><a href="/cartoon"'.($path=='cartoon'?' class="active"':'').'>การ์ตูน</a></li>'.
+      '<li><a href="/news"'.($path=='news'?' class="active"':'').'>ข่าว</a></li>'.
+      '<li><a href="/series"'.($path=='series'?' class="active"':'').'>ซีรีย์</a></li>'.
+      '</ul>'
     ]);
   }
 
