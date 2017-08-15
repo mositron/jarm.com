@@ -23,38 +23,70 @@ class Home extends Service
       $p=$view[$i];
       $d=''.$p['date'];
       $d2 = date('w',strtotime(substr($d,0,4).'-'.substr($d,4,2).'-'.substr($d,6,2).' 00:00:00'));
-      $pageview['x'][]=[$j, $days[$d2].'.'];//substr($d,6,2).'/'.substr($d,4,2));
-      $pageview['do'][]=[$j,$p['do']];
-      $pageview['is'][]=[$j,$p['is']];
-      $pageview['tb'][]=[$j,$p['tb']];
-      $pageview['mb'][]=[$j,$p['mb']];
-      $pageview['dt'][]=[$j,$p['dt']];
-      $pageview['all'][]=[$j,intval($p['is'])+intval($p['do'])];
+      $pageview['x'][]=$days[$d2].'.';//substr($d,6,2).'/'.substr($d,4,2));
+      $pageview['do'][]=$p['do'];
+      $pageview['is'][]=$p['is'];
+      $pageview['tb'][]=$p['tb'];
+      $pageview['mb'][]=$p['mb'];
+      $pageview['dt'][]=$p['dt'];
+      $pageview['all'][]=intval($p['is'])+intval($p['do']);
       $j++;
     }
 
-    $diff=['today'=>[],'yesterday'=>[],'yesterday2'=>[]];
-    if($view[0])
+    $diff=[];
+    $writer=[];
+    $min_diff=0;
+    $max_diff=23;
+    $start_diff=false;
+    for($i=0;$i<24;$i++)
     {
-      for($i=0;$i<24;$i++)
+      $is_null=true;
+      for($j=0;$j<=5;$j++)
       {
-        $diff['today'][]=[$i,$view[0]['hour'][$i]??null];
+        if($view[$j])
+        {
+          $diff['day'.($j+1)][$i]=$view[$j]['hour'][$i];
+          $writer['day'.($j+1)][$i]=$view[$j]['hw'][$i];
+          if($view[$j]['hw'][$i])
+          {
+            $is_null=false;
+          }
+        }
+      }
+
+      if($is_null)
+      {
+        if(!$start_diff)
+        {
+          $min_diff=$i;
+        }
+      }
+      else
+      {
+        $start_diff=true;
+        $max_diff=$i;
       }
     }
-    if($view[1])
+    //if(Load::$my['_id']==1)
+    //{
+    //print_r($writer);
+    if($max_diff<23)
     {
-      for($i=0;$i<24;$i++)
-      {
-        $diff['yesterday'][]=[$i,$view[1]['hour'][$i]];
-      }
+      $max_diff++;
     }
-    if($view[2])
+    for($i=1;$i<=6;$i++)
     {
-      for($i=0;$i<24;$i++)
-      {
-        $diff['yesterday2'][]=[$i,$view[2]['hour'][$i]];
-      }
+      array_splice($writer['day'.$i],0,$min_diff);
+      array_splice($writer['day'.$i],$max_diff-$min_diff);
     }
+    for($i=$min_diff;$i<=$max_diff;$i++)
+    {
+      $writer['day'][]=$i;
+    }
+    //echo $min_diff.'-'.$max_diff;
+    //print_r($writer);
+    //exit;
+    //}
     $now=Load::Time()->now();
     $ads=['banner'=>0,'advertorial'=>0];
     $ads['banner']=$db->count('ads',['dd'=>['$exists'=>false],'pl'=>1,'ty'=>'ads','boxza'=>['$exists'=>true],'dt1'=>['$lte'=>$now],'dt2'=>['$gte'=>$now]]);
@@ -70,6 +102,7 @@ class Home extends Service
       ->assign('user',Load::User())
       ->assign('ads',$ads)
       ->assign('diff',$diff)
+      ->assign('writer',$writer)
       ->assign('member',$member)
       ->assign('pageview',$pageview)
       ->assign('admin',$db->find('user',['am'=>['$gte'=>1]],['_id'=>1,'if.am'=>1,'am'=>1,'du'=>1,'em'=>1],['sort'=>['du'=>-1]]))
