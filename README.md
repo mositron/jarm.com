@@ -2,7 +2,7 @@
 
 
 
-[![Minimum PHP Version](https://img.shields.io/badge/PHP-%3E%3D%207.0-8892BF.svg)](https://php.net/) [![Minimum ImageMagick Version](https://img.shields.io/badge/ImageMagick-%3E%3D%206-428bca.svg)](http://imagemagick.org) [![Minimum MongoDB Version](https://img.shields.io/badge/MongoDB-%3E%3D%203.4-7fc857.svg)](https://www.mongodb.com)
+[![Minimum PHP Version](https://img.shields.io/badge/PHP-%3E%3D%207.1-8892BF.svg)](https://php.net/) [![Minimum ImageMagick Version](https://img.shields.io/badge/ImageMagick-%3E%3D%206-428bca.svg)](http://imagemagick.org) [![Minimum MongoDB Version](https://img.shields.io/badge/MongoDB-%3E%3D%203.4-7fc857.svg)](https://www.mongodb.com)
 
 .
 
