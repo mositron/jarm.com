@@ -1,26 +1,14 @@
 # Jarm.com - Micro CMS v3.1
 
-[![Build Status](https://travis-ci.org/positronth/jarm.com.svg?branch=master)](https://travis-ci.org/positronth/jarm.com)
-[![Build Status](https://scrutinizer-ci.com/g/positronth/jarm.com/badges/build.png?b=master)](https://scrutinizer-ci.com/g/positronth/jarm.com/build-status/master)
-[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/positronth/jarm.com/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/positronth/jarm.com/?branch=master)
-[![Code Coverage](https://scrutinizer-ci.com/g/positronth/jarm.com/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/positronth/jarm.com/?branch=master)  
+
+
+[![Minimum PHP Version](https://img.shields.io/badge/PHP-%3E%3D%207.0-8892BF.svg)](https://php.net/) [![Minimum ImageMagick Version](https://img.shields.io/badge/ImageMagick-%3E%3D%206-428bca.svg)](http://imagemagick.org) [![Minimum MongoDB Version](https://img.shields.io/badge/MongoDB-%3E%3D%203.4-7fc857.svg)](https://www.mongodb.com) 
 
 .
 
-## ตัวอย่าง
 [jarm.com](https://jarm.com)
 
 ![Screenshot](https://github.com/positronth/jarm.com/raw/master/Screenshot.png)  
-
-.
-
-## เป้าหมาย  
-เพื่อรองรับการใช้งานพร้อมกันจำนวนมาก โดยคำนึงถึงการใช้ทรัพยากรน้อยที่สุด แต่ยังคงความยืดหยุ่นในการใช้งานอยู่.  
-
-.
-
-## เกี่ยวกับซอสโค๊ดนี้  
-โค๊ดชุดนี้เป็น OpenSource ซึ่งเป็นชุดเดียวกับที่ใช้งานจริงบนเว็บ [jarm.cm](https://jarm.com) แต่มีการลบค่า setting และรูปภาพบางส่วนออก เพื่อความปลอดภัย.  
 
 .
 
