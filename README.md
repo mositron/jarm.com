@@ -2,17 +2,16 @@
 [![Minimum PHP Version](https://img.shields.io/badge/PHP-%3E%3D%207.1-8892BF.svg)](https://php.net/) [![Minimum ImageMagick Version](https://img.shields.io/badge/ImageMagick-%3E%3D%206-428bca.svg)](http://imagemagick.org) [![Minimum MongoDB Version](https://img.shields.io/badge/MongoDB-%3E%3D%203.4-7fc857.svg)](https://www.mongodb.com)
 
 ## [Docker Image](https://hub.docker.com/r/positron)
-- [positron/php](https://hub.docker.com/r/positron/php/) - v. 7.1.8  
-- [positron/nginx](https://hub.docker.com/r/positron/nginx/)  v. 1.12.1
-- [positron/mongo](https://hub.docker.com/r/positron/mongo/)  v. 3.4.7
+- [positron/php](https://hub.docker.com/r/positron/php/) v. 7.1.8 (with PECL/MongoDB, ImageMagick)  
+- [positron/nginx](https://hub.docker.com/r/positron/nginx/)  v. 1.12.1  
+- [positron/mongo](https://hub.docker.com/r/positron/mongo/)  v. 3.4.7  
 
-.
 
-## [jarm.com](https://jarm.com)
+## [jarm.com](https://jarm.com)  
 
 ![Screenshot](https://github.com/positronth/jarm.com/raw/master/Screenshot.png)  
 
-.
+
 
 ## การทำงาน  
 - jarm.com, \*.jarm.com - เรียกใช้งาน [php/start.php](https://github.com/positronth/jarm.com/blob/master/php/start.php)
@@ -105,15 +104,6 @@ server {
     }
 }
 ```
-.
-
-## ความต้องการของระบบ  
-- [PHP](https://php.net) v. 7.1+ ขึ้นไป
-- PECL/MongoDB (php-pecl-mongodb)
-- เซ็ทค่า date.timezone ในไฟล์ php.ini
-- [Composer](https://getcomposer.org/) สำหรับอัพเดท libs ต่างๆ  
-
-.
 
 Positron  
 Sarawut Chongrakchit [Facebook](https://www.facebook.com/positron.th)
