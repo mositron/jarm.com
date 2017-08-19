@@ -18,7 +18,7 @@ class Lyric extends Service
       'get_search'=>'json_search',
       'get_apps'=>'get_apps',
     ];
-    $this->{$serv[$_GET['json']]??'json_home'}();
+    $this->{$serv[$_GET['json']]?:'json_home'}();
     exit;
   }
 

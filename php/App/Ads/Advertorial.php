@@ -9,7 +9,7 @@ class Advertorial extends Service
     if($this->check_perm('banner'))
     {
       Load::Ajax()->register(['newbanner','delbanner','clearcache']);
-      $status=(Load::$path[1]??'active');
+      $status=(Load::$path[1]?:'active');
       $arg = ['dd'=>['$exists'=>false],'ty'=>'advertorial'];
       if($status=='inactive')
       {

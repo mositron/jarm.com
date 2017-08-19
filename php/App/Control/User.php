@@ -8,7 +8,7 @@ class User extends Service
   {
     if($this->check_perm('banner',7))
     {
-      Load::Ajax()->register(['setadmin','setban'],$this);
+      Load::Ajax()->register(['setadmin','setban','setname'],$this);
     }
     $db=Load::DB();
     Load::$core->data['title']='ผู้ดูแล - '.Load::$core->data['title'];
@@ -72,6 +72,19 @@ class User extends Service
         Load::Ajax()->alert('แบนเรียบร้อยแล้ว');
         Load::User()->reset($a);
       }
+    }
+    Load::Ajax()->script('setTimeout(function(){window.location.href="/user";},2000);');
+  }
+
+  public function setname($frm)
+  {
+    $db=Load::DB();
+    if(Load::$my['am']>=7)
+    {
+      $a=intval($frm['uid']);
+      $db->update('user',['_id'=>$a],['$set'=>['if.an'=>trim($frm['name'])]]);
+      Load::Ajax()->alert('เปลี่ยนชื่อเล่นเรียบร้อยแล้ว');
+      Load::User()->reset($a);
     }
     Load::Ajax()->script('setTimeout(function(){window.location.href="/user";},2000);');
   }

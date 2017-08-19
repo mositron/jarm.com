@@ -8,7 +8,7 @@ class Dialog extends Service
   public function get_dialog()
   {
     Load::Session()->logged();
-    $path=(Load::$path[1]??'');
+    $path=(Load::$path[1]?:'');
     if(in_array($path,['photos','list','email']))
     {
       $ct=Load::$core->fetch('my/dialog.'.$path);

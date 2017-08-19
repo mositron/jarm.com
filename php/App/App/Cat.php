@@ -11,7 +11,7 @@ class Cat extends Service
       'get_recent_posts'=>'json_recent',
       'get_apps'=>'get_apps',
     ];
-    $this->{$serv[$_GET['json']]??'recent'}();
+    $this->{$serv[$_GET['json']]?:'recent'}();
     exit;
   }
 

@@ -15,7 +15,7 @@ class Music extends Service
       'get_song_view'=>'json_song_view',
       'get_apps'=>'get_apps',
     ];
-    $this->{$serv[$_GET['json']]??'json_home'}();
+    $this->{$serv[$_GET['json']]?:'json_home'}();
     exit;
   }
 

@@ -283,9 +283,9 @@ class News_Update
       }
     }
 
-    $parent->news['rc']=($parent->news['rc']??0);
-    $parent->news['exl']=($parent->news['exl']??0);
-    #$parent->news['tags']=($parent->news['tags']??[]);
+    $parent->news['rc']=($parent->news['rc']?:0);
+    $parent->news['exl']=($parent->news['exl']?:0);
+    #$parent->news['tags']=($parent->news['tags']?:[]);
     return Load::$core
       ->assign('news',$parent->news)
       ->assign('error',$error)

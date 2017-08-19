@@ -26,7 +26,8 @@ class DB
                    ->executeCommand(Load::$conf['db']['db'],
                       new \MongoDB\Driver\Command(array_merge([$func=>$col],$param))
       );
-      return $cursor->toArray()[0]->values ?? NULL;
+      return $cursor->toArray()[0]->values;
+      //return $cursor->toArray()[0]->values??NULL;
     }
     catch(\MongoDB\Driver\Exception\Exception $e)
     {
@@ -88,7 +89,8 @@ class DB
 
   public function findOne(string $col,array $qry=[],array $fld=[],array $opt=[],$fet=true): ?array
   {
-    return $this->find($col,$qry,$fld,array_merge($opt,['limit'=>1]),$fet)[0]??NULL;
+    return $this->find($col,$qry,$fld,array_merge($opt,['limit'=>1]),$fet)[0];
+    //return $this->find($col,$qry,$fld,array_merge($opt,['limit'=>1]),$fet)[0]??NULL;
   }
 
   public function insert(string $col,array $data): ?int
@@ -259,17 +261,13 @@ class DB
                          'pipeline'=>$pipeline
                       ])
               );
-      return $this->obj2ar($cursor->toArray()[0]->result) ?? NULL;
+      return $this->obj2ar($cursor->toArray()[0]->result);
+      //return $this->obj2ar($cursor->toArray()[0]->result)??NULL;
     }
     catch(\MongoDB\Driver\Exception\Exception $e)
     {
       die('group - '.$col.' : '.$e->getMessage());
     }
-    //return $this->_command($col,'group',['key'=>$key, 'cond'=>$condition, 'reduce'=>$reduce, 'initial'=>$initial]);
-    /*
-    $rs=$this->_command($col, 'group', [$key, $initial, $reduce, $condition]);
-    return $return?$rs['retval'][0][$return]:$rs['retval'];
-    */
   }
 
   public function count(string $col,array $qry=[],array $opt=[]): ?int
@@ -283,7 +281,8 @@ class DB
                         'query'=>$qry
                     ])
               );
-      return $cursor->toArray()[0]->n ?? NULL;
+      return $cursor->toArray()[0]->n;
+      //return $cursor->toArray()[0]->n??NULL;
     }
     catch(\MongoDB\Driver\Exception\Exception $e)
     {
@@ -293,12 +292,7 @@ class DB
 
   public function mapreduce($col, $map , $reduce, $qry)
   {
-    /*
-    $host=Load::$conf['db']['collection'][$col];
-    $this->getServer($col,1);
-    $rs=$this->db[$host]->command(['mapreduce'=>$col,'map'=>new \MongoDB\BSON\Javascript($map),'reduce'=>new \MongoDB\BSON\Javascript($reduce),'query'=>$qry,'out'=>$col.'_out']);
-    return $this->db[$host]->selectCollection($rs['result']);
-    */
+
   }
 
   public function lastError($host)

@@ -4,10 +4,10 @@
 |     Jarm - for PHP 7.1
 |
 |     https://jarm.com
-|     positron@jarm.comm
+|     positron@jarm.com
 |
-|     $Revision: 3.1.0 $
-|     $Date: 2017/06/27 12:58:00 $
+|     $Revision: 3.1.1 $
+|     $Date: 2017/08/19 15:52:00 $
 |     $Author: Positron $
 +-----------------------------------------------------------------------------+
 */

@@ -13,7 +13,7 @@ class Home extends Service
       $allorder=['t'=>'ชื่อแบนเนอร์','dt1'=>'เริ่มแสดง','dt2'=>'จบแสดง','imp'=>'แสดง','click'=>'คลิก'];
       $allby=['asc'=>'1','desc'=>'-1'];
       $site='';
-      $status=(Load::$path[1]??'active');
+      $status=(Load::$path[1]?:'active');
       extract(Load::Split()->get('/',0,['page','order','by'],$allorder,$allby));
       if($status=='inactive')
       {

@@ -11,7 +11,7 @@ class Quote extends Service
       'get_recent_posts'=>'json_recent',
       'get_apps'=>'get_apps',
     ];
-    $this->{$serv[$_GET['json']]??'json_recent'}();
+    $this->{$serv[$_GET['json']]?:'json_recent'}();
     exit;
   }
 

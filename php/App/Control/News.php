@@ -12,12 +12,7 @@ class News extends Service
     {
       return (new \Jarm\App\Control\News_Update())->get($this,$path);
     }
-    elseif(in_array($path,['upload','report','stats']))
-    {
-      $c='\Jarm\App\Control\News_'.ucfirst($path);
-      return (new $c())->get($this,Load::$path[2]);
-    }
-    elseif(in_array($path,['view-day','view-month']))
+    elseif(in_array($path,['upload','report','stats','view-day','view-month']))
     {
       $c='\Jarm\App\Control\News_'.ucfirst(str_replace('-','',$path));
       return (new $c())->get($this,Load::$path[2]);

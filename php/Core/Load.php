@@ -6,8 +6,8 @@
 |     https://jarm.com
 |     positron@jarm.com
 |
-|     $Revision: 3.1.0 $
-|     $Date: 2017/06/27 12:58:00 $
+|     $Revision: 3.1.1 $
+|     $Date: 2017/08/19 15:52:00 $
 |     $Author: Positron $
 +-----------------------------------------------------------------------------+
 */
@@ -152,7 +152,7 @@ class Load
       if(isset($map[self::$sub]))
       {
         self::$map=$map[self::$sub];
-        if(self::$map['enable']??true)
+        if(self::$map['enable']?:true)
         {
           return $this;
         }
@@ -187,8 +187,8 @@ class Load
       self::$sub=array_keys($app)[0];
       self::$map=array_values($app)[0];
     }
-    $app=ucwords(self::$map['app']??self::$sub,'_');
-    $path=ucwords(str_replace(['-','.'],['_','_dot_'],trim(self::$path[0]??'home','_')),'_');
+    $app=ucwords(self::$map['app']?:self::$sub,'_');
+    $path=ucwords(str_replace(['-','.'],['_','_dot_'],trim(self::$path[0]?:'home','_')),'_');
     self::$request=strtolower($_SERVER['REQUEST_METHOD']?:'get');
     if(!empty($_COOKIE[self::$conf['session']['name']]))
     {
@@ -210,7 +210,7 @@ class Load
         // redirect to main page
         return ['move'=>self::$conf['scheme'].'://'.self::$conf['domain']];
       }
-      $arg=(self::$map['arg']??[]);
+      $arg=(self::$map['arg']?:[]);
       self::$app=(new \ReflectionClass('\\Jarm\\App\\'.$app.$serv))->newInstanceArgs([$arg]);
       $prefix=self::$request.'_';
       if(method_exists(self::$app,$p=$prefix.$path)||
@@ -590,15 +590,15 @@ class Load
           $browser = new \Browser();
           if($browser->isTablet())
           {
-            $log['tb']=($log['tb']??0)+1;
+            $log['tb']=($log['tb']?:0)+1;
           }
           elseif($browser->isMobile())
           {
-            $log['mb']=($log['mb']??0)+1;
+            $log['mb']=($log['mb']?:0)+1;
           }
           else
           {
-            $log['dt']=($log['dt']??0)+1;
+            $log['dt']=($log['dt']?:0)+1;
           }
         }
         if($log[$view])

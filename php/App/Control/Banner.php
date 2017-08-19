@@ -33,7 +33,7 @@ class Banner extends Service
       'car'=>['t'=>'autocar.in.th - Car','l'=>['a','b','c','d','e','f','h','i','b1','b2']],
     ];
     Load::$core->assign('position',$position);
-    $path=(Load::$path[1]??'');
+    $path=(Load::$path[1]?:'');
     if(is_numeric($path))
     {
       if($access)
@@ -167,7 +167,7 @@ class Banner extends Service
         ->assign('enabled',$db->findone('msg',['_id'=>'ads']))
         ->assign('banner',$banner)
         ->assign('access',$access)
-        ->assign('site',$site??'')
+        ->assign('site',$site?:'')
         //->assign('pager',$pg)
         ->assign('order',$order)
         ->assign('by',$by)

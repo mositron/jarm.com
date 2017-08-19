@@ -14,7 +14,7 @@ class Trend extends Service
       'get_recommend'=>'json_recommend',
       'get_apps'=>'get_apps',
     ];
-    $this->{$serv[$_GET['json']]??'json_recent'}();
+    $this->{$serv[$_GET['json']]?:'json_recent'}();
     exit;
   }
 

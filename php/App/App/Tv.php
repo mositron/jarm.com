@@ -15,7 +15,7 @@ class Tv extends Service
       'part'=>'json_part',
       'cate'=>'json_cate',
     ];
-    $this->{$serv[$_GET['json']]??'json_cate'}();
+    $this->{$serv[$_GET['json']]?:'json_cate'}();
     exit;
   }
 

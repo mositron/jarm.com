@@ -20,7 +20,7 @@ class Service extends Container
       if($arg['cate'])
       {
         $cate=Load::$conf['news'][$arg['cate']];
-        $path=(Load::$path[1]??'');
+        $path=(Load::$path[1]?:'');
         if(is_array($cate['s']))
         {
           $tmp='';
@@ -52,7 +52,7 @@ class Service extends Container
   private function home_cate(array $arg=[])
   {
     $cond=['pl'=>1,'c'=>$arg['cate'],'ds'=>['$lte'=>Load::Time()->now(-3600*3)]];
-    $gte=($arg['hot']??0);
+    $gte=($arg['hot']?:0);
     if($gte>0)
     {
       $cond['ds']['$gte']=Load::Time()->now(-3600*24*$gte);
@@ -315,13 +315,13 @@ class Service extends Container
     $img=Load::uri([Load::getServ($n['sv']),'/news/'.$n['fd'].'/']);
     return array_merge($n,[
                 'title'=>$n['t'],
-                'link'=>$n['pr']??$this->link($n),
+                'link'=>$n['pr']?:$this->link($n),
                 'cate'=>Load::$conf['news'][$n['c']]['t'],
                 'sec'=>Load::Time()->sec($n['ds']),
                 'ago'=>Load::Time()->from($n['ds'],'ago'),
-                'pl'=>($n['pl']??0),
-                'do'=>($n['do']??0),
-                'is'=>($n['is']??0),
+                'pl'=>($n['pl']?:0),
+                'do'=>($n['do']?:0),
+                'is'=>($n['is']?:0),
                 'img_s'=>$img.'s.jpg',
                 'img_t'=>$img.'t.jpg',
                 'img_m'=>$img.'m.jpg'

@@ -13,7 +13,7 @@ class Fbsticker extends Service
       'get_post'=>'json_view',
       'get_apps'=>'get_apps',
     ];
-    $this->{$serv[$_GET['json']]??'json_recent'}();
+    $this->{$serv[$_GET['json']]?:'json_recent'}();
     exit;
   }
 

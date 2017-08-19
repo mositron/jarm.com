@@ -10,7 +10,7 @@ class Radio extends Service
       'get_radio'=>'json_radio',
       'get_apps'=>'get_apps',
     ];
-    $this->{$serv[$_GET['json']]??'json_radio'}();
+    $this->{$serv[$_GET['json']]?:'json_radio'}();
     exit;
   }
 

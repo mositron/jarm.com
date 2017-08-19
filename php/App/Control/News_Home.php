@@ -68,7 +68,7 @@ class News_Home
       ->assign('count',$count)
       ->assign('news',$news)
       ->assign('pager',$pg)
-      ->assign('cp',$cp??'')
+      ->assign('cp',$cp?:'')
       ->assign('user',Load::User())
       ->fetch('control/news.home');
   }

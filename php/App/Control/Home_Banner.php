@@ -10,7 +10,7 @@ class Home_Banner extends Service
     $access=$this->check_perm('home-banner',1);
     $position=['img'=>'TALK OF THE TOWN','bottom'=>'เรื่องเด่น ประเด็นร้อน'];
     Load::$core->assign('position',$position);
-    $path=(Load::$path[1]??'');
+    $path=(Load::$path[1]?:'');
     if(is_numeric($path))
     {
       if($access)

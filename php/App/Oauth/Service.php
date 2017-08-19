@@ -29,7 +29,7 @@ class Service extends Container
 
     $this->logined();
 
-    $path=(Load::$path[1]??'');
+    $path=(Load::$path[1]?:'');
     if($path=='facebook')
     {
       $fb = new \Facebook\Facebook([

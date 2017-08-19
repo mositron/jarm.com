@@ -14,7 +14,7 @@ class Movie extends Service
       'get_movie'=>'json_movie',
       'get_apps'=>'get_apps',
     ];
-    $this->{$serv[$_GET['json']]??'json_now'}();
+    $this->{$serv[$_GET['json']]?:'json_now'}();
     exit;
   }
 

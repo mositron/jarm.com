@@ -7,7 +7,7 @@ class Lotto extends Service
   public function _lotto()
   {
     Load::Session()->logged();
-    $path=(Load::$path[1]??'home');
+    $path=(Load::$path[1]?:'home');
     if(Load::$my['am'])
     {
       return $this->{'lotto_'.(is_numeric(Load::$path[1])?'update':'home')}();
