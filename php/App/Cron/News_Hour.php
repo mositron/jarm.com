@@ -33,13 +33,29 @@ class News_Hour extends Service
       $d1=$today;
       $d2=$today+$day;
     }
-    $n=$db->find('news',['dd'=>['$exists'=>false],'pl'=>['$in'=>[1,2]],'ds'=>['$gte'=>Load::Time()->from($d1),'$lt'=>Load::Time()->from($d2)]],['u'=>1,'da'=>1,'ds'=>1]);
     $u=[];
     $ds=[];
     $time=Load::Time();
-    for($i=0;$i<count($n);$i++)
+    $n1=$db->find('article',['dd'=>['$exists'=>false],'pl'=>['$in'=>[1,2]],'ds'=>['$gte'=>Load::Time()->from($d1),'$lt'=>Load::Time()->from($d2)]],['u'=>1,'da'=>1,'ds'=>1]);
+    for($i=0;$i<count($n1);$i++)
     {
-      $v=$n[$i];
+      $v=$n1[$i];
+      if(!isset($u[$v['u']]))
+      {
+        $u[$v['u']]=0;
+      }
+      $u[$v['u']]++;
+      $hr=date('G',$time->sec($v['ds']));
+      if(!isset($ds[$hr]))
+      {
+        $ds[$hr]=0;
+      }
+      $ds[$hr]++;
+    }
+    $n2=$db->find('news',['dd'=>['$exists'=>false],'pl'=>['$in'=>[1,2]],'ds'=>['$gte'=>Load::Time()->from($d1),'$lt'=>Load::Time()->from($d2)]],['u'=>1,'da'=>1,'ds'=>1]);
+    for($i=0;$i<count($n2);$i++)
+    {
+      $v=$n2[$i];
       if(!isset($u[$v['u']]))
       {
         $u[$v['u']]=0;
@@ -57,7 +73,7 @@ class News_Hour extends Service
     if($db->findone('logs',['ty'=>'news','date'=>$cday]))
     {
       echo 1;
-      $db->update('logs',['ty'=>'news','date'=>$cday],['$set'=>['ur'=>$u,'hw'=>$ds,'urc'=>count($n)]]);
+      $db->update('logs',['ty'=>'news','date'=>$cday],['$set'=>['ur'=>$u,'hw'=>$ds,'urc'=>count($n1)+count($n2)]]);
     }
       echo '2-'.$cday.'-';
 

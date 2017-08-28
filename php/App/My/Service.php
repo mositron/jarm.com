@@ -116,7 +116,7 @@ class Service extends Container
             Load::User()->update(Load::$my['_id'],['$set'=>['pf'=>$prof['pf']]]);
 
             $status['status']='OK';
-            $status['pic']=Load::$conf['scheme'].'://'.$prof['sv'].'.'.Load::$conf['domain'].'/profile/'.$prof['if']['fd'].'/'.$q2['data']['n'].'?'.rand(1,999);
+            $status['pic']='https://'.$prof['sv'].'.jarm.com/profile/'.$prof['if']['fd'].'/'.$q2['data']['n'].'?'.rand(1,999);
             $status['update']='header';
           }
           else

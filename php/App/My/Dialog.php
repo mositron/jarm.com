@@ -44,7 +44,7 @@ class Dialog extends Service
         if($q['data']['h']>0)$h=$q['data']['h'];
       }
       $ct=Load::$core->assign(['w'=>$w,'h'=>$h])
-              ->assign('picture',Load::$conf['scheme'].'://'.Load::$my['sv'].'.'.Load::$conf['domain'].'/profile/'.Load::$my['if']['fd'].'/o.jpg?v='.rand(1,9999))
+              ->assign('picture','https://'.Load::$my['sv'].'.jarm.com/profile/'.Load::$my['if']['fd'].'/o.jpg?v='.rand(1,9999))
               ->fetch('my/dialog.avatar');
     }
     echo Load::$core->assign('ct',$ct)

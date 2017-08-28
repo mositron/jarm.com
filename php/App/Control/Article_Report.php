@@ -45,6 +45,10 @@ class Article_Report
           'article'=>[]
         ];
       }
+      if(!is_array($n['c']))
+      {
+        $n['c']=[$n['c']];
+      }
       $u[$n['u']]['article'][]=$n;
     }
 //    print_r($article);

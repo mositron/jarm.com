@@ -57,7 +57,7 @@ class News extends Service
         $db->update('news',['_id'=>intval($i)],['$set'=>['dd'=>Load::Time()->now()]]);
         list($scheme,$key)=explode('://',$this->news['link']);
         Load::$core->delete($key)
-                  ->delete('news.'.Load::$conf['domain'].'/home');
+                  ->delete('news.'.$this->news['dm'].'/home');
         Load::Ajax()->redirect(URL);
       }
       else
@@ -89,6 +89,7 @@ class News extends Service
         't'=>mb_substr(trim($arg['title']),0,100,'utf-8'),
         'u'=>Load::$my['_id'],
         'pl'=>0,
+        'dm'=>($arg['domain']&&isset(Load::$conf['domain'][$arg['domain']])?$arg['domain']:'jarm.com')
       ];
 
       $_cs=explode('-',trim($arg['type']));
@@ -97,7 +98,7 @@ class News extends Service
       $_['cs2']=intval($_cs[2]);
 
       $ksv=[];
-      foreach(Load::$conf['server']['files'] as $k=>$v)
+      foreach(Load::$conf['domain'][$_['dm']]['server']['files'] as $k=>$v)
       {
         if($v['upload'])
         {
@@ -145,9 +146,43 @@ class News extends Service
   {
     if($a)
     {
-      Load::Upload()->post($this->news['sv'],'delete','news/'.$this->news['fd'].'/'.$a);
+      if($this->news['dm']&&Load::$conf['domain'][$this->news['dm']]['api'])
+      {
+        $this->api($this->news['dm'],$this->news['sv'],'delete',$a,['id'=>$this->news['_id'],'sv'=>$this->news['sv'],'fd'=>$this->news['fd']]);
+      }
+      else
+      {
+        Load::Upload()->post($this->news['sv'],'delete','news/'.$this->news['fd'].'/'.$a);
+      }
     }
     Load::Ajax()->redirect(URL);
+  }
+
+  public function api(string $domain,string $serv,string $method,string $file,$data='')
+  {
+    if(isset(Load::$conf['domain'][$domain]))
+    {
+      $addr = Load::$conf['domain'][$domain];
+      $tmp=json_encode($data);
+      $key=md5($method.$addr['key'].$tmp);
+      if(substr($file,0,1)=='@')
+      {
+        $file=new \CurlFile(substr($file,1));
+      }
+      $json=Load::Http()->get($addr['server']['files'][$serv]['upload'],['key'=>$key,'method'=>$method,'file'=>$file,'data'=>$tmp]);
+/*
+      if($method=='post')
+      {
+        echo $json;
+        exit;
+      }
+*/
+      return json_decode($json,true);
+    }
+    else
+    {
+      return ['status'=>'FAIL','message'=>'no server'];
+    }
   }
 }
 ?>

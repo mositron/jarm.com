@@ -69,7 +69,7 @@ class Settings extends Service
       require_once _PHP.'vendor/google/Google_Client.php';
       require_once _PHP.'vendor/google/contrib/Google_PlusService.php';
       $client=new Google_Client();
-      $client->setApplicationName('Login to '.Load::$conf['domain'].' with Google API');
+      $client->setApplicationName('Login to jarm.com with Google API');
       $client->setClientId(Load::$conf['social']['google']['appid']);
       $client->setClientSecret(Load::$conf['social']['google']['secret']);
       $client->setRedirectUri(URH.'/settings/google/?call=google');

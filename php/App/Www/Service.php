@@ -21,17 +21,30 @@ class Service extends Container
     {
       Load::$core->data['title']='เงื่อนไข ข้อตกลง การใช้งาน Jarm';
       Load::$core->data['description']='เงื่อนไขข้อตกลงการใช้งาน สังคมออนไลน์ของคนไทย';
+      return Load::$core->fetch('www/about');
     }
     elseif(Load::$path[1]=='team')
     {
-      Load::$core->data['title']='Team | '.Load::$conf['domain'];
-      Load::$core->data['description']='Jarm & BoxzaRacing Team | '.Load::$conf['domain'];
+      Load::$core->data['title']='Team | jarm.com';
+      Load::$core->data['description']='Jarm Team | jarm.com';
+      return Load::$core->fetch('www/about');
+    }
+    elseif(Load::$path[1]=='ads')
+    {
+      Load::$core->data['title']='ติดต่อลงโฆษณา | jarm.com';
+      Load::$core->data['description']='ติดต่อลงโฆษณา | jarm.com';
+      return Load::$core->fetch('www/about.ads');
+    }
+    elseif(!Load::$path[1])
+    {
+      Load::$core->data['title']='เกี่ยวกับเรา | jarm.com';
+      Load::$core->data['description']='เกี่ยวกับเรา เกี่ยวกับ jarm.com';
+      return Load::$core->fetch('www/about.home');
     }
     else
     {
-      return ['move'=>'/about/privacy'];
+      return ['move'=>'/about'];
     }
-    return Load::$core->fetch('www/about');
   }
 
   public function _ads(): void

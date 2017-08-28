@@ -7,7 +7,7 @@ if($_FILES['file'])
   {
     $photo=Load::Photo();
     $folder=UPLOAD_FOLDER.'news/'.$_POST['data']['folder'];
-    if($n = $photo->thumb('m',$_FILES['file']['tmp_name'],$folder,750,500,'width','jpg'))
+    if($n = $photo->thumb('m',$_FILES['file']['tmp_name'],$folder,1024,1024,'width','jpg'))
     {
       //750x500
       $f = UPLOAD_PATH.'news/'.$_POST['data']['folder'].'/'.$n;

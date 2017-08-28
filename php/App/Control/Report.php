@@ -28,7 +28,7 @@ class Report extends Service
       $date=date('Ym');
     }
 
-    Load::$core->data['title']='รายงานระบบข่าว - '.Load::$core->data['title'];
+    Load::$core->data['title']='รายงานข่าว+บทความ - '.Load::$core->data['title'];
     $dfrom=intval($date.'00');
     $dto=intval($date.'99');
     $user=Load::User();

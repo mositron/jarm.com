@@ -43,6 +43,10 @@ class Time
     {
       $s=$sec->milliseconds/1000;
     }
+    elseif(is_object($sec)&&$cls=$sec->toDateTime())
+    {
+      $s=$cls->format('U');
+    }
     elseif(is_string($sec)&&!is_numeric($sec))
     {
       $s=strtotime($sec);
@@ -54,6 +58,8 @@ class Time
     else
     {
       $s=0;
+      //echo '-0-'.gettype($sec).'-'.$sec.'-'.print_r($sec,1);
+      //exit;
     }
     return $s;
   }

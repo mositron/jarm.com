@@ -91,9 +91,12 @@ class Article_Update
         }
       }
       $arg['d']=implode("\r\n",$detail);
-      $arg['c']=intval($_POST['cate']);
+      $arg['c']=array_values(array_unique(array_map('intval',array_filter((array)$_POST['cate']))));
       $arg['pl']=(in_array(intval($_POST['publish']),[0,1,2])?intval($_POST['publish']):0);
       $arg['rc']=($_POST['recommend']?1:0);
+      $arg['tags']=array_values(array_filter(array_unique(array_map('trim',explode(',',$_POST['tags'])))));
+
+
 
       if(!$arg['t'])
       {
@@ -124,7 +127,17 @@ class Article_Update
         $error['detail']='ห้ามมีรายละเอียดหรือรูปภาพจาก fbcdn.net';
         $db->update('article',['_id'=>$parent->article['_id']],['$set'=>['pl'=>0]]);
       }
-      if(!isset(Load::$conf['article'][$arg['c']]))
+      elseif(mb_stripos($arg['d'],'f1.jarm.com',0,'utf-8')>-1)
+      {
+        $error['detail']='ห้ามมีรายละเอียดหรือรูปภาพจาก jarm.com';
+        $db->update('article',['_id'=>$parent->article['_id']],['$set'=>['pl'=>0]]);
+      }
+      elseif(mb_stripos($arg['d'],'f2.jarm.com',0,'utf-8')>-1)
+      {
+        $error['detail']='ห้ามมีรายละเอียดหรือรูปภาพจาก jarm.com';
+        $db->update('article',['_id'=>$parent->article['_id']],['$set'=>['pl'=>0]]);
+      }
+      if(count($arg['c'])<1)
       {
         $error['category']='กรุณาเลือกชนิดของบทความ';
       }
@@ -138,10 +151,10 @@ class Article_Update
           {
             $arg['ds']=Load::Time()->now();
           }
-          if(!$parent->article['di'])
-          {
+          #if(!$parent->article['di'])
+          #{
             $arg['di']=Load::Time()->now();
-          }
+          #}
         }
         $arg['de']=Load::Time()->now();
         if($f=$_FILES['o']['tmp_name'])

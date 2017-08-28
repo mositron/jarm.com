@@ -5,7 +5,7 @@ use Jarm\App\Container;
 
 class Service extends Container
 {
-  public static $arg_view=['_id'=>1,'t'=>1,'fd'=>1,'da'=>1,'ds'=>1,'di'=>1,'do'=>1,'is'=>1,'mb'=>1,'dt'=>1,'tb'=>1,'c'=>1,'cs'=>1,'cs2'=>1,'na'=>1,'d'=>1,'sv'=>1,'u'=>1,'exl'=>1,'url'=>1,'tags'=>1,'sh'=>1];
+  public static $arg_view=['_id'=>1,'t'=>1,'dm'=>1,'fd'=>1,'da'=>1,'ds'=>1,'di'=>1,'do'=>1,'is'=>1,'mb'=>1,'dt'=>1,'tb'=>1,'c'=>1,'cs'=>1,'cs2'=>1,'na'=>1,'d'=>1,'sv'=>1,'u'=>1,'exl'=>1,'url'=>1,'tags'=>1,'sh'=>1];
 
   public function __construct(array $arg=[])
   {
@@ -86,7 +86,7 @@ class Service extends Container
   {
     if($n=Load::DB()->find('news',
       array_merge(['dd'=>['$exists'=>false]],$cond),
-      array_merge(['_id'=>1,'t'=>1,'fd'=>1,'da'=>1,'ds'=>1,'di'=>1,'de'=>1,'u'=>1,'ue'=>1,'do'=>1,'c'=>1,'cs'=>1,'exl'=>1,'url'=>1,'sv'=>1,'pl'=>1,'is'=>1],$arg),
+      array_merge(['_id'=>1,'t'=>1,'dm'=>1,'fd'=>1,'da'=>1,'ds'=>1,'di'=>1,'de'=>1,'u'=>1,'ue'=>1,'do'=>1,'c'=>1,'cs'=>1,'exl'=>1,'url'=>1,'sv'=>1,'pl'=>1,'is'=>1],$arg),
       array_merge(['sort'=>['ds'=>-1],'skip'=>0,'limit'=>100],$sort)))
     {
       for($i=0;$i<count($n);$i++)
@@ -117,7 +117,7 @@ class Service extends Container
         {
           $d=strtr(base64_encode(json_encode(['i'=>$tmp['_id'],'l'=>$adv[0]['link'],'t'=>time()])), '+/', '-_');
           $adv[0]['cls']='n-ads';
-          $adv[0]['pr']=Load::$conf['scheme'].'://code.'.Load::$conf['domain'].'/click/?__b='.urlencode($d);
+          $adv[0]['pr']='https://code.jarm.com/click/?__b='.urlencode($d);
           $advs[]=$adv[0];
           $nin[]=$tmp['content'];
         }
@@ -189,17 +189,22 @@ class Service extends Container
       return ['move'=>$news['url'],'stats'=>'news:'.$news['_id'].':do:'.$news['u']];
     }
     $news=$this->fetch($news);
+    if($news['dm']!=DOMAIN)
+    {
+      $dm=Load::$conf['domain'][$news['dm']];
+      return ['move'=>$dm['scheme'].'://'.Load::$sub.'.'.$news['dm'].'/view/'.$news['_id']];
+    }
     $user=Load::User()->get($news['u']);
     $ctitle=(array)$news['tags'];
     Load::$core->data['stats']='news:'.$news['_id'].':do:'.$news['u'];
     Load::$core->data['title']=$news['t'];
     Load::$core->data['description']=$news['t'].' - '.Load::$conf['news'][$news['c']]['t'].' '.implode(' ',$ctitle).' ข่าวล่าสุด ข่าววันนี้ ข่าวด่วน ข่าวเด่น';
     Load::$core->data['keywords']=implode(', ',$ctitle).','.Load::$conf['news'][$news['c']]['t'];
-    Load::$core->data['feed']=['title'=>Load::$conf['news'][$news['c']]['t'],'url'=>Load::$conf['scheme'].'://feed.'.Load::$conf['domain'].'/news-'.$news['c'].'/rss'];
+    Load::$core->data['feed']=['title'=>Load::$conf['news'][$news['c']]['t'],'url'=>Load::$conf['domain'][$news['dm']]['scheme'].'://feed.'.$news['dm'].'/news-'.$news['c'].'/rss'];
     Load::$core->data['image']=$news['img_m'];
-    if(Load::$core->data['img_cache'])
+    if(Load::$core->data['img_cache']&&$news['dm']=='jarm.com')
     {
-      Load::$core->data['image_cache']=Load::$conf['scheme'].'://cache.'.Load::$conf['domain'].'/'.Load::getServ($news['sv']).'/news/'.$news['fd'].'/m.jpg';
+      Load::$core->data['image_cache']='https://cache.jarm.com/'.Load::getServ($news['sv']).'/news/'.$news['fd'].'/m.jpg';
     }
     Load::$core->data['image_type']='image/jpeg';
     Load::$core->data['type']='article';
@@ -221,7 +226,7 @@ class Service extends Container
         if($adv=$this->find(['_id'=>$tmp['content']],[],['limit'=>1]))
         {
           $d=strtr(base64_encode(json_encode(['i'=>$tmp['_id'],'l'=>$adv[0]['link'],'t'=>time()])), '+/', '-_');
-          $adv[0]['pr']=Load::$conf['scheme'].'://code.'.Load::$conf['domain'].'/click/?__b='.urlencode($d);
+          $adv[0]['pr']='https://code.jarm.com/click/?__b='.urlencode($d);
           $advs[]=$adv[0];
           $nin[]=$tmp['content'];
         }
@@ -311,8 +316,23 @@ class Service extends Container
   {
     #if(!$n) return null;
     # default: jarm.com
-    //$img=Load::$conf['scheme'].'://'.Load::getServ($n['sv']).'.'.Load::$conf['domain'].'/news/'.$n['fd'];
-    $img=Load::uri([Load::getServ($n['sv']),'/news/'.$n['fd'].'/']);
+    if(!$n['dm'])
+    {
+      $n['dm']='jarm.com';
+    }
+    if($n['dm']=='xn--82c4c7b.com')
+    {
+      $img='https://xn--82c4c7b.com/upload/news/'.$n['fd'].'/';
+    }
+    else
+    {
+      $dm=Load::$conf['domain'][$n['dm']];
+      $img=$dm['scheme'].'://'.Load::getServ($n['sv']).'.'.$n['dm'].'/news/'.$n['fd'].'/';
+      if(DOMAIN=='jarmza.com')
+      {
+        $img=str_replace(['https://','jarm.com'],['http://','jarmza.com'],$img);
+      }
+    }
     return array_merge($n,[
                 'title'=>$n['t'],
                 'link'=>$n['pr']?:$this->link($n),
@@ -346,8 +366,31 @@ class Service extends Container
       return $n['url'];
     }
     */
-    $site=(Load::$conf['news'][$n['c']]['sl']?:Load::$conf['scheme'].'://news.'.Load::$conf['domain']);
-    return $site.'/'.(strpos($site,'autocar')!==false?'news':'view').'/'.$n['_id'];
+    $dm=Load::$conf['domain'][$n['dm']];
+    $link=(Load::$conf['news'][$n['c']]['sl']?:$dm['scheme'].'://news.'.$n['dm']).'/view/'.$n['_id'];
+    if(DOMAIN=='jarmza.com')
+    {
+      return str_replace(['https://','jarm.com'],['http://','jarmza.com'],$link);
+    }
+    else
+    {
+      if($n['dm']=='jarmza.com')
+      {
+        return str_replace(['https://','jarm.com'],['http://','jarmza.com'],$link);
+      }
+      elseif($n['dm']=='xn--82c4c7b.com')
+      {
+        return 'https://xn--82c4c7b.com/v/'.$n['_id'];
+      }
+      elseif(strpos($link,'autocar')!==false)
+      {
+        return 'http://www.autocar.in.th/news/'.$n['_id'];
+      }
+      else
+      {
+        return $link;
+      }
+    }
   }
 }
 ?>

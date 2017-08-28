@@ -142,10 +142,11 @@ class Load
   */
   public function route(array $map): Load
   {
-    $subc=strlen(self::$conf['domain'])*-1;
-    if(substr(HOST,$subc)==self::$conf['domain'])
+    $dm=explode('.',HOST);
+    define('DOMAIN',$dm[count($dm)-2].'.'.$dm[count($dm)-1]);
+    if(isset(self::$conf['domain'][DOMAIN]))
     {
-      if(empty(self::$sub=trim(substr(HOST,0,$subc),' .'))) // echo "www."
+      if(empty(self::$sub=trim(substr(HOST,0,strlen(DOMAIN)*-1),' .'))) // echo "www."
       {
         self::$sub='www';
       }
@@ -172,7 +173,9 @@ class Load
     }
     // domain name does not match
     // redirect to main page
-    self::move(self::$conf['scheme'].'://'.self::$sub.self::$conf['domain'],true);
+    echo HOST.'-'.DOMAIN;
+    exit;
+    self::move('https://jarm.com',true);
   }
 
   /**
@@ -208,7 +211,7 @@ class Load
       {
         // if don't have app [directory or file]
         // redirect to main page
-        return ['move'=>self::$conf['scheme'].'://'.self::$conf['domain']];
+        return ['move'=>'https://jarm.com'];
       }
       $arg=(self::$map['arg']?:[]);
       self::$app=(new \ReflectionClass('\\Jarm\\App\\'.$app.$serv))->newInstanceArgs([$arg]);
@@ -413,13 +416,13 @@ class Load
     {
       if(count($arg)==2)
       {
-        return self::$conf['scheme'].'://'.($arg[0]?$arg[0].'.':'').self::$conf['domain'].$arg[1];
+        return (defined('DOMAIN')?self::$conf['domain'][DOMAIN]['scheme']:'https').'://'.($arg[0]?$arg[0].'.':'').(defined('DOMAIN')?DOMAIN:'jarm.com').$arg[1];
       }
       $arg=$arg[0];
     }
     if(strpos($arg,'://')===false && !in_array(substr($arg,0,1),['?','/']))
     {
-      return self::$conf['scheme'].'://'.($arg?$arg.'.':'').self::$conf['domain'].'/';
+      return (defined('DOMAIN')?self::$conf['domain'][DOMAIN]['scheme']:'https').'://'.($arg?$arg.'.':'').(defined('DOMAIN')?DOMAIN:'jarm.com').'/';
     }
     return $arg;
   }

@@ -32,15 +32,21 @@ class Article extends Service
   public function delarticle($i)
   {
     $db=Load::DB();
+    $redirect='';
     if($this->article=$db->findone('article',['_id'=>intval($i),'dd'=>['$exists'=>false]]))
     {
       $this->article=$this->fetch($this->article);
-      $db->update('article',['_id'=>intval($i)],['$set'=>['dd'=>Load::Time()->now()]]);
+      $q=$this->api($this->article['sv'],'post','',['_id'=>$this->article['_id'],'sv'=>$this->article['sv'],'fd'=>$this->article['fd'],'dd'=>Load::Time()->now()]);
+      if($q['status']!='OK')
+      {
+        $redirect='?server-error';
+      }
+      else
+      {
+        $db->update('article',['_id'=>$this->article['_id']],['$set'=>['dd'=>Load::Time()->now()]]);
+      }
     }
-    else
-    {
-      Load::Ajax()->redirect(URL);
-    }
+    Load::Ajax()->redirect(URL.$redirect);
   }
 
   public function newarticle($arg)
@@ -57,40 +63,29 @@ class Article extends Service
     }
     else
     {
+      $sv=explode('#',$arg['type']);
       $_=[
         't'=>mb_substr(trim($arg['title']),0,100,'utf-8'),
         'u'=>Load::$my['_id'],
+        'un'=>Load::$my['name'],
         'pl'=>0,
-        'sv'=>trim($arg['sv'])
+        'c'=>[intval($sv[1])],
+        'sv'=>trim($sv[0])
       ];
-      $_['c']=intval(trim($arg['type']));
 
-      $ksv=[];
-      foreach(Load::$conf['server']['article'] as $k=>$v)
-      {
-        if($v['upload'])
-        {
-          $ksv[]=$k;
-        }
-      }
       if($_['sv']&&!isset(Load::$conf['server']['article'][$_['sv']]))
       {
         $_['sv']='';
       }
-      if(count($ksv)==0)
+      if(!$_['sv'])
       {
         $ajax->alert('ไม่มี server รองรับการ upload รูปภาพ');
       }
       elseif($id=$db->insert('article',$_))
       {
-        if(!$_['sv'])
-        {
-          $_['sv']=$ksv[$id%count($ksv)];
-          $db->update('article',['_id'=>$id],['$set'=>['sv'=>$_['sv']]]);
-        }
         if($last=$db->find('article',['sv'=>$_['sv']],['no'=>1],['sort'=>['no'=>-1],'limit'=>1]))
         {
-          $idx=intval($last['no'])+1;
+          $idx=intval($last[0]['no'])+1;
         }
         else
         {
@@ -127,6 +122,13 @@ class Article extends Service
         $file=new \CurlFile(substr($file,1));
       }
       $json=Load::Http()->get($addr['upload'],['key'=>$key,'method'=>$method,'file'=>$file,'data'=>$tmp]);
+/*
+      if($method=='post')
+      {
+        echo $json;
+        exit;
+      }
+*/
       return json_decode($json,true);
     }
     else
@@ -139,7 +141,7 @@ class Article extends Service
   {
     if($n=Load::DB()->find('article',
       array_merge(['dd'=>['$exists'=>false]],$cond),
-      array_merge(['_id'=>1,'t'=>1,'fd'=>1,'da'=>1,'ds'=>1,'di'=>1,'de'=>1,'u'=>1,'ue'=>1,'do'=>1,'c'=>1,'cs'=>1,'exl'=>1,'url'=>1,'sv'=>1,'pl'=>1,'is'=>1],$arg),
+      array_merge(['_id'=>1,'no'=>1,'t'=>1,'fd'=>1,'da'=>1,'ds'=>1,'di'=>1,'de'=>1,'u'=>1,'ue'=>1,'do'=>1,'c'=>1,'cs'=>1,'exl'=>1,'url'=>1,'sv'=>1,'pl'=>1,'is'=>1],$arg),
       array_merge(['sort'=>['ds'=>-1],'skip'=>0,'limit'=>100],$sort)))
     {
       for($i=0;$i<count($n);$i++)
@@ -153,11 +155,11 @@ class Article extends Service
 
   public function fetch(array $n): ?array
   {
-    $img='https://www.'.$n['sv'].'/files/'.$n['fd'].'/';
+    $img='https://'.$n['sv'].'/files/'.$n['fd'].'/';
     return array_merge($n,[
                 'title'=>$n['t'],
                 'link'=>$n['pr']?:$this->link($n),
-                'cate'=>Load::$conf['article'][$n['c']]['t'],
+            //    'cate'=>Load::$conf['article'][$n['c']]['t'],
                 'sec'=>Load::Time()->sec($n['ds']),
                 'ago'=>Load::Time()->from($n['ds'],'ago'),
                 'pl'=>($n['pl']?:0),
@@ -170,7 +172,7 @@ class Article extends Service
 
   public function link(array $n): string
   {
-    return 'https://www.'.$n['sv'].'/news/'.$n['_id'];
+    return 'https://'.$n['sv'].'/view/'.$n['no'];
   }
 }
 ?>

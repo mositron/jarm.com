@@ -223,12 +223,21 @@ class News_Update
               case 'image/x-png':
                 if($size[0]>=100 && $size[1]>=100)
                 {
-                  $q=Load::Upload()->post($parent->news['sv'],'news-post','@'.$f,['folder'=>$parent->news['fd']]);
-                  if($q['status']=='OK')
-                  {
-                    $parent->news['img']=$q['data']['n'];
-                    $db->update('news',['_id'=>$parent->news['_id']],['$set'=>['img'=>$q['data']['n']]]);
-                  }
+
+                    if($parent->news['dm']&&Load::$conf['domain'][$parent->news['dm']]['api'])
+                    {
+
+                    }
+                    else
+                    {
+                      $q=Load::Upload()->post($parent->news['sv'],'news-post','@'.$f,['folder'=>$parent->news['fd']]);
+
+                      if($q['status']=='OK')
+                      {
+                        $parent->news['img']=$q['data']['n'];
+                        $db->update('news',['_id'=>$parent->news['_id']],['$set'=>['img'=>$q['data']['n']]]);
+                      }
+                    }
                 }
             }
           }

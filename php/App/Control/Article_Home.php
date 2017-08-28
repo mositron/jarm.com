@@ -20,7 +20,15 @@ class Article_Home
     Load::$core->data['title']='บทความ - หน้ารวมบทความ - '.Load::$core->data['title'];
     if(isset($c))
     {
-      $arg['c']=intval($c);
+      $cs=explode('_',$c);
+      if($cs[0])
+      {
+        $arg['sv']=$cs[0];
+      }
+      if($cs[1])
+      {
+        $arg['c']=intval($cs[1]);
+      }
       $url .= 'c-'.$c.'/';
     }
     if($count=$db->count('article',$arg))
@@ -32,7 +40,7 @@ class Article_Home
       ->assign('count',$count)
       ->assign('article',$article)
       ->assign('pager',$pg)
-      ->assign('cp',$c?:'')
+      ->assign('arg',$arg)
       ->assign('user',Load::User())
       ->fetch('control/article.home');
   }

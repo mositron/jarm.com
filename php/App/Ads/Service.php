@@ -23,35 +23,30 @@ class Service extends Container
 
     $this->position=[
       'boxza'=>[
-        't'=>Load::$conf['domain'],
+        't'=>'jarm.com',
         'l'=>[
-          'www'=>['t'=>Load::$conf['domain'].' - หน้าแรกเว็บไซต์','l'=>['a','b','c','d','e','f','g']],
-          'beauty'=>['t'=>'beauty.'.Load::$conf['domain'].' - Beauty','l'=>['a','b','c','d','e','f']],
-          'boyz'=>['t'=>'boyz.'.Load::$conf['domain'].' - Boyz','l'=>['a','b','c','d','e','f']],
-          'drama'=>['t'=>'drama.'.Load::$conf['domain'].' - ละคร','l'=>['a','b','c','d','e','f']],
-          'ent'=>['t'=>'ent.'.Load::$conf['domain'].' - Entertain','l'=>['a','b','c','d','e','f']],
-          'friend'=>['t'=>'friend.'.Load::$conf['domain'].' - Friend','l'=>['a','b','c','d','e','f']],
-          'forum'=>['t'=>'forum.'.Load::$conf['domain'].' - Forum','l'=>['a','b','c','d','e','f']],
-          'game'=>['t'=>'game.'.Load::$conf['domain'].' - Game','l'=>['a','b','c','d','e','f']],
-          'guess'=>['t'=>'guess.'.Load::$conf['domain'].' - Glitter','l'=>['a','b','c','d','e','f']],
-          'horo'=>['t'=>'horo.'.Load::$conf['domain'].' - Horo','l'=>['a','b','c','d','e','f']],
-          'korea'=>['t'=>'korea.'.Load::$conf['domain'].' - Korea','l'=>['a','b','c','d','e','f']],
-          'image'=>['t'=>'image.'.Load::$conf['domain'].' - Image','l'=>['a','b','c','d','e','f']],
-          'lesbian'=>['t'=>'lesbian.'.Load::$conf['domain'].' - Lesbian','l'=>['a','b','c','d','e','f']],
-          'lotto'=>['t'=>'lotto.'.Load::$conf['domain'].' - Lotto','l'=>['a','b','c','d','e','f']],
-          'movie'=>['t'=>'movie.'.Load::$conf['domain'].' - Movie','l'=>['a','b','c','d','e','f']],
-          'music'=>['t'=>'music.'.Load::$conf['domain'].' - Music','l'=>['a','b','c','d','e','f']],
-          'news'=>['t'=>'news.'.Load::$conf['domain'].' - News','l'=>['a','b','c','d','e','f']],
-          'politic'=>['t'=>'politic.'.Load::$conf['domain'].' - Politic','l'=>['a','b','c','d','e','f']],
-          'radio'=>['t'=>'radio.'.Load::$conf['domain'].' - Radio','l'=>['a','b','c','d','e','f']],
-          'tech'=>['t'=>'tech.'.Load::$conf['domain'].' - Technology','l'=>['a','b','c','d','e','f']],
+          'www'=>['t'=>'หน้าแรกเว็บไซต์','l'=>['a','b','c','d','e','f','g']],
+          'beauty'=>['t'=>'Beauty','l'=>['a','b','c','d','e','f']],
+          'ent'=>['t'=>'Entertain','l'=>['a','b','c','d','e','f']],
+          'game'=>['t'=>'Game','l'=>['a','b','c','d','e','f']],
+          'guess'=>['t'=>'Guess','l'=>['a','b','c','d','e','f']],
+          'horo'=>['t'=>'Horo','l'=>['a','b','c','d','e','f']],
+          'korea'=>['t'=>'Korea','l'=>['a','b','c','d','e','f']],
+          'image'=>['t'=>'Image','l'=>['a','b','c','d','e','f']],
+          'lotto'=>['t'=>'Lotto','l'=>['a','b','c','d','e','f']],
+          'movie'=>['t'=>'Movie','l'=>['a','b','c','d','e','f']],
+          'music'=>['t'=>'Music','l'=>['a','b','c','d','e','f']],
+          'news'=>['t'=>'News','l'=>['a','b','c','d','e','f']],
+          'politic'=>['t'=>'Politic','l'=>['a','b','c','d','e','f']],
+          'radio'=>['t'=>'Radio','l'=>['a','b','c','d','e','f']],
+          'tech'=>['t'=>'Technology','l'=>['a','b','c','d','e','f']],
         ],
       ],
     ];
 
     $this->advertorial_position=[
       'boxza'=>[
-        't'=>Load::$conf['domain'],
+        't'=>'jarm.com',
         'l'=>[
           'news'=>['t'=>'ข่าวเด่น'],
           'ent'=>['t'=>'ข่าวบันเทิง'],
@@ -68,18 +63,18 @@ class Service extends Container
 
     $this->relate_position=[
       'boxza'=>[
-        't'=>Load::$conf['domain'],
+        't'=>'jarm.com',
         'l'=>[
-          'beauty'=>['t'=>'beauty.'.Load::$conf['domain'].' - Beauty'],
-          'ent'=>['t'=>'ent.'.Load::$conf['domain'].' - Entertain'],
-          'game'=>['t'=>'game.'.Load::$conf['domain'].' - Game'],
-          'horo'=>['t'=>'horo.'.Load::$conf['domain'].' - Horo'],
-          'korea'=>['t'=>'korea.'.Load::$conf['domain'].' - Korea'],
-          'lotto'=>['t'=>'lotto.'.Load::$conf['domain'].' - Lotto'],
-          'movie'=>['t'=>'movie.'.Load::$conf['domain'].' - Movie'],
-          'music'=>['t'=>'music.'.Load::$conf['domain'].' - Music'],
-          'news'=>['t'=>'news.'.Load::$conf['domain'].' - News'],
-          'tech'=>['t'=>'tech.'.Load::$conf['domain'].' - Technology'],
+          'beauty'=>['t'=>'Beauty'],
+          'ent'=>['t'=>'Entertain'],
+          'game'=>['t'=>'Game'],
+          'horo'=>['t'=>'Horo'],
+          'korea'=>['t'=>'Korea'],
+          'lotto'=>['t'=>'Lotto'],
+          'movie'=>['t'=>'Movie'],
+          'music'=>['t'=>'Music'],
+          'news'=>['t'=>'News'],
+          'tech'=>['t'=>'Technology'],
         ],
       ],
     ];
@@ -180,7 +175,7 @@ class Service extends Container
   public function clearcache()
   {
     Load::$core->clean();
-    Load::DB()->insert('logs',['ty'=>'cache','u'=>Load::$my['_id'],'dm'=>Load::$conf['domain'].' (ADS)']);
+    Load::DB()->insert('logs',['ty'=>'cache','u'=>Load::$my['_id'],'dm'=>'jarm.com (ADS)']);
     Load::Ajax()->alert('ล้างแคชทั้งหมดเรียบร้อยแล้ว')
               ->script('setTimeout(function(){window.location.href="'.URL.'"},2000);');
   }

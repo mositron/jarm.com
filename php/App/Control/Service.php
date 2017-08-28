@@ -17,8 +17,8 @@ class Service extends Container
       'nav-header'=>'<ul>'.
       '<li><a href="/" title="ควบคุม"'.($path=='home'?' class="active"':'').'>ควบคุม</a></li>'.
       '<li><a href="/news"'.($path=='news'?' class="active"':'').'>ข่าว</a></li>'.
-      '<li><a href="/report"'.($path=='report'?' class="active"':'').'>รายงานข่าว</a></li>'.
       '<li><a href="/article"'.($path=='article'?' class="active"':'').'>บทความ</a></li>'.
+      '<li><a href="/report"'.($path=='report'?' class="active"':'').'>รายงานข่าว+บทความ</a></li>'.
       '<li><a href="/lotto"'.($path=='lotto'?' class="active"':'').'>ตรวจหวย</a></li>'.
       '<li><a href="/user"'.($path=='user'?' class="active"':'').'>ผู้ดูแล</a></li>'.
       '<li><a href="/home-banner"'.($path=='home-banner'?' class="active"':'').'>แบนเนอร์หน้าแรก</a></li>'.

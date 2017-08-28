@@ -42,7 +42,7 @@ class Session
         }
       }
     }
-    setcookie(Load::$conf['session']['name'],'',time()+86400,'/',Load::$conf['domain']);
+    setcookie(Load::$conf['session']['name'],'',time()+86400,'/',(defined('DOMAIN')?DOMAIN:'jarm.com'));
   }
 
   public function logged(): void
@@ -55,7 +55,7 @@ class Session
 
   public function logout(): void
   {
-    setcookie(Load::$conf['session']['name'],'',time()+86400,'/',Load::$conf['domain']);
+    setcookie(Load::$conf['session']['name'],'',time()+86400,'/',(defined('DOMAIN')?DOMAIN:'jarm.com'));
   }
 
   public function set(array $user,bool $redirect=true): ?string
@@ -65,7 +65,7 @@ class Session
     {
       if($status==-1)
       {
-        setcookie(Load::$conf['block'],'YES-'.$user['_id'],time()+2592000,'/',Load::$conf['domain'],false,true);
+        setcookie(Load::$conf['block'],'YES-'.$user['_id'],time()+2592000,'/',(defined('DOMAIN')?DOMAIN:'jarm.com'),false,true);
         $p=trim((string)$_SERVER['REMOTE_ADDR']);
         if(substr($p,0,8)!='192.168.')
         {
@@ -88,7 +88,7 @@ class Session
       $data['algorithm'] = 'HMAC-SHA256';
       $d = strtr(base64_encode(json_encode($data)), '+/', '-_');
       $s = strtr(base64_encode(hash_hmac('sha256', $d, Load::$conf['session']['key'].$data['_id'], true)), '+/', '-_');
-      setcookie(Load::$conf['session']['name'],$s.'.'.$d,time()+($user['aways']?2592000:86400),'/',Load::$conf['domain'],false,true);
+      setcookie(Load::$conf['session']['name'],$s.'.'.$d,time()+($user['aways']?2592000:86400),'/',(defined('DOMAIN')?DOMAIN:'jarm.com'),false,true);
       if($redirect)
       {
         Load::move(URI);
